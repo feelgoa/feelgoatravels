@@ -18,6 +18,10 @@
 
 #Basic Routes
 
-Route::get('/', function () {
-    return view('home');
+Route::get('/', 'PagesController@home');
+
+Route::get('/landing', function () {
+    return view('landing');
 });
+
+Route::get('landing/', 'TimelineController@get_list');

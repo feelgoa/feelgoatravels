@@ -71,7 +71,8 @@ http://www.templatemo.com/tm-515-eatery
     text-decoration: none !important;
   }
 
-  a:hover, a:active, a:focus {
+  /*a:hover,*/ 
+  a:active, a:focus {
     color: #ce3232;
     outline: none;
   }
@@ -115,7 +116,7 @@ http://www.templatemo.com/tm-515-eatery
 
   section {
     position: relative;
-    padding: 100px 0;
+    padding: 15px 0;
   }
 
   #team, 
@@ -403,17 +404,22 @@ http://www.templatemo.com/tm-515-eatery
   }
 
   .slider .item-first {
-    background-image: url(../images/slider-image1.jpg);
+    background-image: url(../images/bus.jpg);
   }
 
   .slider .item-second {
-    background-image: url(../images/slider-image2.jpg);
+    background-image: url(../images/weddingcar.jpg);
   }
 
   .slider .item-third {
-    background-image: url(../images/slider-image3.jpg);
+    background-image: url(../images/rooms.jpg);
   }
 
+  .slider .item-fourth {
+    background-image: url(../images/rentbike.jpg);
+  }
+
+  /*
   .slider .item-second .section-btn {
     background: #292929;
   }
@@ -433,7 +439,7 @@ http://www.templatemo.com/tm-515-eatery
     border-color: transparent;
     color: #ffffff;
   }
-
+  */
 
 
   /*---------------------------------------
@@ -749,7 +755,7 @@ http://www.templatemo.com/tm-515-eatery
 
   footer {
     border-top: 1px solid rgba(0,0,0,0.05);
-    padding: 120px 0;
+    padding: 70px 0;
     padding-bottom: 80px;
   }
 
@@ -854,6 +860,10 @@ http://www.templatemo.com/tm-515-eatery
     color: #ffffff;
   }
 
+  footer .fa-facebook-square a:hover {
+    color: #3b5998;
+  }
+
 
 
   /*---------------------------------------
@@ -880,7 +890,7 @@ http://www.templatemo.com/tm-515-eatery
 
   @media only screen and (max-width: 992px) {
     section {
-      padding: 60px 0;
+      padding: 15px 0;
     }
 
     .custom-navbar .section-btn {
