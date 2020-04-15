@@ -24,4 +24,7 @@ Route::get('/landing', function () {
     return view('landing');
 });
 
-Route::get('landing/', 'TimelineController@get_list');
+
+Route::group(['prefix'=>'admin'], function(){
+    Route::get('/home', 'AdminController@home');
+});
