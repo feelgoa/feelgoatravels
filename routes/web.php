@@ -11,20 +11,31 @@
 |
 */
 
-#Route::get('/', function () {
-#    return view('welcome');
-#});
-
-
-#Basic Routes
+/*User Route */
 
 Route::get('/', 'PagesController@home');
 
 Route::get('/landing', function () {
-    return view('landing');
+	return view('landing');
 });
 
 
-Route::group(['prefix'=>'admin'], function(){
-    Route::get('/home', 'AdminController@home');
+/*Admin ROUTES */
+/* 'middleware' => ['authenticate'] */
+Route::get(ADMIN_BASE.ADMIN_LOGIN_URL, 'AdminController@login');
+Route::group(['prefix'=>ADMIN_BASE,'middleware' => []], function(){
+	Route::get(ADMIN_HOME_URL, 'AdminController@home');
+	Route::get(ADMIN_LOGOUT_URL, 'AdminController@logout');
+
+	Route::get('/', function () {
+		return abort(404);
+	});
 });
+
+
+/*Route::get('/', function () {
+	return view('landing');
+});
+*/
+
+

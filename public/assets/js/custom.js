@@ -2,121 +2,121 @@
 
   "use strict";
 
-    // PRE LOADER
-    $(window).load(function(){
-      $('.preloader').fadeOut(1000); // set duration in brackets    
-    });
+	// PRE LOADER
+	$(window).load(function(){
+	  $('.preloader').fadeOut(1000); // set duration in brackets	
+	});
 
 
-    // MENU
-    $('.navbar-collapse a').on('click',function(){
-      $(".navbar-collapse").collapse('hide');
-    });
+	// MENU
+	$('.navbar-collapse a').on('click',function(){
+	  $(".navbar-collapse").collapse('hide');
+	});
 
-    $(window).scroll(function() {
-      if (window.location.pathname == "/") {
-        if ($(".navbar").offset().top > 50) {
-          $(".navbar-fixed-top").addClass("top-nav-collapse");
-            } else {
-              $(".navbar-fixed-top").removeClass("top-nav-collapse");
-            }
-      } else {
-        $(".navbar-fixed-top").addClass("top-nav-collapse");
-      }
-    });
-
-
-    // SLIDER
-    $('.owl-carousel').owlCarousel({
-      animateOut: 'fadeOut',
-      items:1,
-      loop:true,
-      autoplayHoverPause: false,
-      //autoplay: true,
-      smartSpeed: 1000,
-    })
+	$(window).scroll(function() {
+	  if (window.location.pathname == "/") {
+		if ($(".navbar").offset().top > 50) {
+		  $(".navbar-fixed-top").addClass("top-nav-collapse");
+			} else {
+			  $(".navbar-fixed-top").removeClass("top-nav-collapse");
+			}
+	  } else {
+		$(".navbar-fixed-top").addClass("top-nav-collapse");
+	  }
+	});
 
 
-    // PARALLAX EFFECT
-    $.stellar({
-      horizontalScrolling: false,
-    }); 
+	// SLIDER
+	$('.owl-carousel').owlCarousel({
+	  animateOut: 'fadeOut',
+	  items:1,
+	  loop:true,
+	  autoplayHoverPause: false,
+	  //autoplay: true,
+	  smartSpeed: 1000,
+	})
 
 
-    // MAGNIFIC POPUP
-    $('.image-popup').magnificPopup({
-        type: 'image',
-        removalDelay: 300,
-        mainClass: 'mfp-with-zoom',
-        gallery:{
-          enabled:true
-        },
-        zoom: {
-        enabled: true, // By default it's false, so don't forget to enable it
+	// PARALLAX EFFECT
+	$.stellar({
+	  horizontalScrolling: false,
+	}); 
 
-        duration: 300, // duration of the effect, in milliseconds
-        easing: 'ease-in-out', // CSS transition easing function
 
-        // The "opener" function should return the element from which popup will be zoomed in
-        // and to which popup will be scaled down
-        // By defailt it looks for an image tag:
-        opener: function(openerElement) {
-        // openerElement is the element on which popup was initialized, in this case its <a> tag
-        // you don't need to add "opener" option if this code matches your needs, it's defailt one.
-        return openerElement.is('img') ? openerElement : openerElement.find('img');
-        }
-      }
-    });  
+	// MAGNIFIC POPUP
+	$('.image-popup').magnificPopup({
+		type: 'image',
+		removalDelay: 300,
+		mainClass: 'mfp-with-zoom',
+		gallery:{
+		  enabled:true
+		},
+		zoom: {
+		enabled: true, // By default it's false, so don't forget to enable it
+
+		duration: 300, // duration of the effect, in milliseconds
+		easing: 'ease-in-out', // CSS transition easing function
+
+		// The "opener" function should return the element from which popup will be zoomed in
+		// and to which popup will be scaled down
+		// By defailt it looks for an image tag:
+		opener: function(openerElement) {
+		// openerElement is the element on which popup was initialized, in this case its <a> tag
+		// you don't need to add "opener" option if this code matches your needs, it's defailt one.
+		return openerElement.is('img') ? openerElement : openerElement.find('img');
+		}
+	  }
+	});  
 
 /*
-    // CONTACT FORM
-    $("#contact-form").submit(function (e) {
-      e.preventDefault();
-      var name = $("#cf-name").val();
-      var email = $("#cf-email").val();
-      var subject = $("#cf-subject").val();
-      var message = $("#cf-message").val();
-      var dataString = 'name=' + name + '&email=' + email + '&subject=' + subject + '&message=' + message;
+	// CONTACT FORM
+	$("#contact-form").submit(function (e) {
+	  e.preventDefault();
+	  var name = $("#cf-name").val();
+	  var email = $("#cf-email").val();
+	  var subject = $("#cf-subject").val();
+	  var message = $("#cf-message").val();
+	  var dataString = 'name=' + name + '&email=' + email + '&subject=' + subject + '&message=' + message;
 
-      function isValidEmail(emailAddress) {
-          var pattern = new RegExp(/^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i);
-          return pattern.test(emailAddress);
-      };
-      if (isValidEmail(email) && (message.length > 1) && (name.length > 1)) {
-          $.ajax({
-              type: "POST",
-              url: "email.php",
-              data: dataString,
-              success: function () {
-                  $('.text-success').fadeIn(1000);
-                  $('.text-danger').fadeOut(500);
-              }
-          });
-      }
-      else {
-          $('.text-danger').fadeIn(1000);
-          $('.text-success').fadeOut(500);
-      }
-      return false;
-    });
+	  function isValidEmail(emailAddress) {
+		  var pattern = new RegExp(/^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i);
+		  return pattern.test(emailAddress);
+	  };
+	  if (isValidEmail(email) && (message.length > 1) && (name.length > 1)) {
+		  $.ajax({
+			  type: "POST",
+			  url: "email.php",
+			  data: dataString,
+			  success: function () {
+				  $('.text-success').fadeIn(1000);
+				  $('.text-danger').fadeOut(500);
+			  }
+		  });
+	  }
+	  else {
+		  $('.text-danger').fadeIn(1000);
+		  $('.text-success').fadeOut(500);
+	  }
+	  return false;
+	});
 
 */
 
 
-    // SMOOTHSCROLL
-    $(function() {
-      $('.custom-navbar a, #home a').on('click', function(event) {
-        var $anchor = $(this);
-          $('html, body').stop().animate({
-            scrollTop: $($anchor.attr('href')).offset().top - 49
-          }, 1000);
-            event.preventDefault();
-      });
-    });  
+	// SMOOTHSCROLL
+	$(function() {
+	  $('.custom-navbar a, #home a').on('click', function(event) {
+		var $anchor = $(this);
+		  $('html, body').stop().animate({
+			scrollTop: $($anchor.attr('href')).offset().top - 49
+		  }, 1000);
+			event.preventDefault();
+	  });
+	});  
 
 
-    // WOW ANIMATION
-    new WOW({ mobile: false }).init();
+	// WOW ANIMATION
+	new WOW({ mobile: false }).init();
 
 })(jQuery);
 
@@ -225,9 +225,9 @@ jQuery(document).ready(function($){
 			timelineTotWidth = Number(timelineComponents['eventsWrapper'].css('width').replace('px', ''));
 		var timelineTranslate = getTranslateValue(timelineComponents['eventsWrapper']);
 
-        if( (string == 'next' && eventLeft > timelineWidth - timelineTranslate) || (string == 'prev' && eventLeft < - timelineTranslate) ) {
-        	translateTimeline(timelineComponents, - eventLeft + timelineWidth/2, timelineWidth - timelineTotWidth);
-        }
+		if( (string == 'next' && eventLeft > timelineWidth - timelineTranslate) || (string == 'prev' && eventLeft < - timelineTranslate) ) {
+			translateTimeline(timelineComponents, - eventLeft + timelineWidth/2, timelineWidth - timelineTotWidth);
+		}
 	}
 
 	function translateTimeline(timelineComponents, value, totWidth) {
@@ -252,9 +252,9 @@ jQuery(document).ready(function($){
 
 	function setDatePosition(timelineComponents, min) {
 		for (i = 0; i < timelineComponents['timelineDates'].length; i++) { 
-		    var distance = daydiff(timelineComponents['timelineDates'][0], timelineComponents['timelineDates'][i]),
-		    	distanceNorm = Math.round(distance/timelineComponents['eventsMinLapse']) + 2;
-		    timelineComponents['timelineEvents'].eq(i).css('left', distanceNorm*min+'px');
+			var distance = daydiff(timelineComponents['timelineDates'][0], timelineComponents['timelineDates'][i]),
+				distanceNorm = Math.round(distance/timelineComponents['eventsMinLapse']) + 2;
+			timelineComponents['timelineEvents'].eq(i).css('left', distanceNorm*min+'px');
 		}
 	}
 
@@ -298,21 +298,21 @@ jQuery(document).ready(function($){
 	function getTranslateValue(timeline) {
 		var timelineStyle = window.getComputedStyle(timeline.get(0), null),
 			timelineTranslate = timelineStyle.getPropertyValue("-webkit-transform") ||
-         		timelineStyle.getPropertyValue("-moz-transform") ||
-         		timelineStyle.getPropertyValue("-ms-transform") ||
-         		timelineStyle.getPropertyValue("-o-transform") ||
-         		timelineStyle.getPropertyValue("transform");
+		 		timelineStyle.getPropertyValue("-moz-transform") ||
+		 		timelineStyle.getPropertyValue("-ms-transform") ||
+		 		timelineStyle.getPropertyValue("-o-transform") ||
+		 		timelineStyle.getPropertyValue("transform");
 
-        if( timelineTranslate.indexOf('(') >=0 ) {
-        	var timelineTranslate = timelineTranslate.split('(')[1];
-    		timelineTranslate = timelineTranslate.split(')')[0];
-    		timelineTranslate = timelineTranslate.split(',');
-    		var translateValue = timelineTranslate[4];
-        } else {
-        	var translateValue = 0;
-        }
+		if( timelineTranslate.indexOf('(') >=0 ) {
+			var timelineTranslate = timelineTranslate.split('(')[1];
+			timelineTranslate = timelineTranslate.split(')')[0];
+			timelineTranslate = timelineTranslate.split(',');
+			var translateValue = timelineTranslate[4];
+		} else {
+			var translateValue = 0;
+		}
 
-        return Number(translateValue);
+		return Number(translateValue);
 	}
 
 	function setTransformValue(element, property, value) {
@@ -331,7 +331,7 @@ jQuery(document).ready(function($){
 				newDate = new Date(dateComp[2], dateComp[1]-1, dateComp[0]);
 			dateArrays.push(newDate);
 		});
-	    return dateArrays;
+		return dateArrays;
 	}
 
 	function parseDate2(events) {
@@ -352,19 +352,19 @@ jQuery(document).ready(function($){
 			var	newDate = new Date(dayComp[2], dayComp[1]-1, dayComp[0], timeComp[0], timeComp[1]);
 			dateArrays.push(newDate);
 		});
-	    return dateArrays;
+		return dateArrays;
 	}
 
 	function daydiff(first, second) {
-	    return Math.round((second-first));
+		return Math.round((second-first));
 	}
 
 	function minLapse(dates) {
 		//determine the minimum distance among events
 		var dateDistances = [];
 		for (i = 1; i < dates.length; i++) { 
-		    var distance = daydiff(dates[i-1], dates[i]);
-		    dateDistances.push(distance);
+			var distance = daydiff(dates[i-1], dates[i]);
+			dateDistances.push(distance);
 		}
 		return Math.min.apply(null, dateDistances);
 	}
@@ -380,16 +380,16 @@ jQuery(document).ready(function($){
 		var height = el.offsetHeight;
 
 		while(el.offsetParent) {
-		    el = el.offsetParent;
-		    top += el.offsetTop;
-		    left += el.offsetLeft;
+			el = el.offsetParent;
+			top += el.offsetTop;
+			left += el.offsetLeft;
 		}
 
 		return (
-		    top < (window.pageYOffset + window.innerHeight) &&
-		    left < (window.pageXOffset + window.innerWidth) &&
-		    (top + height) > window.pageYOffset &&
-		    (left + width) > window.pageXOffset
+			top < (window.pageYOffset + window.innerHeight) &&
+			left < (window.pageXOffset + window.innerWidth) &&
+			(top + height) > window.pageYOffset &&
+			(left + width) > window.pageXOffset
 		);
 	}
 
@@ -398,16 +398,3 @@ jQuery(document).ready(function($){
 		return window.getComputedStyle(document.querySelector('.cd-horizontal-timeline'), '::before').getPropertyValue('content').replace(/'/g, "").replace(/"/g, "");
 	}
 });
-
-(function ($) {
-	var setting = {"height":500,"width":500,"zoom":16,"queryString":"The Chocolate Room, KTC Margao, opposite KTC, Madel, Margao, Goa, India","place_id":"ChIJI5A7fCyyvzsRjrrtzPghOHo","satellite":false,"centerCoord":[15.287444904340608,73.95506615],"cid":"0x7a3821f8ccedba8e","lang":"en","cityUrl":"/india/calangute-32448","cityAnchorText":"Map of Calangute, South Kerala, India","id":"map-9cd199b9cc5410cd3b1ad21cab2e54d3","embed_id":"177407"};
-	var d = document;
-	var s = d.createElement('script');
-	s.src = 'https://embedgooglemap.1map.com/js/script-for-user.js?embed_id=177407';
-	s.async = true;
-	s.onload = function (e) {
-		window.OneMap.initMap(setting)
-	};
-	var to = d.getElementsById('map-9cd199b9cc5410cd3b1ad21cab2e54d3');
-	to.parentNode.insertBefore(s, to);
-})(jQuery);

@@ -10,6 +10,6 @@ class PagesController extends Controller
     function home()
     {
         $timeline = DB::select('select * from timeline where visiblity=1');
-        return view('home',compact('timeline'));
+        return view('user.home',compact('timeline'));
     }
 }
