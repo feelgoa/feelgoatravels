@@ -18,3 +18,5 @@ Route::post('register', 'API\UserController@register');
 Route::group(['middleware' => 'auth:api'], function(){
     Route::post('details', 'API\UserController@details');
 });
+
+Route::get('get-addr-location', 'API\UserController@get_addr_location_details');

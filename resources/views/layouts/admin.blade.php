@@ -175,7 +175,7 @@
 									</a>
 									<ul>
 										<li>
-											<a href="elements-buttons-standard.html">
+											<a href="{{ ADMIN_URL.ADMIN_HOME_CONTENT_URL }}">
 												<i class="metismenu-icon"></i>
 												Home Page
 											</a>

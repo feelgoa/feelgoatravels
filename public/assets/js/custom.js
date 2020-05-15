@@ -14,15 +14,15 @@
 	});
 
 	$(window).scroll(function() {
-	  if (window.location.pathname == "/") {
-		if ($(".navbar").offset().top > 50) {
-		  $(".navbar-fixed-top").addClass("top-nav-collapse");
+		if (window.location.pathname == "/" || window.location.pathname == "/home") {
+			if ($(".navbar").offset().top > 50) {
+				$(".navbar-fixed-top").addClass("top-nav-collapse");
 			} else {
-			  $(".navbar-fixed-top").removeClass("top-nav-collapse");
+				$(".navbar-fixed-top").removeClass("top-nav-collapse");
 			}
-	  } else {
-		$(".navbar-fixed-top").addClass("top-nav-collapse");
-	  }
+		} else {
+			$(".navbar-fixed-top").addClass("top-nav-collapse");
+		}
 	});
 
 
@@ -397,4 +397,14 @@ jQuery(document).ready(function($){
 		//check if mobile or desktop device
 		return window.getComputedStyle(document.querySelector('.cd-horizontal-timeline'), '::before').getPropertyValue('content').replace(/'/g, "").replace(/"/g, "");
 	}
+});
+
+jQuery(document).ready(function($){
+	$.ajax({
+		type: 'GET', 
+		url : "http://127.0.0.1/api/get-addr-location", 
+		success : function (data) {
+			$("#addr_location" ).replaceWith("<div id='addr_location'>"+data[0]['content']+"</div>");
+		}
+	});
 });

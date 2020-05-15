@@ -8,7 +8,7 @@
 				<div class="page-title-icon">
 					<i class="metismenu-icon pe-7s-graph2"></i>
 				</div>
-				<div>Dashboard
+				<div>{{ ADMIN_DASHBOARD_TITLE }}
 					<div class="page-title-subheading">Complete overview of yout website is available here.</div>
 				</div>
 			</div>

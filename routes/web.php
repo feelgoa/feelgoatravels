@@ -13,11 +13,14 @@
 
 /*User Route */
 
-Route::get('/', 'PagesController@home');
+Route::get('/', 'PagesController@index');
+Route::get(HOME_URL, 'PagesController@home');
+Route::get(PACKAGES_URL, 'PagesController@packages');
+Route::get(LOCATION_URL, 'PagesController@locations');
+Route::get(BOOKING_URL, 'PagesController@bookings');
+Route::get(CONTACTUS_URL, 'PagesController@contactus');
+Route::get(GALLERY_URL, 'PagesController@gallery');
 
-Route::get('/landing', function () {
-	return view('landing');
-});
 
 
 /*Admin ROUTES */
@@ -26,6 +29,7 @@ Route::get(ADMIN_BASE.ADMIN_LOGIN_URL, 'AdminController@login');
 Route::group(['prefix'=>ADMIN_BASE,'middleware' => []], function(){
 	Route::get(ADMIN_HOME_URL, 'AdminController@home');
 	Route::get(ADMIN_LOGOUT_URL, 'AdminController@logout');
+	Route::get(ADMIN_HOME_CONTENT_URL, 'AdminController@page_content');
 
 	Route::get('/', function () {
 		return abort(404);

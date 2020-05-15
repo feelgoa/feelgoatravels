@@ -95,7 +95,7 @@
 		</div>
 	</div>
 
-	<div class="container">
+	<div class="container" style="display:none;">
 		<div class="row">
 			<div class="col-md-12 col-sm-12 tldiv">
 				<div class="col-md-12 col-sm-12 colourbanner">
@@ -160,6 +160,6 @@
 				</section>
 			</div>
 		</div>
-	</div> 
+	</div>
 </section>
 @endsection
