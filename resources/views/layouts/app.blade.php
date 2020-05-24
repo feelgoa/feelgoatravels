@@ -45,7 +45,7 @@
 				<div class="collapse navbar-collapse">
 					<ul class="nav navbar-nav navbar-nav-first">
 						<li><a href="{{ SITE_URL.HOME_URL }}" class="smoothScroll">Home</a></li>
-						<li><a href="{{ SITE_URL.PACKAGES_URL }}" class="smoothScroll">Packages</a></li>
+						<li style="display:none;"><a href="{{ SITE_URL.PACKAGES_URL }}" class="smoothScroll">Packages</a></li>
 						<li><a href="{{ SITE_URL.LOCATION_URL }}" class="smoothScroll">Locations</a></li>
 						<li><a href="{{ SITE_URL.BOOKING_URL }}" class="smoothScroll">Bookings</a></li>
 						<li><a href="{{ SITE_URL.GALLERY_URL }}" class="smoothScroll">Gallery</a></li>
@@ -66,7 +66,7 @@
 					<div class="col-md-4 col-sm-4">
 							<div class="footer-info">
 								<div class="section-title">
-									<h2 class="wow fadeInUp" data-wow-delay="0.2s">Find us <a onMouseOver="this.style.color='#23527c'" onMouseOut="this.style.color='#909090'"id="fbicon" class="fa fa-facebook-square" attr="facebook icon" style="font-size: 40px;cursor:pointer;"></a>
+									<h2 class="wow fadeInUp" data-wow-delay="0.2s">Find us <a onMouseOver="this.style.color='#23527c'" onMouseOut="this.style.color='#909090'"id="fbicon" class="fa fa-facebook-square" attr="facebook icon" style="font-size: 20px;cursor:pointer;"></a>
 									</h2>
 								</div>
 								<address class="wow fadeInUp" data-wow-delay="0.4s">

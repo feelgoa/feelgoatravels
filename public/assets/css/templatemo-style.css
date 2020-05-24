@@ -136,6 +136,21 @@ http://www.templatemo.com/tm-515-eatery
     height: 390px;
   }
 
+  .locations-header {
+    background-color: #ce3232;
+  }
+
+  .locations-header p{
+    padding-left: 12px;
+    color: white;
+  }
+  .homepagetop {
+    padding-top:0px;
+  }
+  .otherpagetop {
+    padding-top:75px;
+  }
+
 
 
   /*---------------------------------------

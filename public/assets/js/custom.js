@@ -20,8 +20,12 @@
 			} else {
 				$(".navbar-fixed-top").removeClass("top-nav-collapse");
 			}
+			$('body').addClass('homepagetop');
+			$('body').removeClass('otherpagetop');
 		} else {
 			$(".navbar-fixed-top").addClass("top-nav-collapse");
+			$('body').addClass('otherpagetop');
+			$('body').removeClass('homepagetop');
 		}
 	});
 

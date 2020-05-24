@@ -3,7 +3,7 @@
 define('SITE_URL', 'http://127.0.0.1');
 define('ADMIN_URL','http://127.0.0.1/admin');
 define('API_URL','http://127.0.0.1/api');
-define('SITE_NAME','feel Goa');
+define('SITE_NAME','feelGoa');
 define('SITE_SHORT_DESC','FeelGoa - Tours and Travels');
 /*********************************/
 
