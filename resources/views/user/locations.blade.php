@@ -5,7 +5,7 @@
 	<div class="row">
 		<div class="col-md-12 col-sm-12">
 			<div>
-				<p> REAL GOAN EXPERIENCE</p>
+				<p>REAL GOAN EXPERIENCE</p>
 			</div>
 			<p align="justify">
 				We at feelGoa have choosen the best locations so that you can enjoy the beauty of Goa. See the top 16 places (7-North and 9-South) that put Goa on the International Tourist Map.
