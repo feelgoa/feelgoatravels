@@ -62,4 +62,8 @@ public $successStatus = 200;
 		return response()->json($add_details);
 	}
 
+	public function send_mail() {
+        echo "SUCCESS";
+    }
+
 }

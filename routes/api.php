@@ -20,3 +20,4 @@ Route::group(['middleware' => 'auth:api'], function(){
 });
 
 Route::get('get-addr-location', 'API\UserController@get_addr_location_details');
+Route::get(SENDMAIL,'API\MailController@send_mail');
