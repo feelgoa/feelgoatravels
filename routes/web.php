@@ -11,6 +11,11 @@
 |
 */
 
+/*
+Email Routes
+*/
+
+#Route::get('/sendemail','MailController@basic_email');
 /*User Route */
 
 Route::get('/', 'PagesController@index');
@@ -21,7 +26,7 @@ Route::get(BOOKING_URL, 'PagesController@bookings');
 Route::get(CONTACTUS_URL, 'PagesController@contactus');
 Route::get(GALLERY_URL, 'PagesController@gallery');
 
-
+Route::any('recapcha-page', 'PagesController@recapchay');
 
 /*Admin ROUTES */
 /* 'middleware' => ['authenticate'] */

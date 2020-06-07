@@ -5,6 +5,15 @@ define('ADMIN_URL','http://127.0.0.1/admin');
 define('API_URL','http://127.0.0.1/api');
 define('SITE_NAME','feelGoa');
 define('SITE_SHORT_DESC','FeelGoa - Tours and Travels');
+
+/*Emails Config*/
+define('SMTP_HOST_VALUE','smtp.hostinger.in');
+define('SMTP_PORT_VALUE','587');
+define('EMAIL_USERNAME','team@feelgoatravels.com');
+define('EMAIL_PASSWORD','F33lG0aTravel$');
+define('EMAIL_SENDER','team@feelgoatravels.com');
+define('EMAIL_FOOTER','<span>Regards</span><p>Team feelGoa</p>');
+
 /*********************************/
 
 /* Page Titles*/
@@ -43,9 +52,15 @@ define('ADMIN_HOME_CONTENT_URL','/home-page-content');
 /* API Routes*/
 
 define('API_GET_ADDRLOCATION','/get-addr-location');
+define('SENDMAIL','/send-mail');
 
 define('ADMIN_PAGES_CONST',
 	array(
 		ADMIN_HOME_CONTENT_URL => 1
 		)
 );
+
+/*Google reCapcha*/
+
+define("RECAPCHA_SITE_KEY","6Le8fv4UAAAAADhwT9U00tMkk548oepW6gXdkxKr");
+define("RECAPCHA_SECRET_KEY","6Le8fv4UAAAAAFRhTptH-7bKGT63oy7g7ZiYy2i9");

@@ -29,7 +29,6 @@
 		}
 	});
 
-
 	// SLIDER
 	$('.owl-carousel').owlCarousel({
 	  animateOut: 'fadeOut',
@@ -123,6 +122,7 @@
 	new WOW({ mobile: false }).init();
 
 })(jQuery);
+
 
 /* Timeline code below*/
 jQuery(document).ready(function($){
@@ -410,5 +410,20 @@ jQuery(document).ready(function($){
 		success : function (data) {
 			$("#addr_location" ).replaceWith("<div id='addr_location'>"+data[0]['content']+"</div>");
 		}
+	});
+
+
+});
+
+$('#contact_submit').on('click',function(event){
+	event.preventDefault();
+	alert('posting');
+	$.ajax({
+		url: "/recapcha-page",
+		type:"POST",
+		data:$('#contactus_form').serialize(),
+		success:function(response){
+		console.log(response);
+		},
 	});
 });
