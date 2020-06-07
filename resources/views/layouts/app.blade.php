@@ -72,15 +72,6 @@
 								</div>
 								<address class="wow fadeInUp" data-wow-delay="0.4s">
 									<div id="addr_location">
-										<p>Office: Konkan Railway Station,<br>Margao, Salcete Goa.<br>
-
-										<a href="tel:+91 83227 80521">&nbsp;<i class="fa fa-phone"></i>+91 83227 80521</a>
-										<a href="tel:+91 98225 81353">&nbsp;<i class="fa fa-phone"></i>+91 98225 81353</a><br>
-										<a href="tel:+91 98603 30901">&nbsp;<i class="fa fa-phone"></i>+91 98603 30901</a>
-										<a href="tel:+91 95036 76268">&nbsp;<i class="fa fa-phone"></i>+91 95036 76268</a><br>
-										<a href="tel:+91 88881 65163">&nbsp;<i class="fa fa-phone"></i>+91 88881 65163</a>
-										</p>
-										<p>Also at: Colva, Salcete Goa<br><i>(Please contact above mobile numbers for further details)</i></p>
 									</div>
 								</address>
 							</div>
