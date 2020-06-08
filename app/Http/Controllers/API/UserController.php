@@ -47,18 +47,25 @@ public $successStatus = 200;
 		$success['name'] =  $user->name;
 		return response()->json(['success'=>$success], $this-> successStatus); 
 	}
+
+	public function logout() { 
+		if (Auth::check()) {
+			Auth::user()->AauthAcessToken()->delete();
+		}
+	}
+
 	/** 
 	 * details api 
 	 * 
 	 * @return \Illuminate\Http\Response 
 	 */ 
-	public function details() { 
-		$user = Auth::user(); 
+	public function details() {
+		$user = Auth::user();
 		return response()->json(['success' => $user], $this-> successStatus); 
 	}
 
 	public function get_addr_location_details() {
-		$add_details = DB::select('select * from content where id=2');
+		$add_details = DB::select('select title,content from content where id=2');
 		return response()->json($add_details);
 	}
 

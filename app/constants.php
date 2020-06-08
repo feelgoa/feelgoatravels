@@ -3,8 +3,8 @@
 define('SITE_URL', 'http://127.0.0.1');
 define('ADMIN_URL','http://127.0.0.1/admin');
 define('API_URL','http://127.0.0.1/api');
-define('SITE_NAME','feelGoa');
-define('SITE_SHORT_DESC','FeelGoa - Tours and Travels');
+define('SITE_NAME','Feel Goa');
+define('SITE_SHORT_DESC','Feel Goa - Tours and Travels');
 
 /*Emails Config*/
 define('SMTP_HOST_VALUE','smtp.hostinger.in');
@@ -12,7 +12,20 @@ define('SMTP_PORT_VALUE','587');
 define('EMAIL_USERNAME','team@feelgoatravels.com');
 define('EMAIL_PASSWORD','F33lG0aTravel$');
 define('EMAIL_SENDER','team@feelgoatravels.com');
-define('EMAIL_FOOTER','<span>Regards</span><p>Team feelGoa</p>');
+define('EMAIL_FOOTER','</br></br<b><span>Regards,</span><p>Team Feel Goa</p></b>');
+define('FG_TEAM','Feel Goa');
+
+
+
+define('EMAIL_TEMPLATE_NAMES',
+	array(
+			1 => 'contact_us_email_template'
+		)
+);
+
+define('CONTACTUS_EMAIL_TEMPLATE', 1);
+
+
 
 /*********************************/
 
@@ -53,6 +66,7 @@ define('ADMIN_HOME_CONTENT_URL','/home-page-content');
 
 define('API_GET_ADDRLOCATION','/get-addr-location');
 define('SENDMAIL','/send-mail');
+define('SAVE_CONTACT_US_FORM_API','/save-contact-us');
 
 define('ADMIN_PAGES_CONST',
 	array(
@@ -60,6 +74,14 @@ define('ADMIN_PAGES_CONST',
 		)
 );
 
+/*Error Messages */
+
+define('VALIDATION_FAILED','Validation Error (Data provided is invalid or incomplete)');
+define('FORM_DATA_SUBIMITTED_CONTACT_US_FORM','Thank you for contacting us. We will get back to you soon.');
+define('FORM_SUBMIT_FAILED','Something is went wrong. We could not save your data. Please try again.');
+define('FORM_SUBMIT_WITHOUT_EMAIL_FAILED', 'You have successfully submited your form.');
+define('EMAIL_SENDING_ERROR', 'There is some issue with sending email.');
+define('RECAPTCH_REQUIRED','Recapcha is not clicked. Please check mark the box to continue');
 /*Google reCapcha*/
 
 define("RECAPCHA_SITE_KEY","6Le8fv4UAAAAADhwT9U00tMkk548oepW6gXdkxKr");

@@ -427,3 +427,17 @@ $('#contact_submit').on('click',function(event){
 		},
 	});
 });
+
+$('#contact_us_submit').on('click',function(event){
+	event.preventDefault();
+	$.ajax({
+		url: "/api/save-contact-us",
+		type:"POST",
+		data:$('#contact-us-form').serialize(),
+		success:function(response){
+			grecaptcha.reset();
+		}, error:function(response){
+			grecaptcha.reset();
+		},
+	});
+});
