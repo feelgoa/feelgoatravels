@@ -116,7 +116,8 @@ http://www.templatemo.com/tm-515-eatery
 
   section {
     position: relative;
-    padding: 15px 0;
+    padding: 0px 0px 15px 0px;
+    
   }
 
   #team, 
@@ -168,6 +169,27 @@ http://www.templatemo.com/tm-515-eatery
     transition: 0.5s 0.2s;
   }
 
+  .section-btn-success {
+    background: #28a745;
+    border-radius: 0;
+    border: 0;
+    color: #f9f9f9;
+    font-size: inherit;
+    font-weight: normal;
+    padding: 10px 25px;
+    transition: 0.5s 0.2s;
+  }
+
+  .section-btn-blue {
+    background: #007bff;
+    border-radius: 0;
+    border: 0;
+    color: #f9f9f9;
+    font-size: inherit;
+    font-weight: normal;
+    padding: 10px 25px;
+    transition: 0.5s 0.2s;
+  }
 
 
   /*---------------------------------------
@@ -276,7 +298,7 @@ http://www.templatemo.com/tm-515-eatery
   }
 
   .custom-navbar .nav li a {
-    font-size: 12px;
+    font-size: 15px;
     font-weight: bold;
     color: #ffffff;
     padding-right: 22px;
@@ -421,24 +443,27 @@ http://www.templatemo.com/tm-515-eatery
 
   .slider .item-first {
     background-image: url(../images/bus.jpg);
-    box-shadow: inset 0px 98px 40px #8397a8;
+    box-shadow: inset 0px 75px 45px #85beef;;
   }
 
   .slider .item-second {
     background-image: url(../images/weddingcar.jpg);
-    box-shadow: inset 0px 98px 40px #8397a8;
+    box-shadow: inset 0px 75px 45px #85beef;;
   }
 
   .slider .item-third {
     background-image: url(../images/rooms.jpg);
-    box-shadow: inset 0px 98px 40px #8397a8;
+    box-shadow: inset 0px 75px 45px #85beef;;
   }
 
   .slider .item-fourth {
     background-image: url(../images/rentbike.jpg);
-    box-shadow: inset 0px 98px 40px #8397a8;
+    box-shadow: inset 0px 75px 45px #85beef;;
   }
 
+  ul.navbar-nav-first li {
+    font-size:25px;
+  }
   /*
   .slider .item-second .section-btn {
     background: #292929;
@@ -768,7 +793,31 @@ http://www.templatemo.com/tm-515-eatery
   }
 
 
+  .heading-text {
+    font-size: 20px;
+  }
 
+  .form-labels {
+    font-size: 14px;
+  }
+
+  li.a   a {
+    color: red;
+  }
+
+  #overlay {
+    position: fixed; /* Sit on top of the page content */
+    display: none; /* Hidden by default */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer; /* Add a pointer on hover */
+  }
   /*---------------------------------------
      FOOTER              
   -----------------------------------------*/
@@ -845,6 +894,9 @@ http://www.templatemo.com/tm-515-eatery
   }
 
 
+  .required-field {
+    color:red;
+  }
 
   /*---------------------------------------
      SOCIAL ICON              

@@ -1,6 +1,6 @@
 (function ($) {
 
-  "use strict";
+  //"use strict";
 
 	// PRE LOADER
 	$(window).load(function(){
@@ -412,7 +412,12 @@ jQuery(document).ready(function($){
 		}
 	});
 
-
+	var url = window.location.href;
+	url = url.split("/");
+	if (url[3] != 'home') {
+		var activetab = $("#"+url[3]).find( "a" );
+		activetab.css("color", "#ce3232");
+	}
 });
 
 $('#contact_submit').on('click',function(event){
@@ -429,15 +434,23 @@ $('#contact_submit').on('click',function(event){
 });
 
 $('#contact_us_submit').on('click',function(event){
+	document.getElementById("overlay").style.display = "block";
 	event.preventDefault();
 	$.ajax({
 		url: "/api/save-contact-us",
 		type:"POST",
-		data:$('#contact-us-form').serialize(),
+		data:$('#contactus_form').serialize(),
 		success:function(response){
 			grecaptcha.reset();
+			document.getElementById("overlay").style.display = "none";
 		}, error:function(response){
 			grecaptcha.reset();
+			document.getElementById("overlay").style.display = "none";
 		},
 	});
 });
+$('#contact_us_reset').on('click',function(event){
+	grecaptcha.reset();
+});
+
+

@@ -24,25 +24,9 @@ function send_mail_custom($reciever_email_value,$reciever_email_name) {
 
 		$reciever = $reciever_email_value;
 		$reciever_name = "Reciever";
-        $subject = "We got it! - ".FG_TEAM;
-        $template_name['name'] = $reciever_email_name;
-        //EMAIL_TEMPLATE_NAMES[1];
-        //$body = EMAIL_TEMPLATE_NAMES[$template_id]($template_name);
+        $subject = FIRST_EMAIL_SUBJECT.' '.SITE_SHORT_DESC;
+        $template_name['name'] = $reciever_email_name;  
         $body = contact_us_email_template($template_name);
-        /*$h = '1';
-        $p = json_decode($template_name);
-        printValues($template_name);
-        echo $template_name;
-        echo "##";
-        echo $p;
-        $x = 'EMAIL_TEMPLATE_NAMES[$template_id]($p)';
-        echo $x;
-        eval ("\$x = \"$x\";");
-        echo $x;
-        exit;
-        $f = eval($x);
-        */
-
 		#$mail->addReplyTo($reciever, $reciever_name);
 		$mail->addAddress($reciever, $reciever_name);
         $mail->Subject = $subject;
@@ -73,17 +57,26 @@ return '<table>
 <tr>
 <td align="left" valign="top" colspan="2" style="padding-top: 10px;">
 Hi '.$data['name'].',
-
-Thanks so much for reaching out! This auto-reply is just to let you know…
-
-We received your email and will get back to you with a (human) response as soon as possible. During [business_hours] that’s usually within a couple of hours. Evenings and weekends may take us a little bit longer.
-
+<td>
+</tr>
+<tr>
+<td colspan="2">
+Thank you for reaching out to us.
+</td>
+</tr>
+<tr colspan="2">
+<td>
+This auto-reply is just to let you know that we have received your email and will get back to you with a response as soon as possible. We usually reply within a couple of hours.
+</td>
+</tr>
+<tr colspan="2">
+<td>
 If you have general questions about your travel or stay, check out our here for walkthroughs and answers to FAQs.
-
-If you have any additional information that you think will help us to assist you, please feel free to reply to this email.
-
+</td>
+</tr>
+<tr colspan="2">
+<td>
 We look forward to chatting soon!
-
 </td>
 </tr>
 </table>';

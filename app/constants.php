@@ -12,9 +12,9 @@ define('SMTP_PORT_VALUE','587');
 define('EMAIL_USERNAME','team@feelgoatravels.com');
 define('EMAIL_PASSWORD','F33lG0aTravel$');
 define('EMAIL_SENDER','team@feelgoatravels.com');
-define('EMAIL_FOOTER','</br></br<b><span>Regards,</span><p>Team Feel Goa</p></b>');
+define('EMAIL_FOOTER','<div style="padding-top:12px;";><table<tr colspan="2"><td><b><span>Regards,</span></td></tr><tr colspan="2"><td><p>Team Feel Goa</p></b></td></tr></table></div>');
 define('FG_TEAM','Feel Goa');
-
+define('FIRST_EMAIL_SUBJECT','We got it !');
 
 
 define('EMAIL_TEMPLATE_NAMES',

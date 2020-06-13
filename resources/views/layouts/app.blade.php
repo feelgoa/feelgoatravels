@@ -24,6 +24,7 @@
 
 	</head>
 	<body>
+		<div id="overlay"></div>
 		<!-- PRE PAGE LOADER -->
 		<section class="preloader">
 			<div class="spinner">
@@ -40,20 +41,20 @@
 						<span class="icon icon-bar"></span>
 					</button>
 					<!-- lOGO TEXT HERE -->
-					<a href="{{ SITE_URL.HOME_URL }}" class="navbar-brand"> {{ SITE_NAME }}</a>
+					<a href="{{ SITE_URL.HOME_URL }}" class="navbar-brand" style="font-size: 40px;"> {{ SITE_NAME }}</a>
 				</div>
 				<!-- MENU LINKS -->
 				<div class="collapse navbar-collapse">
 					<ul class="nav navbar-nav navbar-nav-first">
-						<li><a href="{{ SITE_URL.HOME_URL }}" class="smoothScroll">Home</a></li>
-						<li style="display:none;"><a href="{{ SITE_URL.PACKAGES_URL }}" class="smoothScroll">Packages</a></li>
-						<li><a href="{{ SITE_URL.LOCATION_URL }}" class="smoothScroll">Locations</a></li>
-						<li><a href="{{ SITE_URL.BOOKING_URL }}" class="smoothScroll">Bookings</a></li>
-						<li><a href="{{ SITE_URL.GALLERY_URL }}" class="smoothScroll">Gallery</a></li>
-						<li><a href="{{ SITE_URL.CONTACTUS_URL }}" class="smoothScroll">Contact Us</a></li>
+						<li id="home"><a href="{{ SITE_URL.HOME_URL }}" class="smoothScroll">Home</a></li>
+						<li id="packages" style="display:none;"><a href="{{ SITE_URL.PACKAGES_URL }}" class="smoothScroll">Packages</a></li>
+						<li id="locations"><a href="{{ SITE_URL.LOCATION_URL }}" class="smoothScroll">Locations</a></li>
+						<li id="bookings"><a href="{{ SITE_URL.BOOKING_URL }}" class="smoothScroll">Bookings</a></li>
+						<li id="gallery"><a href="{{ SITE_URL.GALLERY_URL }}" class="smoothScroll">Gallery</a></li>
+						<li id="contact-us"><a href="{{ SITE_URL.CONTACTUS_URL }}" class="smoothScroll">Contact Us</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="tel:+91 88881 65163">Call Now! <i class="fa fa-phone"></i>+91 88881 65163</a></li>
+						<li><a href="tel:+91 88881 65163"><i class="fa fa-phone"></i>+91 88881 65163</a></li>
 					</ul>
 				</div>
 			</div>
@@ -64,7 +65,7 @@
 			<div class="container">
 				<div class="row">
 
-					<div class="col-md-4 col-sm-4">
+					<div class="col-md-4 col-sm-6">
 							<div class="footer-info">
 								<div class="section-title">
 									<h2 class="wow fadeInUp" data-wow-delay="0.2s">Find us <a onMouseOver="this.style.color='#23527c'" onMouseOut="this.style.color='#909090'"id="fbicon" class="fa fa-facebook-square" attr="facebook icon" style="font-size: 20px;cursor:pointer;"></a>
@@ -77,7 +78,7 @@
 							</div>
 					</div>
 
-					<div class="col-md-4 col-sm-4">
+					<div class="col-md-4 col-sm-6">
 							<div class="footer-info">
 								<div class="section-title">
 									<h2 class="wow fadeInUp" data-wow-delay="0.2s">Useful Links</h2>
@@ -136,6 +137,6 @@
 			<script type="text/javascript" src="{{ URL::asset('assets/js/smoothscroll.js') }}"></script>
 			<script type="text/javascript" src="{{ URL::asset('assets/js/custom.js') }}"></script>
 			<script type="text/javascript" src="{{ URL::asset('assets/js/swiper.min.js') }}"></script>
-		</footer>
+			</footer>
 	</body>
 </html>
