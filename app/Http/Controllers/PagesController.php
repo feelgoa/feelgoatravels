@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+
 class PagesController extends Controller
 {
 	//
@@ -13,7 +14,8 @@ class PagesController extends Controller
 
 	function home() {
 		$timeline = DB::select('select * from timeline where visiblity=1');
-		return view('user.home',['title'=> HOME_TITLE,'timeline'=>$timeline]);
+		$slides =DB::select('SELECT * FROM `sliders` WHERE (`from`IS NULL OR `from` <= CURRENT_DATE ) AND (`to` IS NULL OR `to` >= CURRENT_DATE ) AND visibility=true ORDER BY `ordering` ASC');
+		return view('user.home',['title'=> HOME_TITLE,'timeline'=>$timeline,'slides'=>$slides]);
 	}
 
 	function packages() {
@@ -21,11 +23,13 @@ class PagesController extends Controller
 	}
 
 	function locations() {
-		return view('user.locations',['title'=> LOCATIONS_TITLE]);
+		$package_details =DB::select('SELECT * FROM `package_details`');
+		return view('user.locations',['title'=> LOCATIONS_TITLE,'package_details'=>$package_details]);
 	}
 
 	function bookings() {
-		return view('user.bookings',['title'=> BOOKINGS_TITLE]);
+		$package_details =DB::select('SELECT * FROM `package_details`');
+		return view('user.bookings',['title'=> BOOKINGS_TITLE,'package_details'=>$package_details]);
 	}
 
 	function contactus() {
@@ -61,4 +65,34 @@ class PagesController extends Controller
 			}
 		}
 	}
+	
+	function insert(Request $request){
+	
+		$name = $request->input('name1');
+		$email = $request->input('email');
+		$contact = $request->input('contact');
+		$gender = $request->input('gender');
+		$age = $request->input('age');
+		$place=$request->input('place');
+		$male_count=$request->input('male_count');
+		$female_count=$request->input('female_count');
+		$travelling_date=$request->input('travel_date');
+		$pickup_point=$request->input('pickup_point');
+		$hotelbooking=$request->input('hotelbooking');
+		$spots=$request->input('spots');
+		$user_data=array('name'=>$name,"email"=>$email,"contact"=>$contact,"gender"=>$gender,"age"=>$age,"place"=>$place,"male_count"=>$male_count,"female_count"=>$female_count);
+		$user_id=DB::table('user_details')->insertGetId($user_data);
+		$booking_pnr=generate_pnr();
+		$booking_data=array("booking_pnr"=>$booking_pnr,"travelling_date"=>$travelling_date,"pickup_point"=>$pickup_point,"user_id"=>$user_id);
+		$booking_id=DB::table('booking_details')->insertGetId($booking_data);
+		
+		$count=count($spots);
+		$items = array();
+		for($i = 0; $i < $count; $i++){
+			$item = array("booking_id" => $booking_id, 'spot_id' => $spots[$i]);
+			DB::table('booking_spot')->insert($item);
+		}
+		return view('user.bookings_success',['title'=> "Bookings",'booking_pnr'=>$booking_pnr]);
+	}
+	
 }

@@ -88,3 +88,15 @@ We look forward to chatting soon!
 </tr>
 </table>';
 }
+
+function generate_pnr(){
+    $digits_needed=8;
+    $random_number=''; // set up a blank string
+    $count=0;
+    while ( $count < $digits_needed ) {
+        $random_digit = mt_rand(1, 9);
+        $random_number .= $random_digit;
+        $count++;
+    }
+    return $random_number;
+}

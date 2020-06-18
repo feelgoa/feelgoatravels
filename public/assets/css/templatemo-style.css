@@ -417,11 +417,12 @@ http://www.templatemo.com/tm-515-eatery
     background-attachment: local;
     background-size: cover;
     height: 650px;
+    box-shadow: inset 0px 98px 40px #8397a8;
   }
 
   .slider .item-first {
     background-image: url(../images/bus.jpg);
-    box-shadow: inset 0px 98px 40px #8397a8;
+   
   }
 
   .slider .item-second {

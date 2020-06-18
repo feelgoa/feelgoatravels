@@ -4,56 +4,22 @@
 <section id="home" class="slider" data-stellar-background-ratio="0.5">
 	<div class="row">
 		<div class="owl-carousel owl-theme">
-			<div class="item item-first">
+			@foreach ($slides as $slide)
+			<div class="item" style="background-image: url({{ $slide->img_path }})">
 				<div class="caption">
 					<div class="container">
 						<div class="col-md-8 col-sm-12">
 								<h3></h3>
-								<h1>Tours</h1>
-								<a href="#team" class="section-btn btn btn-default smoothScroll">Book Now</a>
+								<h1>{{ $slide->img_name }}</h1>
+								<a href="{{ $slide->link }}" class="section-btn btn btn-default smoothScroll">{{$slide->button_name}}</a>
 						</div>
 					</div>
 				</div>
 			</div>
+			@endforeach
 
-			<div class="item item-second">
-				<div class="caption">
-					<div class="container">
-						<div class="col-md-8 col-sm-12">
-								<h3>Wedding Car</h3>
-								<h1></h1>
-								<a href="#menu" class="section-btn btn btn-default smoothScroll">Enquire Now</a>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="item item-third">
-				<div class="caption">
-					<div class="container">
-						<div class="col-md-8 col-sm-12">
-							<h3>Rooms</h3>
-							<h1></h1>
-							<!--<a href="#contact" class="section-btn btn btn-default smoothScroll">Reservation</a>-->
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="item item-fourth">
-				<div class="caption">
-					<div class="container">
-						<div class="col-md-8 col-sm-12">
-							<h3>Vehicle Rentals</h3>
-							<h1></h1>
-							<a href="#contact" class="section-btn btn btn-default smoothScroll">Reservation</a>
-						</div>
-					</div>
-				</div>
-			</div>
 		</div>
 	</div>
-
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 col-sm-12">

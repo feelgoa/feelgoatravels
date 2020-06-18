@@ -40,8 +40,7 @@ Route::group(['prefix'=>ADMIN_BASE,'middleware' => []], function(){
 		return abort(404);
 	});
 });
-
-
+Route::post(BOOKING_URL,'PagesController@insert')->name('bookings.insert');
 /*Route::get('/', function () {
 	return view('landing');
 });
