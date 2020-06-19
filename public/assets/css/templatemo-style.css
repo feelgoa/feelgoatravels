@@ -306,6 +306,10 @@ http://www.templatemo.com/tm-515-eatery
     text-transform: uppercase;
   }
 
+  .call-us-btn {
+    color: #ffffff;
+  }
+
   .custom-navbar .nav li a:hover {
     background: transparent;
     color: #ce3232;
@@ -360,6 +364,10 @@ http://www.templatemo.com/tm-515-eatery
 
     .top-nav-collapse .nav .section-btn a {
       color: #ffffff;
+    }
+
+    .call-us-btn-down {
+      color: #ce3232;
     }
   }
 
@@ -444,11 +452,8 @@ http://www.templatemo.com/tm-515-eatery
 
   .slider .item-first {
     background-image: url(../images/bus.jpg);
-<<<<<<< HEAD
-   
-=======
     box-shadow: inset 0px 75px 45px #85beef;;
->>>>>>> 47811fae395ee89039f19a12c9772bfb1dbd2492
+
   }
 
   .slider .item-second {
@@ -804,6 +809,7 @@ http://www.templatemo.com/tm-515-eatery
 
   .form-labels {
     font-size: 14px;
+    color:white;
   }
 
   li.a   a {
@@ -828,8 +834,8 @@ http://www.templatemo.com/tm-515-eatery
   -----------------------------------------*/
 
   footer {
-    border-top: 1px solid rgba(0,0,0,0.05);
-    padding: 70px 0;
+    /*border-top: 1px solid rgba(0,0,0,0.05);*/
+    padding: 25px 0;
     padding-bottom: 80px;
   }
 

@@ -11,7 +11,9 @@
 						<div class="col-md-8 col-sm-12">
 								<h3></h3>
 								<h1>{{ $slide->img_name }}</h1>
-								<a href="{{ $slide->link }}" class="section-btn btn btn-default smoothScroll">{{$slide->button_name}}</a>
+								@if($slide->link !="" )
+									<a href="{{ $slide->link }}" class="section-btn btn btn-default smoothScroll">{{$slide->button_name}}</a>
+								@endif
 						</div>
 					</div>
 				</div>
@@ -40,25 +42,31 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12 col-sm-12">
-			<p class="colordark">
-				- Eulogio Gomes (Proprietor - feelGoa)
-			</p>
+				<address class="wow fadeInUp animated" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+					<p class="colordark">
+						- Eulogio Gomes (Proprietor - feelGoa)
+					</p>
+				</address>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-12 col-sm-12">
-			<p>
-				<i>
-				Motto : Once with us, Always with us, A blessing many envy
-				</i>
-			</p>
+				<address class="wow fadeInUp animated" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+					<p>
+						<i>
+						Motto : Once with us, Always with us, A blessing many envy
+						</i>
+					</p>
+				</address>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-12 com-sm-12">
-				<p>
-					Recently we have also started providing wedding (with driver for rent).
-				</p>
+				<address class="wow fadeInUp animated" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+					<p>
+						Recently we have also started providing wedding (with driver for rent).
+					</p>
+				</address>
 			</div>
 		</div>
 	</div>

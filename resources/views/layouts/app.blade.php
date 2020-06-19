@@ -46,15 +46,26 @@
 				<!-- MENU LINKS -->
 				<div class="collapse navbar-collapse">
 					<ul class="nav navbar-nav navbar-nav-first">
-						<li id="home"><a href="{{ SITE_URL.HOME_URL }}" class="smoothScroll">Home</a></li>
+						<li style= "display:none;" id="home"><a href="{{ SITE_URL.HOME_URL }}" class="smoothScroll">Home</a></li>
 						<li id="packages" style="display:none;"><a href="{{ SITE_URL.PACKAGES_URL }}" class="smoothScroll">Packages</a></li>
 						<li id="locations"><a href="{{ SITE_URL.LOCATION_URL }}" class="smoothScroll">Locations</a></li>
 						<li id="bookings"><a href="{{ SITE_URL.BOOKING_URL }}" class="smoothScroll">Bookings</a></li>
 						<li id="gallery"><a href="{{ SITE_URL.GALLERY_URL }}" class="smoothScroll">Gallery</a></li>
 						<li id="contact-us"><a href="{{ SITE_URL.CONTACTUS_URL }}" class="smoothScroll">Contact Us</a></li>
 					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="tel:+91 88881 65163"><i class="fa fa-phone"></i>+91 88881 65163</a></li>
+					<ul class="nav navbar-nav navbar-right phone-no-div">
+						<li>
+							<a href="tel:+91 88881 65163" class="" style="color: #ce3232;">
+								<div style="display: flex;">
+									<div>
+										<i class="fa fa-phone cu" style="font-size: 25px;"></i>
+									</div>
+									<div>
+										<span class="cu" style="padding-left: 10px;"> CALL US</span>
+									</div>
+								</div>
+							</a>
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -64,7 +75,6 @@
 		<footer id="footer" data-stellar-background-ratio="0.5">
 			<div class="container">
 				<div class="row">
-
 					<div class="col-md-4 col-sm-6">
 							<div class="footer-info">
 								<div class="section-title">

@@ -2,14 +2,14 @@
 
 @section('content')
 <section>
-	<div class="">
-	<div class="row" style="color: black;font-size: 20px;background-size: cover; background-image: url('http://127.0.0.1/assets/images/contact-us-1.jpg'); padding: 12px;" >
+	<div class="" style="padding: 0px 12px 0px 12px;">
+	<div class="row" style="color: black;font-size: 20px;background-size: cover; background-image: url('../../assets/images/contact-us-4.jpg'); padding: 12px;" >
 	<div class="col-md-4" >
 	</div>
 	<div class="container">
 	<div class="row">
-	<div class="col-md-4" style="background-color: #ccc9c8;box-shadow: 12px 12px #00000045;">
-		<h2 class="heading-text">Contact Us</h2>
+	<div class="col-md-4" style="background-color: #0000008c; border-radius: 15px; padding:12px;">
+		<h2 class="heading-text" style="color:white;">Contact Us</h2>
 		<form id="contactus_form" name="contactus_form" action="/recapcha-page" method="post" >
 			@csrf
 			<div class="form-group ">

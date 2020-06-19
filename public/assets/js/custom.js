@@ -17,8 +17,13 @@
 		if (window.location.pathname == "/" || window.location.pathname == "/home") {
 			if ($(".navbar").offset().top > 50) {
 				$(".navbar-fixed-top").addClass("top-nav-collapse");
+				$(".cu").addClass("call-us-btn-down");
+				$(".cu").removeClass("call-us-btn ");
 			} else {
+				$(".cu").removeClass("call-us-btn-down");
+				$(".cu").addClass("call-us-btn ");
 				$(".navbar-fixed-top").removeClass("top-nav-collapse");
+				
 			}
 			$('body').addClass('homepagetop');
 			$('body').removeClass('otherpagetop');
@@ -417,6 +422,8 @@ jQuery(document).ready(function($){
 	if (url[3] != 'home') {
 		var activetab = $("#"+url[3]).find( "a" );
 		activetab.css("color", "#ce3232");
+		activetab.css("border-bottom", "1px solid rgb(206, 50, 50");
+		$('.phone-no-div').hide();
 	}
 });
 

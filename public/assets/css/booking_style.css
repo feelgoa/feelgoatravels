@@ -3,7 +3,7 @@
     line-height: 1.42857143;
     color: #333;
 	font-family: "Ubuntu", sans-serif;
-	background:url("../../assets/images/booking.jpg");
+	background:url("../../assets/images/booking1.jpg");
 	background-size:cover;
 }
 
@@ -107,8 +107,9 @@
 .form-s1 {
 	background: white;
 	box-shadow: 0 5px 10px rgba(0, 0, 0, .4);
-	margin: 4em;
-	min-width: 480px;
+	margin-top: 12px;
+	border-radius: 15px;
+	/*min-width: 480px;*/
 	padding: 1em;
 }
 
@@ -118,7 +119,9 @@
 	padding: 1em 0 0;
 }
 
-
+.lable-from {
+	color:white;
+}
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
     background-color:red;
 }
