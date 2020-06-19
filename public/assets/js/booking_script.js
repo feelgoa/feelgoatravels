@@ -22,15 +22,19 @@ $(".fm-booking .button-s1-next").click(function () {
 			var count=count1+count2;
 			if(count<=10){
 				let checkboxs = document.getElementsByClassName("tours");
-				for(let i = 1; i < checkboxs.length ; i++) {
+				for(let i = 0; i < checkboxs.length ; i++) {
 					checkboxs[i].checked = true;
 				}
 				checkbox1=document.getElementById("customCheckBox5");
 				checkbox1.disabled=true;
+                $(document.body).delegate('.tours', 'click', function(e) {
+					e.preventDefault();
+			    });
 			}
 			$(document.body).delegate('.tours', 'click', function(e) {
-					e.preventDefault();
-			});
+                checkbox1=document.getElementById("customCheckBox5");
+				checkbox1.checked=false;
+        });
 
 		}
 	}
@@ -39,8 +43,8 @@ $(".fm-booking .button-s1-next").click(function () {
 // Control to select and deselect all checkboxs based on checkbox select
 function eventCheckBox() {
     let checkboxs = document.getElementsByClassName("tours");
-    for (let i = 1; i < checkboxs.length; i++) {
-        checkboxs[i].checked = !checkboxs[i].checked;
+    for (let i = 0; i < checkboxs.length; i++) {
+        checkboxs[i].checked = true;
     }
 }
 

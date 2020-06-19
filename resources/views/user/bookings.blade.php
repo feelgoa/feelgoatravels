@@ -90,7 +90,7 @@
 			<h2 class="lable-from">Package Details</h2>
 				<div class="checkbox" style="padding-left: 3.5rem;margin-top: 15px;">
 					<label for="customCheckBox5" class="lable-from">
-						<input type="checkbox" class="tours" id="customCheckBox5" onclick="eventCheckBox()">
+						<input type="checkbox" id="customCheckBox5" onclick="eventCheckBox()">
 						Select All
 						</label>
 				</div><br>
