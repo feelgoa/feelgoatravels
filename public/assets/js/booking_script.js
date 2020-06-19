@@ -6,7 +6,6 @@ $(".fm-booking .stages-s1 .label-s1").click(function () {
 
 //Form change based on button
 $(".fm-booking .button-s1-next").click(function () {
-    alert('a');
 	if(personal_details_check()){
 		var radioButtons = $('.fm-booking .radio-s1');
 		var selectedIndex = radioButtons.index(radioButtons.filter(':checked'));
