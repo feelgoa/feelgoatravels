@@ -1,17 +1,18 @@
 //Form change based on Labels
-$(".form-s1 .stages-s1 .label-s1").click(function () {
-    var radioButtons = $(".form-s1 .radio-s1");
+$(".fm-booking .stages-s1 .label-s1").click(function () {
+    var radioButtons = $(".fm-booking .radio-s1");
     $(radioButtons).attr("disabled", true);
 });
 
 //Form change based on button
-$(".form-s1 .button-s1-next").click(function () {
+$(".fm-booking .button-s1-next").click(function () {
+    alert('a');
 	if(personal_details_check()){
-		var radioButtons = $('.form-s1 .radio-s1');
+		var radioButtons = $('.fm-booking .radio-s1');
 		var selectedIndex = radioButtons.index(radioButtons.filter(':checked'));
 		selectedIndex = selectedIndex + 2;
 		if(selectedIndex < 4){
-			$('.form-s1 .radio-s1:nth-of-type(' + selectedIndex + ')').prop('checked', true);
+			$('.fm-booking .radio-s1:nth-of-type(' + selectedIndex + ')').prop('checked', true);
 		}
 		if (selectedIndex == 3) {
 			$(this).hide();

@@ -6,7 +6,7 @@
 <div class="container">
 <div class="col-md-3">
 </div>
-<div class="col-md-6" style="background-color: #0000008c;border-radius: 15px;padding: 12px;margin-top:12px;">
+<div class="fm-booking col-md-6" style="background-color: #0000008c;border-radius: 15px;padding: 12px;margin-top:12px;">
 	<input id="one-s1" class="radio-s1" type="radio" name="stage" checked="checked" />
 	<input id="two-s1" class="radio-s1" type="radio" name="stage" />
 	<input id="three-s1" class="radio-s1" type="radio" name="stage" />
@@ -62,7 +62,7 @@
 					<div class="col-sm-6 team_details">
 							<label for="age" class="frm-font lable-from">Age:</label>
 							<span class="required-field">*</span>
-							<input type="number" class="frm-font form-control" min="1" max="12" id="age" name="age" placeholder="Enter Age" onblur="ValidateEmptyField(this,'Age cannot be empty')" required>
+							<input type="number" class="frm-font form-control" min="1" max="80" id="age" name="age" placeholder="Enter Age" onblur="ValidateEmptyField(this,'Age cannot be empty')" required>
 					</div>
 				</div>
 			</div>
@@ -75,11 +75,11 @@
 					</div>
 					<div class="col-sm-4 team_details">
 						<label for="number" class="frm-font lable-from">Total Male Members:</label>
-						<input name="male_count" type="number" min="0" max="12" value="0" class="frm-font form-control" id="male_count" placeholder="Male Members count" required>
+						<input name="male_count" type="number" min="0" max="50" value="0" class="frm-font form-control" id="male_count" placeholder="Male Members count" required>
 					</div>
 					<div class="col-sm-4 team_details">
 						<label for="number" class="frm-font lable-from">Total Female Members:</label>
-						<input name="female_count" type="number" min="0" max="12" value="0" class="frm-font form-control" id="female_count" placeholder="Female Members count" required>
+						<input name="female_count" type="number" min="0" max="50" value="0" class="frm-font form-control" id="female_count" placeholder="Female Members count" required>
 					</div>
 				
 				</div>
