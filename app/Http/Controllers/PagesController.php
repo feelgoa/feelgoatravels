@@ -67,7 +67,6 @@ class PagesController extends Controller
 	}
 	
 	function insert(Request $request){
-	
 		$name = $request->input('name1');
 		$email = $request->input('email');
 		$contact = $request->input('contact');
@@ -81,17 +80,29 @@ class PagesController extends Controller
 		$hotelbooking=$request->input('hotelbooking');
 		$spots=$request->input('spots');
 		$user_data=array('name'=>$name,"email"=>$email,"contact"=>$contact,"gender"=>$gender,"age"=>$age,"place"=>$place,"male_count"=>$male_count,"female_count"=>$female_count);
+
 		$user_id=DB::table('user_details')->insertGetId($user_data);
 		$booking_pnr=generate_pnr();
 		$booking_data=array("booking_pnr"=>$booking_pnr,"travelling_date"=>$travelling_date,"pickup_point"=>$pickup_point,"user_id"=>$user_id);
 		$booking_id=DB::table('booking_details')->insertGetId($booking_data);
-		
 		$count=count($spots);
 		$items = array();
 		for($i = 0; $i < $count; $i++){
 			$item = array("booking_id" => $booking_id, 'spot_id' => $spots[$i]);
 			DB::table('booking_spot')->insert($item);
 		}
+
+		//email sending
+		$details['name'] = $name;
+		$details['pnr'] = $booking_pnr;
+		$details['email'] = $email;
+		$details['traveling_date'] = $travelling_date;
+		$details['malecount'] = $male_count;
+		$details['femalecount'] = $female_count;
+		$details['pickup_loc']  = $pickup_point;
+
+		$mailsender = send_mail_custom($email,$name,BOOKINGS_EMAIL_TEMPLATE,$details);
+		$mailsender_admin = send_mail_custom(EMAIL_GMAIL_RECIEVER,FG_TEAM,BOOKINGS_EMAIL_TEMPLATE_ADMIN,$details);
 		return view('user.bookings_success',['title'=> "Bookings",'booking_pnr'=>$booking_pnr]);
 	}
 	

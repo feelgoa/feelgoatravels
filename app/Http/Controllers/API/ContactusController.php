@@ -35,8 +35,14 @@ class ContactusController extends Controller {
 			if($responseKeys["success"] == 1) {
 				$input = $request->all();
 				$name_concat = $input['firstname'].' '.$input['lastname'];
-				$mailsender = send_mail_custom($input['email'],$name_concat);
-				if ($mailsender == 1) {
+				$details['message'] = $input['message'];
+				$details['phone'] = $input['phone'];
+				$details['name'] = $name_concat;
+				$details['email'] = $input['email'];
+				$mailsender = send_mail_custom($input['email'],$name_concat,CONTACTUS_EMAIL_TEMPLATE,$details);
+				$mailsender_admin = send_mail_custom(EMAIL_GMAIL_RECIEVER,FG_TEAM,CONTACTUS_UPDATE_EMAIL_TEMPLATE_ADMIN,$details);
+				#$mailsender_admin=1;
+				if (($mailsender == 1) and ($mailsender_admin == 1)) {
 					unset($input["_token"]);
 					unset($input["g-recaptcha-response"]);
 					DB::table('contactus')->insert($input);

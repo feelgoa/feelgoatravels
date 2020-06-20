@@ -49,20 +49,22 @@
 			<div class="form-group">
 				<div class="row">
 					<div class="col-sm-6 team_details">
-							<label for="gender" class="frm-font lable-from">Gender:</label><span class="required-field">*</span><br>
-							<div class="form-check form-check-inline">
+						<label for="gender" class="frm-font lable-from">Gender:</label><span class="required-field">*</span><br>
+						<div class="form-check" style="display: inline-flex;">
+							<div class="form-check" style="padding-right:12px;">
 							  <input class="form-check-input" type="radio" name="gender" id="b1" value="male" required>
 							  <label class="form-check-label lable-from" for="inlineRadio1">Male</label>
 							</div>
-							<div class="form-check form-check-inline">
+							<div class="form-check">
 							  <input class="form-check-input" type="radio" name="gender" id="b2" value="female" required>
 							  <label class="form-check-label lable-from" for="inlineRadio2">Female</label>
 							</div>
+						</div>
 					</div>
 					<div class="col-sm-6 team_details">
 							<label for="age" class="frm-font lable-from">Age:</label>
 							<span class="required-field">*</span>
-							<input type="number" class="frm-font form-control" min="1" max="80" id="age" name="age" placeholder="Enter Age" onblur="ValidateEmptyField(this,'Age cannot be empty')" required>
+							<input type="text" class="frm-font form-control" maxlength="2" id="age" name="age" placeholder="Enter Age" onblur="ValidateEmptyNumberField(this,'Age must be integer and cannot be empty')" required>
 					</div>
 				</div>
 			</div>
@@ -75,22 +77,25 @@
 					</div>
 					<div class="col-sm-4 team_details">
 						<label for="number" class="frm-font lable-from">Total Male Members:</label>
-						<input name="male_count" type="number" min="0" max="50" value="0" class="frm-font form-control" id="male_count" placeholder="Male Members count" required>
+						<input name="male_count" type="text" maxlength="2" value="0" class="frm-font form-control" id="male_count" placeholder="Male Members count" onblur="ValidateEmptyNumberField(this,'Male member count cannot be empty. You can enter zero if no male members')" required>
 					</div>
 					<div class="col-sm-4 team_details">
 						<label for="number" class="frm-font lable-from">Total Female Members:</label>
-						<input name="female_count" type="number" min="0" max="50" value="0" class="frm-font form-control" id="female_count" placeholder="Female Members count" required>
+						<input name="female_count" type="text" maxlength="2" value="0" class="frm-font form-control" id="female_count" placeholder="Female Members count" onblur="ValidateEmptyNumberField(this,'Female member count cannot be empty. You can enter zero if no female members')" required>
 					</div>
-				
 				</div>
 			</div>
-			<span class="label label-danger" style="font-size: 100%;background-color: #f90700;" id="error_message"></span>
+			<div class="alert alert-warning" role="alert">
+				<strong>Note:</strong> If the total member count exceeds 10, then you are allowed to choose your spots in the next tab.
+			</div>
+
+			<span class="label label-danger" style="font-size: 14px;margin-bottom:14px;white-space: normal;" id="error_message"></span></br>
 		</div>
 		<div data-panel="two-s1" class="div-s1">
 			<h2 class="lable-from">Package Details</h2>
 				<div class="checkbox" style="padding-left: 3.5rem;margin-top: 15px;">
 					<label for="customCheckBox5" class="lable-from">
-						<input type="checkbox" id="customCheckBox5" onclick="eventCheckBox()">
+						<input type="checkbox" id="customCheckBox5" onclick="eventCheckBox(this)">
 						Select All
 						</label>
 				</div><br>

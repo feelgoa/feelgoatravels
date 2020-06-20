@@ -94,7 +94,7 @@
 									<h2 class="wow fadeInUp" data-wow-delay="0.2s">Useful Links</h2>
 								</div>
 								<address class="wow fadeInUp" data-wow-delay="0.4s">
-									<p><a href=""><i class="fa fa-ticket"></i> Get ticket Ecopy</a></p>
+									<p style="display:none;"><a href=""><i class="fa fa-ticket"></i> Get ticket Ecopy</a></p>
 									<p><a href=""><i class="fa fa-ticket"></i> Booking status enquiry</a></p>
 								</address>
 							</div>

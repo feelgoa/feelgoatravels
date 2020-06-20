@@ -125,3 +125,8 @@
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
     background-color:red;
 }
+
+.pfont {
+	font-size:14px;
+	color:white;
+}

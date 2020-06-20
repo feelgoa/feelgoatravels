@@ -443,21 +443,119 @@ $('#contact_submit').on('click',function(event){
 $('#contact_us_submit').on('click',function(event){
 	document.getElementById("overlay").style.display = "block";
 	event.preventDefault();
-	$.ajax({
-		url: "/api/save-contact-us",
-		type:"POST",
-		data:$('#contactus_form').serialize(),
-		success:function(response){
-			grecaptcha.reset();
-			document.getElementById("overlay").style.display = "none";
-		}, error:function(response){
-			grecaptcha.reset();
-			document.getElementById("overlay").style.display = "none";
-		},
-	});
+	var msg = document.getElementById("error_message");
+	if(contact_us_check()) {
+		$.ajax({
+			url: "/api/save-contact-us",
+			type:"POST",
+			data:$('#contactus_form').serialize(),
+			success:function(response){
+				if (response['isSuccess'] == true) {
+					$("#error_message").removeClass("label-danger");
+					$("#error_message").addClass("label-success");
+					msg.style.display = "inline-block";
+					msg.innerHTML = response['message'];
+				} else {
+					$("#error_message").addClass("label-danger");
+					$("#error_message").removeClass("label-success");	
+					msg.style.display = "inline-block";
+					msg.innerHTML = response['message'];
+				}
+				grecaptcha.reset();
+				$("#contact_us_reset").click()
+				document.getElementById("overlay").style.display = "none";
+			}, error:function(response){
+				$("#error_message").addClass("label-danger");
+				$("#error_message").removeClass("label-success");
+				msg.style.display = "inline-block";
+				msg.innerHTML = "Something went wrong. Please Try again in sometime.";
+				grecaptcha.reset();
+				document.getElementById("overlay").style.display = "none";
+			},
+		});
+	} else {
+		document.getElementById("overlay").style.display = "none";
+	}
 });
 $('#contact_us_reset').on('click',function(event){
 	grecaptcha.reset();
 });
+function contact_us_check() {
+	var msg = document.getElementById("error_message");
+	var firstname = document.getElementById("firstname");
+	var lastname = document.getElementById("lastname");
+	var email = document.getElementById("email");
+	var phone = document.getElementById("phone");
+	var message=document.getElementById("message");
+	if (firstname.value == "" || lastname.value == "" || email.value=="" || message.value=="") {
+		msg.style.display = "inline-block";
+		msg.innerHTML = "Fields are empty";
+		$("#error_message").addClass("label-danger");
+		$("#error_message").removeClass("label-success");
+		return false;
+	} else {
+		msg.style.display = "none";
+		return true;
+	}
+}
 
+// This function will validate Email.
+function ValidateEmail(uemail, message) {
+	var msg = document.getElementById("error_message");
+	var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+	if (uemail.value.match(mailformat)) {
+		uemail.style.borderColor = "#66afe9";
+		msg.style.display = "none";
+		return true;
+	} else {
+		$("#error_message").addClass("label-danger");
+		$("#error_message").removeClass("label-success");
+		uemail.style.borderColor = "red";
+		msg.style.display = "inline-block";
+		msg.innerHTML = message;
+		uemail.focus();
+		return false;
+	}
+}
 
+// Function to validate Emails
+function ValidateEmptyField(emt_len, message) {
+	var msg = document.getElementById("error_message");
+	if (emt_len.value === "") {
+		msg.style.display = "inline-block";
+		msg.innerHTML = message;
+		$("#error_message").addClass("label-danger");
+		$("#error_message").removeClass("label-success");
+		emt_len.style.borderColor = "red";
+		emt_len.focus();
+		return false;
+	} else {
+		emt_len.style.borderColor = "#66afe9";
+		msg.style.display = "none";
+		return true;
+	}
+}
+
+// Function to validate Contact
+function ValidateContact(cont, message) {
+	var msg = document.getElementById("error_message");
+	var contformat = /^\d{10}$/;
+
+	if ($("#phone").val() != "") {
+		if (cont.value.match(contformat)) {
+			cont.style.borderColor = "#66afe9";
+			msg.style.display = "none";
+			return true;
+		} else {
+			cont.style.borderColor = "red";
+			$("#error_message").addClass("label-danger");
+			$("#error_message").removeClass("label-success");
+			msg.style.display = "inline-block";
+			msg.innerHTML = message;
+			cont.focus();
+			return false;
+		}
+	} else {
+		return true;
+	}
+}
