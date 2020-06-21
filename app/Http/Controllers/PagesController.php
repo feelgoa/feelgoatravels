@@ -37,7 +37,8 @@ class PagesController extends Controller
 	}
 
 	function gallery() {
-		return view('user.gallery',['title'=> GALLERY_TITLE]);
+		$images =DB::select('SELECT * FROM `gallery` WHERE (`from`IS NULL OR `from` <= CURRENT_DATE ) AND (`to` IS NULL OR `to` >= CURRENT_DATE ) AND visibility=true ORDER BY `ordering` ASC');
+		return view('user.gallery',['title'=> GALLERY_TITLE,'images'=>$images]);
 	}
 
 	function recapchay() {
