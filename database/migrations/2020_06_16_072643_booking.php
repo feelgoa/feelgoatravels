@@ -20,6 +20,7 @@ class Booking extends Migration
             $table->string('pickup_point',64);
             $table->Integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('user_id')->on('user_details')->onDelete('cascade');
+            $table->string('status',128);
             $table->timestamps();
         });
     }

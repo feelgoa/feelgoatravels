@@ -148,10 +148,10 @@
 						<input type="date" class="frm-font form-control" name="travel_date" id="travel_date" onblur="CheckDate(this,'Travelling Date should be in Future')" required>
 					</div>
 					 <div class="col-sm-6">
-						<label for="" class="frm-font lable-from">Pickup Point:</label>
+						<label for="pickup_point" class="frm-font lable-from">Pickup Point:</label>
 						<span class="required-field">*</span>
-						<select id="pickup_point" name="pickup_point" class="form-control">
-							<option selected>Select</option>
+						<select id="pickup_point" name="pickup_point" class="form-control" onblur="ValidateDropdownfield(this,'Select Pickup Point From Dropdown')" required>
+							<option value="">Select</option>
 							<option value="Colva">Colva</option>
 							<option value="Margao">Margao</option>
 						</select>

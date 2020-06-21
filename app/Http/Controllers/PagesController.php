@@ -37,7 +37,8 @@ class PagesController extends Controller
 	}
 
 	function gallery() {
-		return view('user.gallery',['title'=> GALLERY_TITLE]);
+		$images =DB::select('SELECT * FROM `gallery` WHERE (`from`IS NULL OR `from` <= CURRENT_DATE ) AND (`to` IS NULL OR `to` >= CURRENT_DATE ) AND visibility=true ORDER BY `ordering` ASC');
+		return view('user.gallery',['title'=> GALLERY_TITLE,'images'=>$images]);
 	}
 
 	function recapchay() {
@@ -79,11 +80,12 @@ class PagesController extends Controller
 		$pickup_point=$request->input('pickup_point');
 		$hotelbooking=$request->input('hotelbooking');
 		$spots=$request->input('spots');
+		$status="Booking Received";
 		$user_data=array('name'=>$name,"email"=>$email,"contact"=>$contact,"gender"=>$gender,"age"=>$age,"place"=>$place,"male_count"=>$male_count,"female_count"=>$female_count);
 
 		$user_id=DB::table('user_details')->insertGetId($user_data);
 		$booking_pnr=generate_pnr();
-		$booking_data=array("booking_pnr"=>$booking_pnr,"travelling_date"=>$travelling_date,"pickup_point"=>$pickup_point,"user_id"=>$user_id);
+		$booking_data=array("booking_pnr"=>$booking_pnr,"travelling_date"=>$travelling_date,"pickup_point"=>$pickup_point,"user_id"=>$user_id,"status"=>$status);
 		$booking_id=DB::table('booking_details')->insertGetId($booking_data);
 		$count=count($spots);
 		$items = array();
