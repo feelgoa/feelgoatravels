@@ -79,11 +79,12 @@ class PagesController extends Controller
 		$pickup_point=$request->input('pickup_point');
 		$hotelbooking=$request->input('hotelbooking');
 		$spots=$request->input('spots');
+		$status="Booking Received";
 		$user_data=array('name'=>$name,"email"=>$email,"contact"=>$contact,"gender"=>$gender,"age"=>$age,"place"=>$place,"male_count"=>$male_count,"female_count"=>$female_count);
 
 		$user_id=DB::table('user_details')->insertGetId($user_data);
 		$booking_pnr=generate_pnr();
-		$booking_data=array("booking_pnr"=>$booking_pnr,"travelling_date"=>$travelling_date,"pickup_point"=>$pickup_point,"user_id"=>$user_id);
+		$booking_data=array("booking_pnr"=>$booking_pnr,"travelling_date"=>$travelling_date,"pickup_point"=>$pickup_point,"user_id"=>$user_id,"status"=>$status);
 		$booking_id=DB::table('booking_details')->insertGetId($booking_data);
 		$count=count($spots);
 		$items = array();
