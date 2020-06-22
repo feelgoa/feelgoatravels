@@ -12,7 +12,9 @@
 
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
-
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" style="color: white;opacity: 1.0;">&times;</button>
+    </div>
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-body">
