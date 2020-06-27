@@ -6,18 +6,17 @@
 <div class="container">
 <div class="col-md-3">
 </div>
-<div class="fm-booking col-md-6" style="background-color: #0000008c;border-radius: 15px;padding: 12px;margin-top:12px;">
+<div class="form-s1 col-md-7" style="background-color: #0000008c;border-radius: 15px;padding: 12px;margin-top:12px;">
 	<input id="one-s1" class="radio-s1" type="radio" name="stage" checked="checked" />
 	<input id="two-s1" class="radio-s1" type="radio" name="stage" />
 	<input id="three-s1" class="radio-s1" type="radio" name="stage" />
 	<input id="four-s1" class="radio-s1" type="radio" name="stage" />
-	<input id="five-s1" class="radio-s1" type="radio" name="stage" />
-	<input id="six-s1" class="radio-s1" type="radio" name="stage" />
 
 	<div class="stages-s1">
 		<label for="one-s1" class="label-s1">1</label>
 		<label for="two-s1" class="label-s1">2</label>
 		<label for="three-s1" class="label-s1">3</label>
+		<label for="four-s1" class="label-s1">4</label>
 	</div>
 
 	<span class="progress-s1"><span></span></span>
@@ -53,11 +52,11 @@
 						<div class="form-check" style="display: inline-flex;">
 							<div class="form-check" style="padding-right:12px;">
 							  <input class="form-check-input" type="radio" name="gender" id="b1" value="male" required>
-							  <label class="form-check-label lable-from" for="inlineRadio1">Male</label>
+							  <label class="form-check-label lable-from" for="b1">Male</label>
 							</div>
 							<div class="form-check">
 							  <input class="form-check-input" type="radio" name="gender" id="b2" value="female" required>
-							  <label class="form-check-label lable-from" for="inlineRadio2">Female</label>
+							  <label class="form-check-label lable-from" for="b2">Female</label>
 							</div>
 						</div>
 					</div>
@@ -77,11 +76,11 @@
 					</div>
 					<div class="col-sm-4 team_details">
 						<label for="number" class="frm-font lable-from">Total Male Members:</label>
-						<input name="male_count" type="text" maxlength="2" value="0" class="frm-font form-control" id="male_count" placeholder="Male Members count" onblur="ValidateEmptyNumberField(this,'Male member count cannot be empty. You can enter zero if no male members')" required>
+						<input name="male_count" type="text" maxlength="2" value="0" class="frm-font form-control" id="male_count" placeholder="Male Members count" required>
 					</div>
 					<div class="col-sm-4 team_details">
 						<label for="number" class="frm-font lable-from">Total Female Members:</label>
-						<input name="female_count" type="text" maxlength="2" value="0" class="frm-font form-control" id="female_count" placeholder="Female Members count" onblur="ValidateEmptyNumberField(this,'Female member count cannot be empty. You can enter zero if no female members')" required>
+						<input name="female_count" type="text" maxlength="2" value="0" class="frm-font form-control" id="female_count" placeholder="Female Members count"  required>
 					</div>
 				</div>
 			</div>
@@ -93,20 +92,22 @@
 		</div>
 		<div data-panel="two-s1" class="div-s1">
 			<h2 class="lable-from">Package Details</h2>
-				<div class="checkbox" style="padding-left: 3.5rem;margin-top: 15px;">
-					<label for="customCheckBox5" class="lable-from">
-						<input type="checkbox" id="customCheckBox5" onclick="eventCheckBox(this)">
-						Select All
-						</label>
-				</div><br>
-			<div class="form-group">
 				<div class="row">
+					<div class="spot-container">
+						<h4 class="lable-from">Exclusive North Goa Tour( Day 1)</h4>
+						<div class="form-group">
+							<label for="travel_date1" class="frm-font lable-from">Travelling Date:</label>
+							<span class="required-field">*</span>
+							<input type="date" class="frm-font form-control travel_dates" name="travel_date1" id="travel_date1" onblur="CheckSameDate(this,'Travelling Date should be after one day from today and different from other travelling dates','error_message1')" required>
+						</div>
+					</div>
+				
 					<div class="col-sm-6">
-						<h6 class="lable-from">Exclusive North Goa Tour</h6>
+						<h6 class="lable-from">Included in Package</h6>
 						<div class="form-group">
 						@foreach ($package_details as $spot)
-							@if($spot->zone=="North Goa")
-							<div class="checkbox" style="padding-left: 3.5rem;margin-top: 15px;">
+							@if($spot->zone=="North Goa" and $spot->extra_info=="" and $spot->day=="1")
+							<div class="checkbox" style="padding-left: 1.5rem;margin-top: 10px;">
 								<label class="lable-from">
 								<input type="checkbox" class="tours" id="{{$spot->id}}" name="spots[]" value="{{$spot->id}}">
 								{{$spot->spot_name}}
@@ -117,11 +118,11 @@
 						</div>
 					</div>
 					<div class="col-sm-6">
-						<h6 class="lable-from">Exclusive South Goa Tour</h6>
+						<h6 class="lable-from">Extra Charges May Apply</h6>
 						<div class="form-group">
-							@foreach ($package_details as $spot)
-							@if($spot->zone=="South Goa")
-							<div class="checkbox" style="padding-left: 3.5rem;margin-top: 15px;">
+						@foreach ($package_details as $spot)
+							@if($spot->zone=="North Goa" and $spot->extra_info!="" and $spot->day=="1")
+							<div class="checkbox" style="padding-left: 1.5rem;margin-top: 10px;">
 								<label class="lable-from">
 								<input type="checkbox" class="tours" id="{{$spot->id}}" name="spots[]" value="{{$spot->id}}">
 								{{$spot->spot_name}}
@@ -132,21 +133,123 @@
 						</div>
 					</div>
 				</div>
-			</div>
+				<div class="row">
+				    <div class="spot-container">
+						<h4 class="lable-from">Exclusive South Goa Tour (Day 2)</h4>
+						<div class="form-group">
+							<label for="travel_date2" class="frm-font lable-from">Travelling Date:</label>
+							<span class="required-field">*</span>
+							<input type="date" class="frm-font form-control travels_dates" name="travel_date2" id="travel_date2" onblur="CheckSameDate(this,'Travelling Date should be after one day from today and different from other travelling dates','error_message1')" required>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<h6 class="lable-from">Included in Package</h6>
+						<div class="form-group">
+							@foreach ($package_details as $spot)
+							@if($spot->zone=="South Goa" and $spot->extra_info=="" and $spot->day=="2")
+							<div class="checkbox" style="padding-left: 1.5rem;margin-top: 10px;">
+								<label class="lable-from">
+								<input type="checkbox" class="tours" id="{{$spot->id}}" name="spots[]" value="{{$spot->id}}">
+								{{$spot->spot_name}}
+								</label>
+							</div>
+							@endif
+						@endforeach
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<h6 class="lable-from">Extra Charges May Apply</h6>
+						<div class="form-group">
+						@foreach ($package_details as $spot)
+							@if($spot->zone=="South Goa" and $spot->extra_info!="" and $spot->day=="2")
+							<div class="checkbox" style="padding-left: 1.5rem;margin-top: 10px;">
+								<label class="lable-from">
+								<input type="checkbox" class="tours" id="{{$spot->id}}" name="spots[]" value="{{$spot->id}}">
+								{{$spot->spot_name}}
+								</label>
+							</div>
+							@endif
+						@endforeach
+						</div>
+					</div>
+				</div>
+				<label class="lable-from">Travel type: </label>
+				<span class="required-field">*</span><br>
+				<div class="radio-form2">
+					<input class="form-check-input" type="radio" name="package_type" id="p1" value="single" required>
+					<label class="form-check-label lable-from" for="p1">Single</label>
+				</div>
+				<div class="radio-form2">
+					<input class="form-check-input" type="radio" name="package_type" id="p2" value="couple" required>
+					<label class="form-check-label lable-from" for="p2">Couple</label>
+				</div>
+				<div class="radio-form2">
+					<input class="form-check-input" type="radio" name="package_type" id="p3" value="familyless5" required>
+					<label class="form-check-label lable-from" for="p3">Family (Less than 5)</label>
+				</div>
+				<div class="radio-form2">
+					<input class="form-check-input" type="radio" name="package_type" id="p4" value="group" required>
+					<label class="form-check-label lable-from" for="p4">Group</label>
+				</div>
 			<div class="alert alert-warning" role="alert">
 			  <strong>Note:</strong> For more info on places you can click <a style="color:#CE3232;" href="/locations" target="_blank">here</a>.
 			</div>
+			<span class="label label-danger" id="error_message1"></span><br>
 		</div>
 		<div data-panel="three-s1" class="div-s1">
-			<h2 class="lable-from">PickUp Details </h2>
+			<h2 class="lable-from">Extra Package for Group</h2>
+			<div class="row">
+					<div class="col-sm-6">
+					    <h4 class="lable-from">Day 3</h4>
+						<div class="form-group">
+							<label for="travel_date3" class="frm-font lable-from">Travelling Date:</label>
+							<span class="required-field">*</span>
+							<input type="date" class="frm-font form-control travelling_dates" name="travel_date3" id="travel_date3" onblur="CheckSameDate(this,'Travelling Date should be after one day from today and different from other travelling dates','error_message2')">
+						</div>
+						<div class="form-group">
+						@foreach ($package_details as $spot)
+							@if($spot->day=="3")
+							<div class="checkbox" style="padding-left: 1.5rem;margin-top: 10px;">
+								<label class="lable-from">
+								<input type="checkbox" class="tour_extra" id="{{$spot->id}}" name="spots[]" value="{{$spot->id}}">
+								{{$spot->spot_name}}
+								</label>
+							</div>
+							@endif
+						@endforeach
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<h4 class="lable-from">Day 4</h4>
+						<div class="form-group">
+							<label for="travel_date4" class="frm-font lable-from">Travelling Date:</label>
+							<span class="required-field">*</span>
+							<input type="date" class="frm-font form-control travelling_dates" name="travel_date4" id="travel_date4" onblur="CheckSameDate(this,'Travelling Date should be after one day from today and different from other travelling dates','error_message2')" required>
+						</div>
+						<div class="form-group">
+						@foreach ($package_details as $spot)
+							@if($spot->day=="4")
+							<div class="checkbox" style="padding-left: 1.5rem;margin-top: 10px;">
+								<label class="lable-from">
+								<input type="checkbox" class="tour_extra" id="{{$spot->id}}" name="spots[]" value="{{$spot->id}}">
+								{{$spot->spot_name}}
+								</label>
+							</div>
+							@endif
+						@endforeach
+						</div>
+					</div>
+				</div>
+				<div class="alert alert-warning" role="alert">
+					<strong>Note:</strong>These places are optional and are not included in the package. Extra Charges may apply.
+				</div>
+				<span class="label label-danger" id="error_message2"></span><br>
+		</div>
+		<div data-panel="four-s1" class="div-s1">
+		<h2 class="lable-from">PickUp Details </h2>
 			<!-- Date Picker Input -->
 			<div class="form-group">
 				<div class="row">
-					<div class="col-sm-6">
-						<label for="travel_date" class="frm-font lable-from">Travelling Date:</label>
-						<span class="required-field">*</span>
-						<input type="date" class="frm-font form-control" name="travel_date" id="travel_date" onblur="CheckDate(this,'Travelling Date should be in Future')" required>
-					</div>
 					 <div class="col-sm-6">
 						<label for="pickup_point" class="frm-font lable-from">Pickup Point:</label>
 						<span class="required-field">*</span>
@@ -155,7 +258,29 @@
 							<option value="Colva">Colva</option>
 							<option value="Margao">Margao</option>
 						</select>
+					  </div>
+					  <div class="col-sm-6">
+					    <label for="bus_type" class="frm-font lable-from">Bus Type:</label>
+						<span class="required-field">*</span>
+					  	<div class="switch">
+							<input type="radio" class="switch-input" name="bus_type" value="Non-AC" id="Non-AC" checked>
+							<label for="Non-AC" class="switch-label switch-label-off">Non AC</label>
+							<input type="radio" class="switch-input" name="bus_type" value="AC" id="AC">
+							<label for="AC" class="switch-label switch-label-on">AC</label>
+							<span class="switch-selection"></span>
+						</div>
+					  </div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<h3 class="terms">TERMS AND CONDITIONS</h3> 
+						</br>
+						@foreach ($terms_conditions as $t_c)
+							{!! $t_c->content !!}
+						@endforeach
 					</div>
+					<input type="checkbox"  name="terms" id="terms" value="True" required style="margin-left: 3%;width: 20px;height: 20px;">
+					<label class="lable-from" for="terms" style="margin-left: 2%;font-size:20px;">I agree to these terms and conditions: </label><span class="required-field">*</span>
 				</div>
 			</div>
 			<div class="form-group" style="display:none">
@@ -165,10 +290,8 @@
 					Book Hotel</label>
 				</div>
 			</div>
-			<span class="label label-danger" id="error_message1"></span><br>
 			<input type = 'submit' class="btn btn-success" value = "Submit Details"/>
 		</div>
-		
 	</form>
 	</div>
 	<br>

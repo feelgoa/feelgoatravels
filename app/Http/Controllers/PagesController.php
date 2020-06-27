@@ -29,7 +29,8 @@ class PagesController extends Controller
 
 	function bookings() {
 		$package_details =DB::select('SELECT * FROM `package_details`');
-		return view('user.bookings',['title'=> BOOKINGS_TITLE,'package_details'=>$package_details]);
+		$terms_conditions =DB::select('SELECT * FROM `content` WHERE `id`=4');
+		return view('user.bookings',['title'=> BOOKINGS_TITLE,'package_details'=>$package_details,'terms_conditions'=>$terms_conditions]);
 	}
 
 	function contactus() {
