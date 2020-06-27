@@ -76,10 +76,29 @@ define('SAVE_BOOKING_FORM_API','/save-booking-form');
 define('MAKEPAYMENTS','/make-payments');
 define('REQUEST_BOOKING_DETAILS_API','/get-booking-details');
 
+
 define('ADMIN_PAGES_CONST',
 	array(
 		ADMIN_HOME_CONTENT_URL => 1
 		)
+);
+
+define('RECIEVED_NOT_CONFIRMED',1);
+define('RECIEVED_AND_PROCESSING',2);
+define('REPLIEDTO_CUSTOMER',3);
+define('PAYMENT_RECIEVED_CONFIRM',4);
+define('PAYMENT_NOT_RECIEVED',5);
+define('TRAVEL_COMPLETED',6);
+
+define('BOOKING_STATUS_VALUES',
+	array (
+		RECIEVED_NOT_CONFIRMED,'Booking Received (Not confirmed)',
+		RECIEVED_AND_PROCESSING, 'Booking Received - Checking availablity (Not confirmed)',
+		REPLIEDTO_CUSTOMER, 'Replied to Customer - Awaiting reply/payment (Not Confirmed)',
+		PAYMENT_RECIEVED_CONFIRM, 'Recieved Payment (Confirmed)',
+		PAYMENT_NOT_RECIEVED, 'Payment not recieved (Not Confirmed)',
+		TRAVEL_COMPLETED, 'Done'
+	)
 );
 
 /*Error Messages */

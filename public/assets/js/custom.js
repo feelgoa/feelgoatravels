@@ -525,6 +525,42 @@ $('#booking_status_submit').on('click',function(event){
 	}
 });
 
+
+/* make changes to this ajax call to submit bookings*/
+$('#submit-booking-details').on('click',function(event){
+	document.getElementById("overlay").style.display = "block";
+	event.preventDefault();
+	var msg = document.getElementById("error_message");
+	$.ajax({
+		url: "/api/get-booking-details",
+		type:"POST",
+		data:$('#booking-detail-form').serialize(),
+		success:function(response){
+			if (response['isSuccess'] == true) {
+				//create a empty form on the bookings page with 'booking_pnr'
+				$("#booking_pnr").val(response['booking_pnr']);
+				//update the value in the text box and post it to the same page from form action pointing to the same page
+				$("#booking-detail-form-duccess").submit();
+				//this will take care of redirecting to success page
+			} else {
+				$("#error_message").addClass("label-danger");
+				$("#error_message").removeClass("label-success");	
+				msg.style.display = "inline-block";
+				msg.innerHTML = response['message'];
+			}
+			document.getElementById("overlay").style.display = "none";
+		}, error:function(response) {
+			$("#error_message").addClass("label-danger");
+			$("#error_message").removeClass("label-success");
+			msg.style.display = "inline-block";
+			msg.innerHTML = "Something went wrong. Please Try again in sometime.";
+			document.getElementById("overlay").style.display = "none";
+		},
+	});
+});
+
+
+
 function contact_us_check() {
 	var msg = document.getElementById("error_message");
 	var firstname = document.getElementById("firstname");
