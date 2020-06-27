@@ -25,8 +25,10 @@ Route::get(LOCATION_URL, 'PagesController@locations');
 Route::get(BOOKING_URL, 'PagesController@bookings');
 Route::get(CONTACTUS_URL, 'PagesController@contactus');
 Route::get(GALLERY_URL, 'PagesController@gallery');
+Route::get(BOOKING_STATUS_URL, 'PagesController@bookingstatus');
 
-Route::any('recapcha-page', 'PagesController@recapchay');
+
+//Route::any('recapcha-page', 'PagesController@recapchay');
 
 /*Admin ROUTES */
 /* 'middleware' => ['authenticate'] */
@@ -41,6 +43,9 @@ Route::group(['prefix'=>ADMIN_BASE,'middleware' => []], function(){
 	});
 });
 Route::post(BOOKING_URL,'PagesController@insert')->name('bookings.insert');
+Route::post(BOOKING_STATUS_URL,'API\UserController@getbookingstatusdetails');
+
+
 /*Route::get('/', function () {
 	return view('landing');
 });

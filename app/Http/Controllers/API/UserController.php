@@ -71,6 +71,38 @@ public $successStatus = 200;
 
 	public function send_mail() {
         echo "SUCCESS";
-    }
+	}
+	
+	public function get_booking_status_form(Request $request) {
+		$validator = Validator::make($request->all(), [ 
+			'email' => 'required', 
+			'pnr' => 'required', 
+		]);
+		if ($validator->fails()) { 
+			return response()->json(['isSuccess'=> false, 'message'=> VALIDATION_FAILED, 'error'=> $validator->errors(), 'data'=> '']);
+		} else {
+			$input = $request->all(); 
+			$details['email'] = $input['email'];
+			$details['pnr'] = $input['pnr'];
+			$booking_details['booking'] = DB::select('SELECT * FROM booking_details as bd left join user_details as ud on bd.user_id = ud.user_id WHERE bd.booking_pnr = "'.$details['pnr'].'" and ud.email = "'.$details['email'].'"');
+			if($booking_details['booking']) {
+				return response()->json(['isSuccess'=> true, 'message'=> '','data'=> $details['pnr']]);
+			} else {
+				return response()->json(['isSuccess'=> false, 'message'=> BOOKING_STATUS_FETCH_FAILED, 'data'=> '']);
+			}
+
+			//response()->json(['isSuccess'=> true, 'message'=> '', 'data'=> $booking_details]);
+		}
+	}
+
+	function getbookingstatusdetails(Request $request) {
+		$input = $request->all(); 
+		$booking_details['booking'] = DB::select('SELECT * FROM booking_details as bd left join user_details as ud on bd.user_id = ud.user_id WHERE bd.booking_pnr = "'.$input['pnrvalueget'].'"');
+		$get_booking_id  = json_decode(json_encode($booking_details), true);
+		$booking_id = $get_booking_id ['booking'][0]['booking_id'];
+		$booking_details['spots'] = DB::select('SELECT * FROM booking_spot where booking_id = "'.$booking_id.'"');
+		return view('user.booking_status_view',['title'=> BOOKING_STATUS_TITLE,'pnrno'=>$get_booking_id ['booking'][0]['booking_pnr']]);
+
+	}
 
 }

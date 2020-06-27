@@ -25,6 +25,7 @@ body {
 
 .colourbanner {
 	background-color: #252525;
+	margin-bottom: 12px;
 }
 
 .colorlight {
@@ -35,6 +36,14 @@ body {
 	font-size: 1em;
 	color: #252525;
 	//background-color: #261C21;
+}
+
+.infoalert {
+	color: white;
+	cursor:help;
+	background-color:#ce3232;
+	font-size:14px;
+	margin-top:5px;
 }
 
 a {

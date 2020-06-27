@@ -23,6 +23,7 @@ Route::group(['middleware' => 'auth:api'], function(){
 
 Route::post(SAVE_CONTACT_US_FORM_API, 'API\ContactusController@save_contact_us_form');
 Route::post(SAVE_BOOKING_FORM_API, 'API\ContactusController@save_contact_us_form');
+Route::post(REQUEST_BOOKING_DETAILS_API, 'API\UserController@get_booking_status_form');
 
 Route::get('get-addr-location', 'API\UserController@get_addr_location_details');
 Route::get(SENDMAIL,'API\MailController@send_mail');

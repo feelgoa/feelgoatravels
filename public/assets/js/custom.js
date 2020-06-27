@@ -1,3 +1,9 @@
+var SITE_URL_JS = 'http://127.0.0.1';
+var BOOKING_STATUS = '/booking-status';
+var BOOKING_STATUS_DETAILS_URL = '/booking-status-details';
+/*
+var SITE_URL_JS = 'https://feelgoatravels.com/';
+*/
 (function ($) {
 
   //"use strict";
@@ -424,6 +430,9 @@ jQuery(document).ready(function($){
 		activetab.css("color", "#ce3232");
 		activetab.css("border-bottom", "1px solid rgb(206, 50, 50");
 		$('.phone-no-div').hide();
+		$('#marquee-holder').hide();
+	} else if (url[3] == 'home') {
+		$('#marquee-holder').hide();
 	}
 });
 
@@ -480,6 +489,42 @@ $('#contact_us_submit').on('click',function(event){
 $('#contact_us_reset').on('click',function(event){
 	grecaptcha.reset();
 });
+
+
+$('#booking_status_submit').on('click',function(event){
+	document.getElementById("overlay").style.display = "block";
+	event.preventDefault();
+	var msg = document.getElementById("error_message");
+	if(booking_status_check()) {
+		$.ajax({
+			url: "/api/get-booking-details",
+			type:"POST",
+			data:$('#booking_status_form').serialize(),
+			success:function(response){
+				if (response['isSuccess'] == true) {
+					$("#pnrvalueget").val(response['data']);
+					$("#booking-s-fetch").submit();
+				} else {
+					$("#error_message").addClass("label-danger");
+					$("#error_message").removeClass("label-success");	
+					msg.style.display = "inline-block";
+					msg.innerHTML = response['message'];
+				}
+				document.getElementById("overlay").style.display = "none";
+			}, error:function(response) {
+				$("#error_message").addClass("label-danger");
+				$("#error_message").removeClass("label-success");
+				msg.style.display = "inline-block";
+				msg.innerHTML = "Something went wrong. Please Try again in sometime.";
+				document.getElementById("overlay").style.display = "none";
+			},
+		});
+	} else {
+		document.getElementById("overlay").style.display = "none";
+		event.preventDefault();
+	}
+});
+
 function contact_us_check() {
 	var msg = document.getElementById("error_message");
 	var firstname = document.getElementById("firstname");
@@ -488,6 +533,23 @@ function contact_us_check() {
 	var phone = document.getElementById("phone");
 	var message=document.getElementById("message");
 	if (firstname.value == "" || lastname.value == "" || email.value=="" || message.value=="") {
+		msg.style.display = "inline-block";
+		msg.innerHTML = "Fields are empty";
+		$("#error_message").addClass("label-danger");
+		$("#error_message").removeClass("label-success");
+		return false;
+	} else {
+		msg.style.display = "none";
+		return true;
+	}
+}
+
+
+function booking_status_check() {
+	var email = document.getElementById("email");
+	var pnr=document.getElementById("pnr");
+	var msg = document.getElementById("error_message");
+	if (email.value == "" || pnr.value == "") {
 		msg.style.display = "inline-block";
 		msg.innerHTML = "Fields are empty";
 		$("#error_message").addClass("label-danger");
@@ -539,9 +601,24 @@ function ValidateEmptyField(emt_len, message) {
 // Function to validate Contact
 function ValidateContact(cont, message) {
 	var msg = document.getElementById("error_message");
-	var contformat = /^\d{10}$/;
 
-	if ($("#phone").val() != "") {
+	if (($("#phone").length > 0) & ($("#phone").val() != "")) {
+		var contformat = /^\d{10}$/;
+		if (cont.value.match(contformat)) {
+			cont.style.borderColor = "#66afe9";
+			msg.style.display = "none";
+			return true;
+		} else {
+			cont.style.borderColor = "red";
+			$("#error_message").addClass("label-danger");
+			$("#error_message").removeClass("label-success");
+			msg.style.display = "inline-block";
+			msg.innerHTML = message;
+			cont.focus();
+			return false;
+		}
+	} else if (($("#pnr").length > 0) & ($("#phone").val() != "")) {
+		var contformat = /^\d{8}$/;
 		if (cont.value.match(contformat)) {
 			cont.style.borderColor = "#66afe9";
 			msg.style.display = "none";

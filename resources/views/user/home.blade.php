@@ -139,5 +139,21 @@
 			</div>
 		</div>
 	</div>
+	<div class="container">
+		<div class="row">
+			@foreach ($terms as $term)
+				<div class="col-md-12 col-sm-12 ">
+				<div class="col-md-12 col-sm-12 colourbanner">
+						<h3 class="colorlight">{{$term->title}}</h3>
+				</div>
+				</div>
+				<div class="col-md-12 col-sm-12" id='terms-content'>
+				<address class="wow fadeInUp animated" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+				{!! $term->content !!}
+				</address>
+				</div>
+			@endforeach
+		</div>
+	</div>
 </section>
 @endsection

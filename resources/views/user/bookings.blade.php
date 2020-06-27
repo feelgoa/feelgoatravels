@@ -166,7 +166,7 @@
 				</div>
 			</div>
 			<span class="label label-danger" id="error_message1"></span><br>
-			<input type = 'submit' class="btn btn-success" value = "Submit Details"/>
+			<input type = 'submit' class="btn btn-success" value = "Submit Booking Details"/>
 		</div>
 		
 	</form>
