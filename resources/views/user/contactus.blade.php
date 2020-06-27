@@ -34,7 +34,7 @@
 			<div class="form-group">
 				<label  for="comment" class="form-labels">Message:</label>
 				<span class="required-field">*</span>
-				<textarea class="form-control" name="message" rows="5" id="message" style="width:100%;resize: none;" onblur="ValidateEmptyField(this,'Message cannot be empty')" required></textarea>
+				<textarea class="form-control" placeholder="Enter description here. Mention your PNR number if you want to enquire about your Booking status." name="message" rows="5" id="message" style="width:100%;resize: none;" onblur="ValidateEmptyField(this,'Message cannot be empty')" required></textarea>
 			</div>
 			<div class="form-group">
 				<div class="g-recaptcha" data-sitekey="{{ RECAPCHA_SITE_KEY }}"></div>

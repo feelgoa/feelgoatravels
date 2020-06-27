@@ -152,7 +152,10 @@ http://www.templatemo.com/tm-515-eatery
     padding-top:75px;
   }
 
-
+  .table-mid-padding {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 
   /*---------------------------------------
      BUTTONS               
@@ -1046,6 +1049,10 @@ http://www.templatemo.com/tm-515-eatery
     .custom-navbar .nav li a,
     .top-nav-collapse .nav li a {
       color: #575757;
+    }
+
+    .cu {
+      color:#ce3232;
     }
 
     .custom-navbar .navbar-nav.navbar-right li {

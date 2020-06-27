@@ -40,7 +40,7 @@ define('LOCATIONS_TITLE','Locations');
 define('BOOKINGS_TITLE','Bookings');
 define('GALLERY_TITLE','Gallery');
 define('CONTACTUS_TITLE','Contact-us');
-
+define('BOOKING_STATUS_TITLE','Booking status');
 
 /*Admin Titles*/
 define('ADMIN_DASHBOARD_TITLE','Dashboard');
@@ -55,7 +55,9 @@ define('PACKAGES_URL','/packages');
 define('BOOKING_URL','/bookings');
 define('CONTACTUS_URL','/contact-us');
 define('GALLERY_URL','/gallery');
-define('BOOKING_STATUS__URL','/#');
+define('BOOKING_STATUS_URL','/booking-status');
+define('BOOKING_STATUS_DETAILS_URL','/booking-status-details');
+
 
 
 /* Admin Routes */
@@ -72,11 +74,31 @@ define('SENDMAIL','/send-mail');
 define('SAVE_CONTACT_US_FORM_API','/save-contact-us');
 define('SAVE_BOOKING_FORM_API','/save-booking-form');
 define('MAKEPAYMENTS','/make-payments');
+define('REQUEST_BOOKING_DETAILS_API','/get-booking-details');
+
 
 define('ADMIN_PAGES_CONST',
 	array(
 		ADMIN_HOME_CONTENT_URL => 1
 		)
+);
+
+define('RECIEVED_NOT_CONFIRMED',1);
+define('RECIEVED_AND_PROCESSING',2);
+define('REPLIEDTO_CUSTOMER',3);
+define('PAYMENT_RECIEVED_CONFIRM',4);
+define('PAYMENT_NOT_RECIEVED',5);
+define('TRAVEL_COMPLETED',6);
+
+define('BOOKING_STATUS_VALUES',
+	array (
+		RECIEVED_NOT_CONFIRMED,'Booking Received (Not confirmed)',
+		RECIEVED_AND_PROCESSING, 'Booking Received - Checking availablity (Not confirmed)',
+		REPLIEDTO_CUSTOMER, 'Replied to Customer - Awaiting reply/payment (Not Confirmed)',
+		PAYMENT_RECIEVED_CONFIRM, 'Recieved Payment (Confirmed)',
+		PAYMENT_NOT_RECIEVED, 'Payment not recieved (Not Confirmed)',
+		TRAVEL_COMPLETED, 'Done'
+	)
 );
 
 /*Error Messages */
@@ -87,6 +109,7 @@ define('FORM_SUBMIT_FAILED','Something is went wrong. We could not save your dat
 define('FORM_SUBMIT_WITHOUT_EMAIL_FAILED', 'You have successfully submited your form.');
 define('EMAIL_SENDING_ERROR', 'There is some issue with sending email.');
 define('RECAPTCH_REQUIRED','Recapcha is not clicked. Please check mark the box to continue');
+define('BOOKING_STATUS_FETCH_FAILED','Sorry we could not fetch the details. Please make sure you have entered the correct details.');
 /*Google reCapcha*/
 
 define("RECAPCHA_SITE_KEY","6Le8fv4UAAAAADhwT9U00tMkk548oepW6gXdkxKr");

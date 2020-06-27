@@ -290,7 +290,12 @@
 					Book Hotel</label>
 				</div>
 			</div>
+<<<<<<< HEAD
 			<input type = 'submit' class="btn btn-success" value = "Submit Details"/>
+=======
+			<span class="label label-danger" id="error_message1"></span><br>
+			<input type = 'submit' class="btn btn-success" value = "Submit Booking Details"/>
+>>>>>>> d26dbb95f03fe9cdb5d2969461af8f92afa92817
 		</div>
 	</form>
 	</div>

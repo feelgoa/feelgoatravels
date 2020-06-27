@@ -15,7 +15,8 @@ class PagesController extends Controller
 	function home() {
 		$timeline = DB::select('select * from timeline where visiblity=1');
 		$slides =DB::select('SELECT * FROM `sliders` WHERE (`from`IS NULL OR `from` <= CURRENT_DATE ) AND (`to` IS NULL OR `to` >= CURRENT_DATE ) AND visibility=true ORDER BY `ordering` ASC');
-		return view('user.home',['title'=> HOME_TITLE,'timeline'=>$timeline,'slides'=>$slides]);
+		$terms = DB::select('SELECT `title`,`content` FROM content WHERE id=4');
+		return view('user.home',['title'=> HOME_TITLE,'timeline'=>$timeline,'slides'=>$slides,'terms'=>$terms]);
 	}
 
 	function packages() {
@@ -81,7 +82,7 @@ class PagesController extends Controller
 		$pickup_point=$request->input('pickup_point');
 		$hotelbooking=$request->input('hotelbooking');
 		$spots=$request->input('spots');
-		$status="Booking Received";
+		$status="Booking Received (Not confirmed)";
 		$user_data=array('name'=>$name,"email"=>$email,"contact"=>$contact,"gender"=>$gender,"age"=>$age,"place"=>$place,"male_count"=>$male_count,"female_count"=>$female_count);
 
 		$user_id=DB::table('user_details')->insertGetId($user_data);
@@ -106,7 +107,12 @@ class PagesController extends Controller
 
 		$mailsender = send_mail_custom($email,$name,BOOKINGS_EMAIL_TEMPLATE,$details);
 		$mailsender_admin = send_mail_custom(EMAIL_GMAIL_RECIEVER,FG_TEAM,BOOKINGS_EMAIL_TEMPLATE_ADMIN,$details);
-		return view('user.bookings_success',['title'=> "Bookings",'booking_pnr'=>$booking_pnr]);
+		return view('user.bookings_success',['title'=> BOOKINGS_TITLE,'booking_pnr'=>$booking_pnr]);
 	}
+
+	function bookingstatus() {
+		return view('user.bookingstatus',['title'=> BOOKING_STATUS_TITLE]);
+	}
+
 	
 }

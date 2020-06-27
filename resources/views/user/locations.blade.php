@@ -2,7 +2,7 @@
 
 @section('content')
 <section id="" class="slider">
-<div style="background-image:url('../../assets/images/loc3.jpg');">
+<div style="background-image:url('../../assets/images/contact-us-4.jpg');">
 	<div class="container">
 	<div class="row">
 		<div class="col-md-12 col-sm-12">

@@ -69,6 +69,11 @@
 					</ul>
 				</div>
 			</div>
+			<div class="col-md-12" id='marquee-holder'>
+				<marquee class="infoalert" onmouseover="this.stop();" onmouseout="this.start();">
+					We will be fully functional by October 2020. According the Government. If there is any delay we will keep you updated. Thank you.
+				</marquee>
+			</div>
 		</section>
 		@yield('content')
 		<!-- FOOTER -->
@@ -95,7 +100,7 @@
 								</div>
 								<address class="wow fadeInUp" data-wow-delay="0.4s">
 									<p style="display:none;"><a href=""><i class="fa fa-ticket"></i> Get ticket Ecopy</a></p>
-									<p><a href=""><i class="fa fa-ticket"></i> Booking status enquiry</a></p>
+									<p><a href="{{ SITE_URL.BOOKING_STATUS_URL }}"><i class="fa fa-ticket"></i> Booking status enquiry</a></p>
 								</address>
 							</div>
 					</div>
@@ -132,7 +137,7 @@
 				<div class="col-md-12 col-sm-12">
 							<div class="wow fadeInUp copyright-text" data-wow-delay="0.8s"> 
                                 <hr>
-								<p align="center"><br>&copy; 2020 - Feel Goa | Approved by Government of Goa and Recognised by department of Tourism, Goa</p>
+								<p align="center"><br>&copy; 2020 - Feel Goa | Approved by Government of Goa and Recognised by Department of Tourism, Goa</p>
 							</div>
 					</div>
 				</div>

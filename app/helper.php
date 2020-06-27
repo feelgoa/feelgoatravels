@@ -189,7 +189,7 @@ function user_booking_email_template($data) {
 	<tr colspan="2" >
 	<td>
 	<br>
-		You can also click <a target="_blank" href="'.SITE_URL.BOOKING_STATUS__URL.'">here</a> to track your status now.
+		You can also click <a target="_blank" href="'.SITE_URL.BOOKING_STATUS_URL.'">here</a> to track your status now.
 	</td>
 		</td>
 	</tr>
@@ -224,7 +224,7 @@ function user_booking_admin_email_template($data) {
 	<tr colspan="2">
 	<td>
 	<br>
-	This customer wants to know if Goa tour booking is possible on '.$formated_date.'. The The total number of members is '.$total_count.'. This consists of '.$malecount.' Male person and '.$femalecount.' Female person.
+	This customer wants to know if Goa tour booking is possible on '.$formated_date.'. The total number of members is '.$total_count.'. This consists of '.$malecount.' Male person and '.$femalecount.' Female person.
 	 </td>
 	 </tr>
 	 <tr colspan="2">
