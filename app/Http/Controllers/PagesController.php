@@ -70,6 +70,8 @@ class PagesController extends Controller
 	}
 	
 	function insert(Request $request){
+		//dd($request);
+		//Personal Details
 		$name = $request->input('name1');
 		$email = $request->input('email');
 		$contact = $request->input('contact');
@@ -78,17 +80,32 @@ class PagesController extends Controller
 		$place=$request->input('place');
 		$male_count=$request->input('male_count');
 		$female_count=$request->input('female_count');
-		$travelling_date=$request->input('travel_date');
+		//package_details
+		$travelling_date1=$request->input('travel_date1');
+		$travelling_date2=$request->input('travel_date2');
+		$spots=$request->input('spots');
+		$travel_type=$request->input('travel_type');
+
+		//Extra Package Group
+		$travelling_date3=$request->input('travel_date3');
+		$travelling_date4=$request->input('travel_date4');
+
+		//Pickup Details
 		$pickup_point=$request->input('pickup_point');
 		$hotelbooking=$request->input('hotelbooking');
-		$spots=$request->input('spots');
 		$status="Booking Received (Not confirmed)";
-		$user_data=array('name'=>$name,"email"=>$email,"contact"=>$contact,"gender"=>$gender,"age"=>$age,"place"=>$place,"male_count"=>$male_count,"female_count"=>$female_count);
-
-		$user_id=DB::table('user_details')->insertGetId($user_data);
 		$booking_pnr=generate_pnr();
-		$booking_data=array("booking_pnr"=>$booking_pnr,"travelling_date"=>$travelling_date,"pickup_point"=>$pickup_point,"user_id"=>$user_id,"status"=>$status);
+		$bus_type=$request->input('bus_type');
+
+		//Personal Details Insertion
+		$user_data=array('name'=>$name,"email"=>$email,"contact"=>$contact,"gender"=>$gender,"age"=>$age,"place"=>$place,"male_count"=>$male_count,"female_count"=>$female_count);
+		$user_id=DB::table('user_details')->insertGetId($user_data);
+		
+		//Booking Details Insertion
+		$booking_data=array("booking_pnr"=>$booking_pnr,"pickup_point"=>$pickup_point,"bus_type"=>$bus_type,"user_id"=>$user_id,"status"=>$status);
 		$booking_id=DB::table('booking_details')->insertGetId($booking_data);
+		
+		//Booking_spots Insertion
 		$count=count($spots);
 		$items = array();
 		for($i = 0; $i < $count; $i++){
@@ -96,6 +113,21 @@ class PagesController extends Controller
 			DB::table('booking_spot')->insert($item);
 		}
 
+		//Booking TravelDate Insertion
+		$count1=2;
+		$travel[0]=array("booking_id" => $booking_id,'travel_date'=>$travelling_date1,'day'=>"1");
+		$travel[1]=array("booking_id" => $booking_id,'travel_date'=>$travelling_date2,'day'=>"2");
+		if($travelling_date3!=NULL){
+			$travel[2]=array("booking_id" => $booking_id,'travel_date'=>$travelling_date3,'day'=>"3");
+			$count1=$count1+1;
+		}
+		if($travelling_date4!=NULL){
+			$travel[3]=array("booking_id" => $booking_id,'travel_date'=>$travelling_date4,'day'=>"4");
+			$count1=$count1+1;
+		}
+		for($i = 0; $i < $count1; $i++){
+			DB::table('booking_traveldate')->insert($travel[$i]);
+		}
 		//email sending
 		$details['name'] = $name;
 		$details['pnr'] = $booking_pnr;

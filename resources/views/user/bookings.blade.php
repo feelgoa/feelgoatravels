@@ -204,14 +204,14 @@
 						<div class="form-group">
 							<label for="travel_date3" class="frm-font lable-from">Travelling Date:</label>
 							<span class="required-field">*</span>
-							<input type="date" class="frm-font form-control travelling_dates" name="travel_date3" id="travel_date3" onblur="CheckSameDate(this,'Travelling Date should be after one day from today and different from other travelling dates','error_message2')">
+							<input type="date" class="frm-font form-control travelling_dates" name="travel_date3" id="travel_date3" onblur="CheckSameDate(this,'Travelling Date should be after one day from today and different from other travelling dates','error_message2');checkday3places();">
 						</div>
 						<div class="form-group">
 						@foreach ($package_details as $spot)
 							@if($spot->day=="3")
 							<div class="checkbox" style="padding-left: 1.5rem;margin-top: 10px;">
 								<label class="lable-from">
-								<input type="checkbox" class="tour_extra" id="{{$spot->id}}" name="spots[]" value="{{$spot->id}}">
+								<input type="checkbox" class="tour_extra3" id="{{$spot->id}}" name="spots[]" value="{{$spot->id}}">
 								{{$spot->spot_name}}
 								</label>
 							</div>
@@ -224,14 +224,14 @@
 						<div class="form-group">
 							<label for="travel_date4" class="frm-font lable-from">Travelling Date:</label>
 							<span class="required-field">*</span>
-							<input type="date" class="frm-font form-control travelling_dates" name="travel_date4" id="travel_date4" onblur="CheckSameDate(this,'Travelling Date should be after one day from today and different from other travelling dates','error_message2')" required>
+							<input type="date" class="frm-font form-control travelling_dates" name="travel_date4" id="travel_date4" onblur="CheckSameDate(this,'Travelling Date should be after one day from today and different from other travelling dates','error_message2');checkday4places();" >
 						</div>
 						<div class="form-group">
 						@foreach ($package_details as $spot)
 							@if($spot->day=="4")
 							<div class="checkbox" style="padding-left: 1.5rem;margin-top: 10px;">
 								<label class="lable-from">
-								<input type="checkbox" class="tour_extra" id="{{$spot->id}}" name="spots[]" value="{{$spot->id}}">
+								<input type="checkbox" class="tour_extra4" id="{{$spot->id}}" name="spots[]" value="{{$spot->id}}">
 								{{$spot->spot_name}}
 								</label>
 							</div>
@@ -290,17 +290,13 @@
 					Book Hotel</label>
 				</div>
 			</div>
-<<<<<<< HEAD
-			<input type = 'submit' class="btn btn-success" value = "Submit Details"/>
-=======
 			<span class="label label-danger" id="error_message1"></span><br>
 			<input type = 'submit' class="btn btn-success" value = "Submit Booking Details"/>
->>>>>>> d26dbb95f03fe9cdb5d2969461af8f92afa92817
 		</div>
 	</form>
 	</div>
 	<br>
-	<button class="button-s1-next btn btn-success">Next</button>
+	<button class="button-s1-next btn btn-success" id="form-next-button">Next</button>
 </div>
 </div>
 <script type="text/javascript" src="{{ URL::asset('assets/js/jquery.js') }}"></script>

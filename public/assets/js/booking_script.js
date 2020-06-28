@@ -10,7 +10,7 @@ $( document ).ready(function() {
 });
 $(".form-s1 .stages-s1 .label-s1").click(function () {
     var radioButtons = $(".form-s1 .radio-s1");
-    //$(radioButtons).attr("disabled", true);
+    $(radioButtons).attr("disabled", true);
 });
 
 //Form change based on button
@@ -44,14 +44,6 @@ $(".form-s1 .button-s1-next").click(function () {
     }
 });
 
-// Control to select and deselect all checkboxs based on checkbox select
-function eventCheckBox() {
-    let checkboxs = document.getElementsByClassName("tours");
-    for (let i = 0; i < checkboxs.length; i++) {
-        checkboxs[i].checked = true;
-    }
-}
-
 // This function will validate Email.
 function ValidateEmail(uemail, message) {
     var msg = document.getElementById("error_message");
@@ -59,11 +51,13 @@ function ValidateEmail(uemail, message) {
     if (uemail.value.match(mailformat)) {
         uemail.style.borderColor = "#66afe9";
         msg.style.display = "none";
+        document.getElementById("form-next-button").disabled = false;
         return true;
     } else {
         uemail.style.borderColor = "red";
         msg.style.display = "inline-block";
         msg.innerHTML = message;
+        document.getElementById("form-next-button").disabled = true;
         uemail.focus();
         return false;
     }
@@ -76,11 +70,13 @@ function ValidateEmptyField(emt_len, message) {
         msg.style.display = "inline-block";
         msg.innerHTML = message;
         emt_len.style.borderColor = "red";
+        document.getElementById("form-next-button").disabled = true;
         emt_len.focus();
         return false;
     } else {
         emt_len.style.borderColor = "#66afe9";
         msg.style.display = "none";
+        document.getElementById("form-next-button").disabled = false;
         return true;
     }
 }
@@ -88,15 +84,17 @@ function ValidateEmptyField(emt_len, message) {
 // Function to Validate Empty Number Field
 function ValidateEmptyNumberField(emt_len, message) {
     var msg = document.getElementById("error_message");
-    if (isNaN(emt_len.value)) {
+    if (isNaN(emt_len.value) || emt_len.value=="") {
         msg.style.display = "inline-block";
         msg.innerHTML = message;
         emt_len.style.borderColor = "red";
+        document.getElementById("form-next-button").disabled = true;
         emt_len.focus();
         return false;
     } else {
         emt_len.style.borderColor = "#66afe9";
         msg.style.display = "none";
+        document.getElementById("form-next-button").disabled = false;
         return true;
     }
 }
@@ -108,11 +106,13 @@ function ValidateDropdownfield(emt_len, message) {
         msg.style.display = "inline-block";
         msg.innerHTML = message;
         emt_len.style.borderColor = "red";
+        document.getElementById("form-next-button").disabled = true;
         emt_len.focus();
         return false;
     } else {
         emt_len.style.borderColor = "#66afe9";
         msg.style.display = "none";
+        document.getElementById("form-next-button").disabled = false;
         return true;
     }
 }
@@ -124,11 +124,13 @@ function ValidateContact(cont, message) {
     if (cont.value.match(contformat)) {
         cont.style.borderColor = "#66afe9";
         msg.style.display = "none";
+        document.getElementById("form-next-button").disabled = false;
         return true;
     } else {
         cont.style.borderColor = "red";
         msg.style.display = "inline-block";
         msg.innerHTML = message;
+        document.getElementById("form-next-button").disabled = true;
         cont.focus();
         return false;
     }
@@ -137,7 +139,7 @@ function ValidateContact(cont, message) {
 //Validate Date
 function CheckSameDate(date_id,message,error_message) {
     var date = new Date();
-    date.setDate(new Date().getDate()+2);
+    date.setDate(new Date().getDate()+1);
     var mydate = new Date(date_id.value);
     var msg = document.getElementById(error_message);
     var dateday1 = new Date(document.getElementById("travel_date1").value);
@@ -149,11 +151,13 @@ function CheckSameDate(date_id,message,error_message) {
             date_id.style.borderColor = "red";
             msg.style.display = "inline-block";
             msg.innerHTML = message;
+            document.getElementById("form-next-button").disabled = true;
             date_id.focus();
             return false;
         } else {  
             date_id.style.borderColor = "#66afe9";
             msg.style.display = "none";
+            document.getElementById("form-next-button").disabled = false;
             return true;
         }
     }else if(!isNaN(dateday1.getDay()) && !isNaN(dateday2.getDay()) && !isNaN(dateday3.getDay())){
@@ -161,11 +165,13 @@ function CheckSameDate(date_id,message,error_message) {
             date_id.style.borderColor = "red";
             msg.style.display = "inline-block";
             msg.innerHTML = message;
+            document.getElementById("form-next-button").disabled = true;
             date_id.focus();
             return false;
         } else {  
             date_id.style.borderColor = "#66afe9";
             msg.style.display = "none";
+            document.getElementById("form-next-button").disabled = false;
             return true;
         }
     }else if(!isNaN(dateday1.getDay()) && !isNaN(dateday2.getDay()) && !isNaN(dateday4.getDay())){
@@ -173,11 +179,27 @@ function CheckSameDate(date_id,message,error_message) {
             date_id.style.borderColor = "red";
             msg.style.display = "inline-block";
             msg.innerHTML = message;
+            document.getElementById("form-next-button").disabled = true;
             date_id.focus();
             return false;
         } else {  
             date_id.style.borderColor = "#66afe9";
             msg.style.display = "none";
+            document.getElementById("form-next-button").disabled = false;
+            return true;
+        }
+    }else if(!isNaN(dateday1.getDay()) && !isNaN(dateday3.getDay()) && !isNaN(dateday4.getDay())){
+        if (date > mydate || dateday1.getDay()===dateday3.getDay() || dateday1.getDay()===dateday4.getDay() || dateday3.getDay()===dateday4.getDay()) {
+            date_id.style.borderColor = "red";
+            msg.style.display = "inline-block";
+            document.getElementById("form-next-button").disabled = true;
+            msg.innerHTML = message;
+            date_id.focus();
+            return false;
+        } else {  
+            date_id.style.borderColor = "#66afe9";
+            msg.style.display = "none";
+            document.getElementById("form-next-button").disabled = false;
             return true;
         }
     }else if(!isNaN(dateday1.getDay()) && !isNaN(dateday3.getDay()) && !isNaN(dateday4.getDay())){
@@ -185,23 +207,13 @@ function CheckSameDate(date_id,message,error_message) {
             date_id.style.borderColor = "red";
             msg.style.display = "inline-block";
             msg.innerHTML = message;
+            document.getElementById("form-next-button").disabled = true;
             date_id.focus();
             return false;
         } else {  
             date_id.style.borderColor = "#66afe9";
             msg.style.display = "none";
-            return true;
-        }
-    }else if(!isNaN(dateday1.getDay()) && !isNaN(dateday3.getDay()) && !isNaN(dateday4.getDay())){
-        if (date > mydate || dateday1.getDay()===dateday3.getDay() || dateday1.getDay()===dateday4.getDay() || dateday3.getDay()===dateday4.getDay()) {
-            date_id.style.borderColor = "red";
-            msg.style.display = "inline-block";
-            msg.innerHTML = message;
-            date_id.focus();
-            return false;
-        } else {  
-            date_id.style.borderColor = "#66afe9";
-            msg.style.display = "none";
+            document.getElementById("form-next-button").disabled = false;
             return true;
         }
     }else if(!isNaN(dateday2.getDay()) && !isNaN(dateday3.getDay()) && !isNaN(dateday4.getDay())){
@@ -209,11 +221,13 @@ function CheckSameDate(date_id,message,error_message) {
             date_id.style.borderColor = "red";
             msg.style.display = "inline-block";
             msg.innerHTML = message;
+            document.getElementById("form-next-button").disabled = true;
             date_id.focus();
             return false;
         } else {  
             date_id.style.borderColor = "#66afe9";
             msg.style.display = "none";
+            document.getElementById("form-next-button").disabled = false;
             return true;
         }
     }else if(!isNaN(dateday1.getDay()) && !isNaN(dateday3.getDay())){
@@ -221,23 +235,27 @@ function CheckSameDate(date_id,message,error_message) {
             date_id.style.borderColor = "red";
             msg.style.display = "inline-block";
             msg.innerHTML = message;
+            document.getElementById("form-next-button").disabled = true;
             date_id.focus();
             return false;
         } else {  
             date_id.style.borderColor = "#66afe9";
             msg.style.display = "none";
+            document.getElementById("form-next-button").disabled = false;
             return true;
         }
     }else if(!isNaN(dateday1.getDay()) && !isNaN(dateday2.getDay())){
         if (dateday1.getDay() === dateday2.getDay() || date > mydate) {
             date_id.style.borderColor = "red";
             msg.style.display = "inline-block";
+            document.getElementById("form-next-button").disabled = true;
             msg.innerHTML = message;
             date_id.focus();
             return false;
         } else {  
             date_id.style.borderColor = "#66afe9";
             msg.style.display = "none";
+            document.getElementById("form-next-button").disabled = false;
             return true;
         }
 
@@ -245,12 +263,14 @@ function CheckSameDate(date_id,message,error_message) {
         if (date > mydate || dateday1.getDay()===dateday4.getDay()) {
             date_id.style.borderColor = "red";
             msg.style.display = "inline-block";
+            document.getElementById("form-next-button").disabled = true;
             msg.innerHTML = message;
             date_id.focus();
             return false;
         } else {  
             date_id.style.borderColor = "#66afe9";
             msg.style.display = "none";
+            document.getElementById("form-next-button").disabled = false;
             return true;
         }
     }else if(!isNaN(dateday2.getDay()) && !isNaN(dateday3.getDay())){
@@ -258,11 +278,13 @@ function CheckSameDate(date_id,message,error_message) {
             date_id.style.borderColor = "red";
             msg.style.display = "inline-block";
             msg.innerHTML = message;
+            document.getElementById("form-next-button").disabled = true;
             date_id.focus();
             return false;
         } else {  
             date_id.style.borderColor = "#66afe9";
             msg.style.display = "none";
+            document.getElementById("form-next-button").disabled = false;
             return true;
         }
     }else if(!isNaN(dateday2.getDay()) && !isNaN(dateday4.getDay())){
@@ -271,10 +293,12 @@ function CheckSameDate(date_id,message,error_message) {
             msg.style.display = "inline-block";
             msg.innerHTML = message;
             date_id.focus();
+            document.getElementById("form-next-button").disabled = true;
             return false;
         } else {  
             date_id.style.borderColor = "#66afe9";
             msg.style.display = "none";
+            document.getElementById("form-next-button").disabled = false;
             return true;
         }
     }else if(!isNaN(dateday3.getDay()) && !isNaN(dateday4.getDay())){
@@ -282,11 +306,13 @@ function CheckSameDate(date_id,message,error_message) {
             date_id.style.borderColor = "red";
             msg.style.display = "inline-block";
             msg.innerHTML = message;
+            document.getElementById("form-next-button").disabled = true;
             date_id.focus();
             return false;
         } else {  
             date_id.style.borderColor = "#66afe9";
             msg.style.display = "none";
+            document.getElementById("form-next-button").disabled = false;
             return true;
         }
     }else if(!isNaN(dateday2.getDay())){
@@ -294,11 +320,13 @@ function CheckSameDate(date_id,message,error_message) {
             date_id.style.borderColor = "red";
             msg.style.display = "inline-block";
             msg.innerHTML = message;
+            document.getElementById("form-next-button").disabled = true;
             date_id.focus();
             return false;
         } else {  
             date_id.style.borderColor = "#66afe9";
             msg.style.display = "none";
+            document.getElementById("form-next-button").disabled = false;
             return true;
         }
     }else if(!isNaN(dateday1.getDay())){
@@ -306,11 +334,13 @@ function CheckSameDate(date_id,message,error_message) {
             date_id.style.borderColor = "red";
             msg.style.display = "inline-block";
             msg.innerHTML = message;
+            document.getElementById("form-next-button").disabled = true;
             date_id.focus();
             return false;
         } else {  
             date_id.style.borderColor = "#66afe9";
             msg.style.display = "none";
+            document.getElementById("form-next-button").disabled = false;
             return true;
         }
     }else if(!isNaN(dateday3.getDay())){
@@ -318,11 +348,13 @@ function CheckSameDate(date_id,message,error_message) {
             date_id.style.borderColor = "red";
             msg.style.display = "inline-block";
             msg.innerHTML = message;
+            document.getElementById("form-next-button").disabled = true;
             date_id.focus();
             return false;
         } else {  
             date_id.style.borderColor = "#66afe9";
             msg.style.display = "none";
+            document.getElementById("form-next-button").disabled = false;
             return true;
         }
     }else if(!isNaN(dateday4.getDay())){
@@ -330,11 +362,13 @@ function CheckSameDate(date_id,message,error_message) {
             date_id.style.borderColor = "red";
             msg.style.display = "inline-block";
             msg.innerHTML = message;
+            document.getElementById("form-next-button").disabled = true;
             date_id.focus();
             return false;
         } else {  
             date_id.style.borderColor = "#66afe9";
             msg.style.display = "none";
+            document.getElementById("form-next-button").disabled = false;
             return true;
         }
     }
@@ -374,5 +408,32 @@ function package_details() {
     } else {
         msg.style.display = "none";
         return true;
+    }
+}
+
+//Function to select places when date3 is selected
+function checkday3places(){
+    var dateday3=new Date(document.getElementById('travel_date3').value);
+    if(!isNaN(dateday3.getDay())){
+        let checkboxs = document.getElementsByClassName("tour_extra3");
+	    for(let i = 0; i < checkboxs.length ; i++) {
+		    checkboxs[i].checked = true;
+        }
+        $(document.body).delegate('.tour_extra3', 'click', function(e) {
+            e.preventDefault();
+        });
+    }
+}
+//Function to select places when date4 is selected
+function checkday4places(){
+    var dateday4=new Date(document.getElementById('travel_date4').value);
+    if(!isNaN(dateday4.getDay())){
+        let checkboxs = document.getElementsByClassName("tour_extra4");
+	    for(let i = 0; i < checkboxs.length ; i++) {
+		    checkboxs[i].checked = true;
+        }
+        $(document.body).delegate('.tour_extra4', 'click', function(e) {
+            e.preventDefault();
+        });
     }
 }
