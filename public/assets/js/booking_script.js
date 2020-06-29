@@ -118,7 +118,7 @@ function ValidateDropdownfield(emt_len, message) {
 }
 
 // Function to validate Contact
-function ValidateContact(cont, message) {
+function ValidateContact1(cont, message) {
     var msg = document.getElementById("error_message");
     var contformat = /^\d{10}$/;
     if (cont.value.match(contformat)) {
