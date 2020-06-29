@@ -41,7 +41,7 @@
 					<div class="col-sm-6">
 						<label for="tel" class="frm-font lable-from">Contact Number:</label>
 						<span class="required-field">*</span>
-						<input type="tel" size="10" class="frm-font form-control" id="contact" name="contact" placeholder="Contact number" onblur="ValidateContact(this,'Enter 10 digit mobile Number')" required>
+						<input type="tel" size="10" class="frm-font form-control" id="contact" name="contact" placeholder="Contact number" onblur="ValidateContact1(this,'Enter 10 digit mobile Number')" required>
 					</div>
 				</div>
 			</div>
