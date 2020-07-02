@@ -44,7 +44,7 @@ Route::group(['prefix'=>ADMIN_BASE,'middleware' => []], function(){
 	});
 });*/
 Route::post(BOOKING_URL,'PagesController@insert')->name('bookings.insert');
-Route::post(BOOKING_STATUS_URL,'API\UserController@getbookingstatusdetails');
+Route::post(BOOKING_STATUS_URL,'API\FguserController@getbookingstatusdetails');
 
 
 /*Route::get('/', function () {
@@ -53,6 +53,6 @@ Route::post(BOOKING_STATUS_URL,'API\UserController@getbookingstatusdetails');
 */
 
 
-//Route::group(['prefix' => 'admin'], function () {
-//    Voyager::routes();
-//});
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
