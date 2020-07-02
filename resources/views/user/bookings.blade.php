@@ -84,10 +84,6 @@
 					</div>
 				</div>
 			</div>
-			<div class="alert alert-warning" role="alert">
-				<strong>Note:</strong> If the total member count exceeds 10, then you are allowed to choose your spots in the next tab.
-			</div>
-
 			<span class="label label-danger" style="font-size: 14px;margin-bottom:14px;white-space: normal;" id="error_message"></span></br>
 		</div>
 		<div data-panel="two-s1" class="div-s1">
@@ -98,7 +94,7 @@
 						<div class="form-group">
 							<label for="travel_date1" class="frm-font lable-from">Travelling Date:</label>
 							<span class="required-field">*</span>
-							<input type="date" class="frm-font form-control travel_dates" name="travel_date1" id="travel_date1" onblur="CheckSameDate(this,'Travelling Date should be after one day from today and different from other travelling dates','error_message1')" required>
+							<input type="date" class="frm-font form-control travel_dates" name="travel_date1" id="travel_date1" onblur="CheckSameDate(this,'Travelling Date should be one day ahead from today and different from other travelling dates','error_message1')" required>
 						</div>
 					</div>
 				
@@ -139,7 +135,7 @@
 						<div class="form-group">
 							<label for="travel_date2" class="frm-font lable-from">Travelling Date:</label>
 							<span class="required-field">*</span>
-							<input type="date" class="frm-font form-control travels_dates" name="travel_date2" id="travel_date2" onblur="CheckSameDate(this,'Travelling Date should be after one day from today and different from other travelling dates','error_message1')" required>
+							<input type="date" class="frm-font form-control travels_dates" name="travel_date2" id="travel_date2" onblur="CheckSameDate(this,'Travelling Date should be one day ahead from today and different from other travelling dates','error_message1')" required>
 						</div>
 					</div>
 					<div class="col-sm-6">
@@ -204,7 +200,7 @@
 						<div class="form-group">
 							<label for="travel_date3" class="frm-font lable-from">Travelling Date:</label>
 							<span class="required-field">*</span>
-							<input type="date" class="frm-font form-control travelling_dates" name="travel_date3" id="travel_date3" onblur="CheckSameDate(this,'Travelling Date should be after one day from today and different from other travelling dates','error_message2');checkday3places();">
+							<input type="date" class="frm-font form-control travelling_dates" name="travel_date3" id="travel_date3" onblur="CheckSameDate(this,'Travelling Date should be one day ahead from today and different from other travelling dates','error_message2'); checkday3places();">
 						</div>
 						<div class="form-group">
 						@foreach ($package_details as $spot)
@@ -224,7 +220,7 @@
 						<div class="form-group">
 							<label for="travel_date4" class="frm-font lable-from">Travelling Date:</label>
 							<span class="required-field">*</span>
-							<input type="date" class="frm-font form-control travelling_dates" name="travel_date4" id="travel_date4" onblur="CheckSameDate(this,'Travelling Date should be after one day from today and different from other travelling dates','error_message2');checkday4places();" >
+							<input type="date" class="frm-font form-control travelling_dates" name="travel_date4" id="travel_date4" onblur="CheckSameDate(this,'Travelling Date should be one day ahead from today and different from other travelling dates','error_message2')" checkday4places();>
 						</div>
 						<div class="form-group">
 						@foreach ($package_details as $spot)
@@ -273,14 +269,19 @@
 				</div>
 				<div class="row">
 					<div class="col-sm-12">
-						<h3 class="terms">TERMS AND CONDITIONS</h3> 
 						</br>
-						@foreach ($terms_conditions as $t_c)
-							{!! $t_c->content !!}
-						@endforeach
+						<div class="col-md-12 colourbanner">
+							<h3 class="colorlight" style="margin-top: 0px;">TERMS AND CONDITIONS</h3>
+						</div>
+						</br>
+						<div class="lable-from">
+							@foreach ($terms_conditions as $t_c)
+								{!! $t_c->content !!}
+							@endforeach
+						</div>
 					</div>
-					<input type="checkbox"  name="terms" id="terms" value="True" required style="margin-left: 3%;width: 20px;height: 20px;">
-					<label class="lable-from" for="terms" style="margin-left: 2%;font-size:20px;">I agree to these terms and conditions: </label><span class="required-field">*</span>
+					<input type="checkbox"  name="terms" id="terms" value="True" required style="margin-left: 12px;width: 20px;height: 20px;">
+					<label class="lable-from" for="terms" style="margin-left: 2%;font-size:14px;">I agree to these terms and conditions: </label><span class="required-field">*</span>
 				</div>
 			</div>
 			<div class="form-group" style="display:none">

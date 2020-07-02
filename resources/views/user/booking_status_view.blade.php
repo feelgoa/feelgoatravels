@@ -17,7 +17,7 @@
 		</td>
 		<td class="table-mid-padding"><label class="form-labels">:<lable>
 		</td>
-		<td><label class="form-labels">Alisther Barreto<lable>
+		<td><label class="form-labels">{{ $details['booking'][0]['name'] }}<lable>
 		</td>
 		</tr>
 		<tr>
@@ -26,7 +26,11 @@
 		</td>
 		<td class="table-mid-padding"><label class="form-labels">:<lable>
 		</td>
-		<td><b><label class="form-labels">27-12-2020</label></b>
+		<td>
+			<b><label class="form-labels">North Goa 27-06-2020</label></b></br>
+			<b><label class="form-labels">South Goa 28-06-2020</label></b>
+			<b><label class="form-labels">Palolem and Agonda 29-06-2020</label></b>
+			<b><label class="form-labels">Dudhsagar 30-06-2020</label></b>
 		</td>
 		</tr>
 		<tr>
@@ -35,16 +39,12 @@
 		</td>
 		<td class="table-mid-padding"><label class="form-labels">:<lable>
 		</td>
-		<td><b><label class="form-labels">6 (3 Male and 3 Female)</label></b>
-		</td>
-		</tr>
-		<tr>
-		<td><label class="form-labels">People Travelling<lable>
-		</td>
-		</td>
-		<td class="table-mid-padding"><label class="form-labels">:<lable>
-		</td>
-		<td><b><label class="form-labels">6 (3 Male and 3 Female)</label></b>
+		<td>
+			<b>
+				<label class="form-labels">{{ $details['booking'][0]['totalcount'] }} 
+					({{ $details['booking'][0]['male_count'] }} Male and {{ $details['booking'][0]['female_count'] }} Female)
+				</label>
+			</b>
 		</td>
 		</tr>
 		<tr>
@@ -53,7 +53,7 @@
 		</td>
 		<td class="table-mid-padding"><label class="form-labels">:<lable>
 		</td>
-		<td><b><label class="form-labels">Booking Received (Not confirmed)</label></b>
+		<td><b><label class="form-labels">{{ $details['booking'][0]['status'] }}</label></b>
 		</td>
 		</tr>
 		</table>
