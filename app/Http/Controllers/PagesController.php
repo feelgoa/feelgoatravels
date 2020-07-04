@@ -27,7 +27,9 @@ class PagesController extends Controller
 		$package_details =DB::select('SELECT * FROM `package_details`');
 		return view('user.locations',['title'=> LOCATIONS_TITLE,'package_details'=>$package_details]);
 	}
-
+	function bookings_cover(){
+		return view('user.booking_cover_page',['title'=> BOOKINGS_TITLE]);
+	}
 	function bookings() {
 		$package_details =DB::select('SELECT * FROM `package_details`');
 		$terms_conditions =DB::select('SELECT * FROM `content` WHERE `id`=4');
@@ -92,11 +94,22 @@ class PagesController extends Controller
 
 		//Pickup Details
 		$pickup_point=$request->input('pickup_point');
-		$hotelbooking=$request->input('hotelbooking');
 		$status="Booking Received (Not confirmed)";
 		$booking_pnr=generate_pnr();
 		$bus_type=$request->input('bus_type');
+<<<<<<< Updated upstream
 	
+=======
+
+		//Hotel Details
+		$hotelbooking_checked=$request->input('hotelbooking');
+		$check_in_date=$request->input('check_in');
+		$check_out_date=$request->input('check_out');
+		$room_type=$request->input('room_type');
+		$room_count=$request->input('room_count');
+		$extra_requirements=$request->input('hotel_req');
+
+>>>>>>> Stashed changes
 		//Personal Details Insertion
 		$user_data=array("name"=>$name,"email"=>$email,"contact"=>$contact,"gender"=>$gender,"age"=>$age,"place"=>$place,"male_count"=>$male_count,"female_count"=>$female_count);
 		$user_id=DB::table('user_details')->insertGetId($user_data);
@@ -127,11 +140,17 @@ class PagesController extends Controller
 		for($i = 0; $i < $count1; $i++){
 			DB::table('booking_traveldate')->insert($travel[$i]);
 		}
+
+		//Hotel details
+		$hotelbooking=array("booking_id" => $booking_id,"check_in_date"=>$check_in_date,"check_out_date"=>$check_out_date,"room_type"=>$room_type,"room_count"=>$room_count,"extra_requirements"=>$extra_requirements);
+		if($hotelbooking_checked=="yes"){
+			$hotel_id=DB::table('hotel_details')->insertGetId($hotelbooking);
+		}
 		//email sending
 		$details['name'] = $name;
 		$details['pnr'] = $booking_pnr;
 		$details['email'] = $email;
-		$details['traveling_date'] = $travelling_date;
+		//$details['traveling_date'] = $travelling_date;
 		$details['malecount'] = $male_count;
 		$details['femalecount'] = $female_count;
 		$details['pickup_loc']  = $pickup_point;

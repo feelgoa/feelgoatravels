@@ -8,10 +8,19 @@ $( document ).ready(function() {
         e.preventDefault();
     });
 });
+
 $(".form-s1 .stages-s1 .label-s1").click(function () {
     var radioButtons = $(".form-s1 .radio-s1");
-    $(radioButtons).attr("disabled", true);
+    //$(radioButtons).attr("disabled", true);
 });
+
+$('#hotelbooking').change(function(){
+    if ($(this).is(':checked')) {
+       $('.hotel-details-div').css('display', 'block')
+    } else {
+       $('.hotel-details-div').css('display', 'none')
+    }
+  });
 
 //Form change based on button
 $(".form-s1 .button-s1-next").click(function () {
@@ -26,21 +35,13 @@ $(".form-s1 .button-s1-next").click(function () {
         }
     }else if(selectedIndex == 1){
         if(package_details()){
-            travel_type = document.getElementById('p4');
-            console.log(travel_type.checked);
-            if(travel_type.checked==true){
-                selectedIndex = selectedIndex + 2;
-                $('.form-s1 .radio-s1:nth-of-type(' + selectedIndex + ')').prop('checked', true);
-            }else{
-                selectedIndex = 4;
-                $('.form-s1 .radio-s1:nth-of-type(' + selectedIndex + ')').prop('checked', true);
-                $(this).hide();
-            }
+            selectedIndex = selectedIndex + 2;
+            $('.form-s1 .radio-s1:nth-of-type(' + selectedIndex + ')').prop('checked', true);
+            $(this).hide();
         }
     }else if(selectedIndex == 2){
         selectedIndex = selectedIndex + 2;
         $('.form-s1 .radio-s1:nth-of-type(' + selectedIndex + ')').prop('checked', true);
-        $(this).hide();
     }
 });
 
@@ -396,12 +397,8 @@ function personal_details_check() {
 function package_details() {
     var dateday1 = new Date(document.getElementById("travel_date1").value);
     var dateday2 = new Date(document.getElementById("travel_date2").value);
-    var p1 = document.getElementById("p1");
-    var p2 = document.getElementById("p2");
-    var p3 = document.getElementById("p3");
-    var p4 = document.getElementById("p4");
     var msg = document.getElementById("error_message1");
-    if (isNaN(dateday1.getDay()) || isNaN(dateday2.getDay()) || (p1.checked==false && p2.checked==false && p3.checked==false && p4.checked==false)) {
+    if (isNaN(dateday1.getDay()) || isNaN(dateday2.getDay())) {
         msg.style.display = "inline-block";
         msg.innerHTML = "Fields are empty";
         return false;

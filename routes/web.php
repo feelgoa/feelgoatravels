@@ -22,6 +22,7 @@ Route::get('/', 'PagesController@index');
 Route::get(HOME_URL, 'PagesController@home');
 Route::get(PACKAGES_URL, 'PagesController@packages');
 Route::get(LOCATION_URL, 'PagesController@locations');
+Route::get(BOOKING_URL_HOME, 'PagesController@bookings_cover');
 Route::get(BOOKING_URL, 'PagesController@bookings');
 Route::get(CONTACTUS_URL, 'PagesController@contactus');
 Route::get(GALLERY_URL, 'PagesController@gallery');

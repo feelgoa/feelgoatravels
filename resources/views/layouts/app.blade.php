@@ -49,7 +49,7 @@
 						<li style= "display:none;" id="home"><a href="{{ SITE_URL.HOME_URL }}" class="smoothScroll">Home</a></li>
 						<li id="packages" style="display:none;"><a href="{{ SITE_URL.PACKAGES_URL }}" class="smoothScroll">Packages</a></li>
 						<li id="locations"><a href="{{ SITE_URL.LOCATION_URL }}" class="smoothScroll">Locations</a></li>
-						<li id="bookings"><a href="{{ SITE_URL.BOOKING_URL }}" class="smoothScroll">Bookings</a></li>
+						<li id="bookings"><a href="{{ SITE_URL.BOOKING_URL_HOME }}" class="smoothScroll">Bookings</a></li>
 						<li id="gallery"><a href="{{ SITE_URL.GALLERY_URL }}" class="smoothScroll">Gallery</a></li>
 						<li id="contact-us"><a href="{{ SITE_URL.CONTACTUS_URL }}" class="smoothScroll">Contact Us</a></li>
 					</ul>

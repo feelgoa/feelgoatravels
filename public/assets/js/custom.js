@@ -559,8 +559,6 @@ $('#submit-booking-details').on('click',function(event){
 	});
 });
 
-
-
 function contact_us_check() {
 	var msg = document.getElementById("error_message");
 	var firstname = document.getElementById("firstname");

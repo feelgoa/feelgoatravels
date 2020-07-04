@@ -1,8 +1,8 @@
 <?php
 
-define('SITE_URL', 'http://127.0.0.1');
-define('ADMIN_URL','http://127.0.0.1/admin');
-define('API_URL','http://127.0.0.1/api');
+define('SITE_URL', 'http://127.0.0.1:8000');
+define('ADMIN_URL','http://127.0.0.1:8000/admin');
+define('API_URL','http://127.0.0.1:8000/api');
 define('SITE_NAME','Feel Goa');
 define('SITE_SHORT_DESC','Feel Goa - Tours and Travels');
 
@@ -52,6 +52,7 @@ define('ADMIN_CONTENT_TITLE','Content');
 define('HOME_URL','/home');
 define('LOCATION_URL','/locations');
 define('PACKAGES_URL','/packages');
+define('BOOKING_URL_HOME','/booking_cover_page');
 define('BOOKING_URL','/bookings');
 define('CONTACTUS_URL','/contact-us');
 define('GALLERY_URL','/gallery');

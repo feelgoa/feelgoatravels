@@ -7,6 +7,9 @@
 	background-size:cover;
 }
 
+.optional-info{
+	margin-left: 2%;
+}
 .terms{
 	color:#ff7703;
 }
@@ -69,8 +72,7 @@
 
 #one-s1:checked ~ .stages-s1 .label-s1[for="one-s1"],
 #two-s1:checked ~ .stages-s1 .label-s1[for="two-s1"],
-#three-s1:checked ~ .stages-s1 .label-s1[for="three-s1"],
-#four-s1:checked ~ .stages-s1 .label-s1[for="four-s1"]{
+#three-s1:checked ~ .stages-s1 .label-s1[for="three-s1"]{
 	border-color: #CE3232;
 }
 
@@ -81,15 +83,13 @@
 #one-s1:checked ~ .stages-s1 .label-s1,
 #two-s1:checked ~ .stages-s1 .label-s1[for="one-s1"] ~ .label-s1,
 #three-s1:checked ~ .stages-s1 .label-s1[for="two-s1"] ~ .label-s1,
-#four-s1:checked ~ .stages-s1 .label-s1[for="three-s1"] ~ .label-s1,
-#five-s1:checked ~ .stages-s1 .label-s1[for="four-s1"] ~ .label-s1{
+#four-s1:checked ~ .stages-s1 .label-s1[for="three-s1"] ~ .label-s1{
 	font-size: 16px;
 }
 
 #one-s1:checked ~ .stages-s1 .label-s1:after,
 #two-s1:checked ~ .stages-s1 .label-s1[for="one-s1"] ~ .label-s1:after,
-#three-s1:checked ~ .stages-s1 .label-s1[for="two-s1"] ~ .label-s1:after,
-#four-s1:checked ~ .stages-s1 .label-s1[for="three-s1"] ~ .label-s1:after {
+#three-s1:checked ~ .stages-s1 .label-s1[for="two-s1"] ~ .label-s1:after {
 	display: none;
 }
 
@@ -103,15 +103,11 @@
 }
 
 #two-s1:checked ~ .progress-s1 span {
-	width: calc(100% / 3 * 1);
+	width: calc(100% / 2 * 1);
 }
 
 #three-s1:checked ~ .progress-s1 span {
-	width: calc(100% / 3 * 2);
-}
-
-#four-s1:checked ~ .progress-s1 span {
-	width: calc(100% / 3 * 3);
+	width: calc(100% / 2 * 2);
 }
 .panels-s1 .div-s1 {
 	display: none;
@@ -119,8 +115,7 @@
 
 #one-s1:checked ~ .panels-s1 [data-panel="one-s1"],
 #two-s1:checked ~ .panels-s1 [data-panel="two-s1"],
-#three-s1:checked ~ .panels-s1 [data-panel="three-s1"],
-#four-s1:checked ~ .panels-s1 [data-panel="four-s1"]{
+#three-s1:checked ~ .panels-s1 [data-panel="three-s1"]{
 	display: block;
 }
 
@@ -233,4 +228,58 @@
 	-o-transition: left 0.15s ease-out;
 	transition: left 0.15s ease-out;
   }
-  
+
+  .booking-a{
+	text-decoration:none;
+	color:black;
+}
+
+.clearfix:before,
+.clearfix:after {
+content: " ";
+display: table;
+}
+
+.clearfix:after {
+clear: both;
+}
+
+.booking-card {
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: -1px 2px 4px rgba(0,0,0,.25), 1px 1px 3px rgba(0,0,0,.1);
+    max-width: 250px;
+    margin-top: 5%;
+}
+
+.booking-card-media {
+width: 100%;
+}
+
+.booking-card-details {
+padding: 5px 15px;
+}
+
+.booking-card-head {
+font-weight: 400;
+}
+
+.booking-card-head {
+font-size: 26px;
+margin-bottom: 15px;
+}
+
+.booking-card-action-button {
+border-radius: 2px;
+color: #FFAB40;
+cursor: pointer;
+display: inline-block;
+font-weight: 500;
+margin: 0;
+padding: 10px;
+text-decoration: none;
+}
+
+.booking-card-action-button:hover {
+background-color: rgba(255 ,168 ,58, .2);
+}
