@@ -87,8 +87,11 @@ define('RECIEVED_NOT_CONFIRMED',1);
 define('RECIEVED_AND_PROCESSING',2);
 define('REPLIEDTO_CUSTOMER',3);
 define('PAYMENT_RECIEVED_CONFIRM',4);
-define('PAYMENT_NOT_RECIEVED',5);
-define('TRAVEL_COMPLETED',6);
+define('PAYMENT_FAILED',5);
+define('PAYMENT_NOT_RECIEVED',6);
+define('TRAVEL_COMPLETED',7);
+define('REFUND_INITIATED',8);
+define('REFUND_COMPLETED',9);
 
 define('BOOKING_STATUS_VALUES',
 	array (
@@ -96,8 +99,11 @@ define('BOOKING_STATUS_VALUES',
 		RECIEVED_AND_PROCESSING, 'Booking Received - Checking availablity (Not confirmed)',
 		REPLIEDTO_CUSTOMER, 'Replied to Customer - Awaiting reply/payment (Not Confirmed)',
 		PAYMENT_RECIEVED_CONFIRM, 'Recieved Payment (Confirmed)',
+		PAYMENT_FAILED, 'Payment Failed - (Not Confirmed)',
 		PAYMENT_NOT_RECIEVED, 'Payment not recieved (Not Confirmed)',
-		TRAVEL_COMPLETED, 'Done'
+		TRAVEL_COMPLETED, 'Done',
+		REFUND_INITIATED, 'Refund has been initited',
+		REFUND_COMPLETED, 'Refund completed',
 	)
 );
 

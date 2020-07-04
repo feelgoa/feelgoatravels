@@ -29,9 +29,9 @@
 				<address class="wow fadeInUp animated" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
 					<p align="justify" id="home-basic-info">
 						<i class="fa fa-quote-left colourquote" aria-hidden="true"></i>
-						It began with and idea for serving people. I was selling tickets for various tourists and was providing travel services to my customers. 
+						It began with an idea for serving people. I was selling tickets for various tourists and was providing travel services to my customers. 
 						I used to hire tourist buses from my friends. It struck to me one day, why don't I own a bus of my own rather then renting it. Thats what made me go ahead
-						and buy my first bus in 2005. I always this dream to give a great feeling to my customers about Goa and all its beautiful heritages. And that is how feelGoa came
+						and buy my first bus in 2005. I always had this dream to give a great feeling to my customers about Goa and all its beautiful heritages. And that is how feelGoa came
 						into existence. Since then I have been working to take this dream ahead every single day. My son, Mr. Eliston Gomes has also willingly agreed to be a part of
 						this journey. Currently, we own 15 buses, provide rental taxi services and make arrangements for guest house stays.
 						<i class="fa fa-quote-right colourquote" aria-hidden="true"></i>

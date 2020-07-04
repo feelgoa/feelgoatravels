@@ -71,7 +71,7 @@
 			</div>
 			<div class="col-md-12" id='marquee-holder'>
 				<marquee class="infoalert" onmouseover="this.stop();" onmouseout="this.start();">
-					We will be fully functional by October 2020. According the Government. If there is any delay we will keep you updated. Thank you.
+					We will be fully functional by October 2020 according the info recieved by Goa Government. If there is any delay we will keep you updated. Thank you.
 				</marquee>
 			</div>
 		</section>

@@ -1,14 +1,16 @@
 <?php
+
 namespace App\Http\Controllers\API;
-use Illuminate\Http\Request; 
-use App\Http\Controllers\Controller; 
-use App\User; 
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth; 
 use Validator;
 use DB;
-class UserController extends Controller 
+
+class FgusersController extends Controller
 {
-public $successStatus = 200;
+    public $successStatus = 200;
 	/** 
 	 * login api 
 	 * 
@@ -99,9 +101,16 @@ public $successStatus = 200;
 		$input = $request->all(); 
 		$booking_details['booking'] = DB::select('SELECT * FROM booking_details as bd left join user_details as ud on bd.user_id = ud.user_id WHERE bd.booking_pnr = "'.$input['pnrvalueget'].'"');
 		$get_booking_id  = json_decode(json_encode($booking_details), true);
+		$get_booking_id['booking'][0]['totalcount'] = $get_booking_id['booking'][0]['male_count'] + $get_booking_id['booking'][0]['female_count'];
+		/*$get_booking_id['booking'][0]['locations'] = array(
+			array('name'=>'North Goa','date'=>'27-06-2020'),
+			array('name'=>'South Goa','date'=>'28-06-2020'),
+			array('name'=>'Palolem and Agonda','date'=>'29-06-2020'),
+			array('name'=>'Dudhsagar','date'=>'30-06-2020')
+			);*/
 		$booking_id = $get_booking_id ['booking'][0]['booking_id'];
 		$booking_details['spots'] = DB::select('SELECT * FROM booking_spot where booking_id = "'.$booking_id.'"');
-		return view('user.booking_status_view',['title'=> BOOKING_STATUS_TITLE,'pnrno'=>$get_booking_id ['booking'][0]['booking_pnr']]);
+		return view('user.booking_status_view',['title'=> BOOKING_STATUS_TITLE,'pnrno'=>$get_booking_id ['booking'][0]['booking_pnr'],'details'=>$get_booking_id]);
 	}
 	function addbookingdetails(Request $request) {
 		$name = $request->input('name1');

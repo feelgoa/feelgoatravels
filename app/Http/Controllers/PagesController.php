@@ -96,15 +96,14 @@ class PagesController extends Controller
 		$status="Booking Received (Not confirmed)";
 		$booking_pnr=generate_pnr();
 		$bus_type=$request->input('bus_type');
-
+	
 		//Personal Details Insertion
-		$user_data=array('name'=>$name,"email"=>$email,"contact"=>$contact,"gender"=>$gender,"age"=>$age,"place"=>$place,"male_count"=>$male_count,"female_count"=>$female_count);
+		$user_data=array("name"=>$name,"email"=>$email,"contact"=>$contact,"gender"=>$gender,"age"=>$age,"place"=>$place,"male_count"=>$male_count,"female_count"=>$female_count);
 		$user_id=DB::table('user_details')->insertGetId($user_data);
-		
 		//Booking Details Insertion
 		$booking_data=array("booking_pnr"=>$booking_pnr,"pickup_point"=>$pickup_point,"bus_type"=>$bus_type,"user_id"=>$user_id,"status"=>$status);
 		$booking_id=DB::table('booking_details')->insertGetId($booking_data);
-		
+
 		//Booking_spots Insertion
 		$count=count($spots);
 		$items = array();

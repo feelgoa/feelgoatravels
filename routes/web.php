@@ -32,6 +32,7 @@ Route::get(BOOKING_STATUS_URL, 'PagesController@bookingstatus');
 
 /*Admin ROUTES */
 /* 'middleware' => ['authenticate'] */
+/*
 Route::get(ADMIN_BASE.ADMIN_LOGIN_URL, 'AdminController@login');
 Route::group(['prefix'=>ADMIN_BASE,'middleware' => []], function(){
 	Route::get(ADMIN_HOME_URL, 'AdminController@home');
@@ -41,9 +42,9 @@ Route::group(['prefix'=>ADMIN_BASE,'middleware' => []], function(){
 	Route::get('/', function () {
 		return abort(404);
 	});
-});
+});*/
 Route::post(BOOKING_URL,'PagesController@insert')->name('bookings.insert');
-Route::post(BOOKING_STATUS_URL,'API\UserController@getbookingstatusdetails');
+Route::post(BOOKING_STATUS_URL,'API\FguserController@getbookingstatusdetails');
 
 
 /*Route::get('/', function () {
@@ -52,3 +53,6 @@ Route::post(BOOKING_STATUS_URL,'API\UserController@getbookingstatusdetails');
 */
 
 
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
