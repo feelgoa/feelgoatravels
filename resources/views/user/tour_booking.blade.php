@@ -18,26 +18,26 @@
 		<span class="progress-s1"><span></span></span>
 
 		<div class="panels-s1">
-			<form id="formoid" class="frm-font" name="registration" id="eform" action="{{ route('bookings.insert') }}" method="POST">
+			<form id="formoid" class="frm-font" name="registration" id="eform" action="{{ route('tour_bookings.insert') }}" method="POST">
 			{{ csrf_field() }}
 				<div data-panel="one-s1" class="div-s1">
 					<h2 class="lable-from">Personal Details</h2>
 					<div class="form-group ">
 						<label class="frm-font lable-from" for="name1">Name:</label>
 						<span class="required-field">*</span>
-						<input type="text" class="frm-font form-control" id="name1" name="name1" placeholder="Enter Full Name" onblur="ValidateEmptyField(this,'Name cannot be empty')" required>
+						<input type="text" class="frm-font form-control" id="name1" name="name1" placeholder="Enter Full Name" onblur="ValidateEmptyField(this,'Name cannot be empty','error_message')" required>
 					</div>
 					<div class="form-group">
 						<div class="row">
 							<div class="col-sm-6">
 								<label for="email" class="frm-font lable-from">Email:</label>
 								<span class="required-field">*</span>
-								<input type="email" class="frm-font form-control" name="email" id="email" placeholder="Enter email id" onblur="ValidateEmail(this,'Please your check email format')" required>
+								<input type="email" class="frm-font form-control" name="email" id="email" placeholder="Enter email id" onblur="ValidateEmail(this,'Please your check email format','error_message')" required>
 							</div>
 							<div class="col-sm-6">
 								<label for="tel" class="frm-font lable-from">Contact Number:</label>
 								<span class="required-field">*</span>
-								<input type="tel" size="10" class="frm-font form-control" id="contact" name="contact" placeholder="Contact number" onblur="ValidateContact1(this,'Enter 10 digit mobile Number')" required>
+								<input type="tel" size="10" class="frm-font form-control" id="contact" name="contact" placeholder="Contact number" onblur="ValidateContact1(this,'Enter 10 digit mobile Number','error_message')" required>
 							</div>
 						</div>
 					</div>
@@ -59,7 +59,7 @@
 							<div class="col-sm-6 team_details">
 									<label for="age" class="frm-font lable-from">Age:</label>
 									<span class="required-field">*</span>
-									<input type="text" class="frm-font form-control" maxlength="2" id="age" name="age" placeholder="Enter Age" onblur="ValidateEmptyNumberField(this,'Age must be integer and cannot be empty')" required>
+									<input type="text" class="frm-font form-control" maxlength="2" id="age" name="age" placeholder="Enter Age" onblur="ValidateEmptyNumberField(this,'Age must be integer and cannot be empty','error_message')" required>
 							</div>
 						</div>
 					</div>
@@ -68,7 +68,7 @@
 							<div class="col-sm-4 team_details">
 								<label for="place" class="frm-font lable-from">Place of Origin:</label>
 								<span class="required-field">*</span>
-								<input name="place" type="text" class="frm-font form-control" id="place" placeholder="Enter place of origin" onblur="ValidateEmptyField(this,'Place oF origin cannot be empty')" required>
+								<input name="place" type="text" class="frm-font form-control" id="place" placeholder="Enter place of origin" onblur="ValidateEmptyField(this,'Place oF origin cannot be empty',,'error_message')" required>
 							</div>
 							<div class="col-sm-4 team_details">
 								<label for="number" class="frm-font lable-from">Total Male Members:</label>
@@ -235,7 +235,7 @@
 								<div class="col-sm-6">
 									<div class="form-group">
 										<label for="check_in" class="frm-font lable-from">Check-in Date:</label>
-										<input type="date" class="frm-font form-control travel_dates" name="check_in" id="check_in" >
+										<input type="date" class="frm-font form-control travel_dates" name="check_in" id="check_in" onblur="CheckDate_after(this,'Check_In Date should be after one day from today','error_message3')">
 									</div>
 									<div class="row">
 										<div class="col-sm-6">
@@ -243,30 +243,34 @@
 											<select id="room_type" name="room_type" class="form-control">
 												<option value="">Select</option>
 												<option value="Single">Single</option>
-												<option value="Double">Double</option>
-												<option value="triple">Triple</option>
-												<option value="Quad">Quad</option>
+												<option value="Double/Sharing">Double/Sharing</option>
 											</select>
 										</div>
 										<div class="col-sm-6">
 											<label for="room_count" class="frm-font lable-from">No of Rooms:</label>
-											<input type="text" class="frm-font form-control" maxlength="2" id="room_count" value="1" name="room_count" placeholder="Enter No of rooms required" onblur="ValidateEmptyNumberField(this,'No of rooms must be integer and cannot be empty')" >
+											<input type="text" class="frm-font form-control" maxlength="2" id="room_count" value="1" name="room_count" placeholder="Enter No of rooms required" onblur="ValidateEmptyNumberField(this,'No of rooms must be integer and cannot be empty','error_message3')" >
 										</div>		
 									</div>
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
 										<label for="check_out" class="frm-font lable-from">Check-out Date:</label>
-										<input type="date" class="frm-font form-control travel_dates" name="check_out" id="check_out" >
+										<input type="date" class="frm-font form-control travel_dates" name="check_out" id="check_out" onblur="Checkout_date_check(this,'Check_Out Date should be atleast one day after Check_In date','error_message3')">
 									</div>
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="form-group">
-												<label  for="hotel_req" class="form-labels">Any other requirements:</label>
-												<textarea class="form-control" placeholder="Please mention any other speciic requirement regarding your hotel booking" name="hotel_req" rows="5" id="message" style="width:100%;resize: none;" onblur="ValidateEmptyField(this,'Message cannot be empty')"></textarea>
+												<label for="member_count" class="frm-font lable-from">Total Members Count:</label>
+												<input name="member_count" type="text" maxlength="2" class="frm-font form-control" id="member_count" placeholder="Total Members count" onblur="ValidateEmptyNumberField(this,'Members Count must be integer and cannot be empty','error_message4')">
 											</div>			
 										</div>
 									</div>
+								</div>
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label  for="hotel_req" class="form-labels">Any other requirements:</label>
+										<textarea class="form-control" placeholder="Please mention any other speciic requirement regarding your hotel booking" name="hotel_req" rows="5" id="message" style="width:100%;resize: none;" onblur="ValidateEmptyField(this,'Message cannot be empty','error_message4')"></textarea>
+									</div>			
 								</div>
 							</div>
 						</div>
@@ -280,7 +284,7 @@
 									<div class="col-sm-6">
 										<label for="pickup_point" class="frm-font lable-from">Pickup Point:</label>
 										<span class="required-field">*</span>
-										<select id="pickup_point" name="pickup_point" class="form-control" onblur="ValidateDropdownfield(this,'Select Pickup Point From Dropdown')" required>
+										<select id="pickup_point" name="pickup_point" class="form-control" onblur="ValidateDropdownfield(this,'Select Pickup Point From Dropdown','error_message3')" required>
 											<option value="">Select</option>
 											<option value="Colva">Colva</option>
 											<option value="Margao">Margao</option>
@@ -310,7 +314,7 @@
 									<label class="lable-from" for="terms" style="margin-left: 2%;font-size:20px;">I agree to these terms and conditions: </label><span class="required-field">*</span>
 								</div>
 							</div>
-							<span class="label label-danger" id="error_message1"></span><br>
+							<span class="label label-danger" id="error_message3"></span><br><br>
 							<input type = 'submit' class="btn btn-success" value = "Submit Booking Details"/>
 						</div>
 					</div>

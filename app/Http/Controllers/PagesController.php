@@ -28,14 +28,23 @@ class PagesController extends Controller
 		return view('user.locations',['title'=> LOCATIONS_TITLE,'package_details'=>$package_details]);
 	}
 	function bookings_cover(){
-		return view('user.booking_cover_page',['title'=> BOOKINGS_TITLE]);
+		return view('user.booking_cover_page',['title'=> BOOKING_TITLE_HOME]);
 	}
-	function bookings() {
+	function tour_bookings() {
 		$package_details =DB::select('SELECT * FROM `package_details`');
 		$terms_conditions =DB::select('SELECT * FROM `content` WHERE `id`=4');
-		return view('user.bookings',['title'=> BOOKINGS_TITLE,'package_details'=>$package_details,'terms_conditions'=>$terms_conditions]);
+		return view('user.tour_booking',['title'=> BOOKING_TITLE_TOUR,'package_details'=>$package_details,'terms_conditions'=>$terms_conditions]);
 	}
-
+	
+	function hotel_bookings() {
+		return view('user.hotel_booking',['title'=> BOOKING_TITLE_TOUR]);
+	}
+	function rental_bookings() {
+		return view('user.rental_booking',['title'=> BOOKING_TITLE_TOUR]);
+	}
+	function wedding_car_bookings() {
+		return view('user.wedding_car_booking',['title'=> BOOKING_TITLE_TOUR]);
+	}
 	function contactus() {
 		return view('user.contactus',['title'=> CONTACTUS_TITLE]);
 	}
@@ -70,8 +79,19 @@ class PagesController extends Controller
 			}
 		}
 	}
-	
-	function insert(Request $request){
+	function hotel_bookings_insert(Request $request){
+		$hotelbooking_checked=$request->input('hotelbooking');
+		$check_in_date=$request->input('check_in');
+		$check_out_date=$request->input('check_out');
+		$room_type=$request->input('room_type');
+		$room_count=$request->input('room_count');
+		$member_count=$request->input('member_count1');
+		$extra_requirements=$request->input('hotel_req');
+		$hotelbooking=array("check_in_date"=>$check_in_date,"check_out_date"=>$check_out_date,"room_type"=>$room_type,"room_count"=>$room_count,"member_count"=>$member_count,"extra_requirements"=>$extra_requirements);
+		$hotel_id=DB::table('hotel_details')->insertGetId($hotelbooking);
+		return view('user.hotel_booking_success',['title'=> BOOKING_TITLE_HOTEL]);
+	}
+	function tour_bookings_insert(Request $request){
 		//dd($request);
 		//Personal Details
 		$name = $request->input('name1');
@@ -97,19 +117,16 @@ class PagesController extends Controller
 		$status="Booking Received (Not confirmed)";
 		$booking_pnr=generate_pnr();
 		$bus_type=$request->input('bus_type');
-<<<<<<< Updated upstream
-	
-=======
-
+		
 		//Hotel Details
 		$hotelbooking_checked=$request->input('hotelbooking');
 		$check_in_date=$request->input('check_in');
 		$check_out_date=$request->input('check_out');
 		$room_type=$request->input('room_type');
 		$room_count=$request->input('room_count');
+		$member_count=$request->input('member_count');
 		$extra_requirements=$request->input('hotel_req');
 
->>>>>>> Stashed changes
 		//Personal Details Insertion
 		$user_data=array("name"=>$name,"email"=>$email,"contact"=>$contact,"gender"=>$gender,"age"=>$age,"place"=>$place,"male_count"=>$male_count,"female_count"=>$female_count);
 		$user_id=DB::table('user_details')->insertGetId($user_data);
@@ -142,7 +159,7 @@ class PagesController extends Controller
 		}
 
 		//Hotel details
-		$hotelbooking=array("booking_id" => $booking_id,"check_in_date"=>$check_in_date,"check_out_date"=>$check_out_date,"room_type"=>$room_type,"room_count"=>$room_count,"extra_requirements"=>$extra_requirements);
+		$hotelbooking=array("booking_id" => $booking_id,"check_in_date"=>$check_in_date,"check_out_date"=>$check_out_date,"room_type"=>$room_type,"room_count"=>$room_count,"member_count"=>$member_count,"extra_requirements"=>$extra_requirements);
 		if($hotelbooking_checked=="yes"){
 			$hotel_id=DB::table('hotel_details')->insertGetId($hotelbooking);
 		}
@@ -157,7 +174,7 @@ class PagesController extends Controller
 
 		$mailsender = send_mail_custom($email,$name,BOOKINGS_EMAIL_TEMPLATE,$details);
 		$mailsender_admin = send_mail_custom(EMAIL_GMAIL_RECIEVER,FG_TEAM,BOOKINGS_EMAIL_TEMPLATE_ADMIN,$details);
-		return view('user.bookings_success',['title'=> BOOKINGS_TITLE,'booking_pnr'=>$booking_pnr]);
+		return view('user.tour_booking_success',['title'=> BOOKING_TITLE_TOUR,'booking_pnr'=>$booking_pnr]);
 	}
 
 	function bookingstatus() {

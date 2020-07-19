@@ -7,11 +7,14 @@ $( document ).ready(function() {
     $(document.body).delegate('.tours', 'click', function(e) {
         e.preventDefault();
     });
+    $('#member_count').keydown(function(e) {
+        e.preventDefault();
+    });
 });
 
 $(".form-s1 .stages-s1 .label-s1").click(function () {
     var radioButtons = $(".form-s1 .radio-s1");
-    //$(radioButtons).attr("disabled", true);
+    $(radioButtons).attr("disabled", true);
 });
 
 $('#hotelbooking').change(function(){
@@ -37,6 +40,10 @@ $(".form-s1 .button-s1-next").click(function () {
         if(package_details()){
             selectedIndex = selectedIndex + 2;
             $('.form-s1 .radio-s1:nth-of-type(' + selectedIndex + ')').prop('checked', true);
+            var count1=parseInt(document.registration.male_count.value);
+			var count2=parseInt(document.registration.female_count.value);
+            var count=count1+count2;
+            $('#member_count').val(count);
             $(this).hide();
         }
     }else if(selectedIndex == 2){
@@ -46,8 +53,8 @@ $(".form-s1 .button-s1-next").click(function () {
 });
 
 // This function will validate Email.
-function ValidateEmail(uemail, message) {
-    var msg = document.getElementById("error_message");
+function ValidateEmail(uemail, message, error_message) {
+    var msg = document.getElementById(error_message);
     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (uemail.value.match(mailformat)) {
         uemail.style.borderColor = "#66afe9";
@@ -65,8 +72,8 @@ function ValidateEmail(uemail, message) {
 }
 
 // Function to Empty Fields
-function ValidateEmptyField(emt_len, message) {
-    var msg = document.getElementById("error_message");
+function ValidateEmptyField(emt_len, message,error_message) {
+    var msg = document.getElementById(error_message);
     if (emt_len.value === "") {
         msg.style.display = "inline-block";
         msg.innerHTML = message;
@@ -83,8 +90,8 @@ function ValidateEmptyField(emt_len, message) {
 }
 
 // Function to Validate Empty Number Field
-function ValidateEmptyNumberField(emt_len, message) {
-    var msg = document.getElementById("error_message");
+function ValidateEmptyNumberField(emt_len, message,error_message) {
+    var msg = document.getElementById(error_message);
     if (isNaN(emt_len.value) || emt_len.value=="") {
         msg.style.display = "inline-block";
         msg.innerHTML = message;
@@ -101,8 +108,8 @@ function ValidateEmptyNumberField(emt_len, message) {
 }
 
 // Function to validate Dropdowns
-function ValidateDropdownfield(emt_len, message) {
-    var msg = document.getElementById("error_message1");
+function ValidateDropdownfield(emt_len, message,error_message) {
+    var msg = document.getElementById(error_message);
     if (emt_len.selectedIndex === 0) {
         msg.style.display = "inline-block";
         msg.innerHTML = message;
@@ -119,8 +126,8 @@ function ValidateDropdownfield(emt_len, message) {
 }
 
 // Function to validate Contact
-function ValidateContact1(cont, message) {
-    var msg = document.getElementById("error_message");
+function ValidateContact1(cont, message,error_message) {
+    var msg = document.getElementById(error_message);
     var contformat = /^\d{10}$/;
     if (cont.value.match(contformat)) {
         cont.style.borderColor = "#66afe9";
@@ -432,5 +439,43 @@ function checkday4places(){
         $(document.body).delegate('.tour_extra4', 'click', function(e) {
             e.preventDefault();
         });
+    }
+}
+
+//Checks if date is after 24 hours
+function CheckDate_after(date_id,message,error_message) {
+    var date = new Date();
+    date.setDate(new Date().getDate()+1);
+    var mydate = new Date(date_id.value);
+    var msg = document.getElementById(error_message);
+    if(date > mydate) {
+        date_id.style.borderColor = "red";
+        msg.style.display = "inline-block";
+        msg.innerHTML = message;
+        date_id.focus();
+        return false;
+    } else {  
+        date_id.style.borderColor = "#66afe9";
+        msg.style.display = "none";
+        return true;
+    }
+}
+
+//Checks if checkout_date is after 24 hours of check_in date
+function Checkout_date_check(date_id,message,error_message) {
+    check_in_date=document.getElementById("check_in").value;
+    var check_out_date = new Date(date_id.value);
+    var check_in_date = new Date(check_in_date);
+    var msg = document.getElementById(error_message);
+    if(check_out_date <= check_in_date) {
+        date_id.style.borderColor = "red";
+        msg.style.display = "inline-block";
+        msg.innerHTML = message;
+        date_id.focus();
+        return false;
+    } else {  
+        date_id.style.borderColor = "#66afe9";
+        msg.style.display = "none";
+        return true;
     }
 }

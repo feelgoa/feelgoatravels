@@ -37,10 +37,14 @@ define('BOOKINGS_EMAIL_TEMPLATE_ADMIN', 4);
 define('HOME_TITLE','Home');
 define('PACKAGES_TITLE','Packages');
 define('LOCATIONS_TITLE','Locations');
-define('BOOKINGS_TITLE','Bookings');
 define('GALLERY_TITLE','Gallery');
 define('CONTACTUS_TITLE','Contact-us');
 define('BOOKING_STATUS_TITLE','Booking status');
+define('BOOKING_TITLE_HOME','bookings');
+define('BOOKING_TITLE_TOUR','Tour Booking');
+define('BOOKING_TITLE_HOTEL','Hotel Booking');
+define('BOOKING_TITLE_RENTALS','Rental Booking');
+define('BOOKING_TITLE_WEDDING','Wedding Car Booking');
 
 /*Admin Titles*/
 define('ADMIN_DASHBOARD_TITLE','Dashboard');
@@ -52,12 +56,16 @@ define('ADMIN_CONTENT_TITLE','Content');
 define('HOME_URL','/home');
 define('LOCATION_URL','/locations');
 define('PACKAGES_URL','/packages');
-define('BOOKING_URL_HOME','/booking_cover_page');
-define('BOOKING_URL','/bookings');
-define('CONTACTUS_URL','/contact-us');
+define('BOOKING_URL_HOME','/bookings');
+define('BOOKING_URL_TOUR','/tour_booking');
+define('BOOKING_URL_HOTEL','/hotel_booking');
+define('BOOKING_URL_RENTALS','/rental_booking');
+define('BOOKING_URL_WEDDING','/wedding_car_booking');
+
+define('CONTACTUS_URL','/contact_us');
 define('GALLERY_URL','/gallery');
-define('BOOKING_STATUS_URL','/booking-status');
-define('BOOKING_STATUS_DETAILS_URL','/booking-status-details');
+define('BOOKING_STATUS_URL','/booking_status');
+define('BOOKING_STATUS_DETAILS_URL','/booking_status_details');
 
 
 

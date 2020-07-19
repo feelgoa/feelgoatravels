@@ -8,10 +8,10 @@
     <div class="col col-md-2"></div>
 	<div class="col col-md-5">
         <div class="booking-card">
-        <a href="{{ SITE_URL.BOOKING_URL }}"><img src="{{ URL::asset('assets/images/tour.jpg') }}" class="booking-card-media" /></a>
+        <a href="{{ SITE_URL.BOOKING_URL_TOUR }}"><img src="{{ URL::asset('assets/images/tour.jpg') }}" class="booking-card-media" /></a>
         <center>
         <div class="booking-card-details">
-            <a href="{{ SITE_URL.BOOKING_URL }}" class="booking-card-head btn btn-primary btn-lg active">Tour Booking</a>
+            <a href="{{ SITE_URL.BOOKING_URL_TOUR }}" class="booking-card-head btn btn-primary btn-lg active">Tour Booking</a>
         </div>
         </center>
 	</div>
@@ -19,10 +19,10 @@
 	</div>
 	<div class="col col-md-5">
 	<div class="booking-card">
-	  <a href="test.html"><img src="{{ URL::asset('assets/images/carrental.jpg') }}" class="booking-card-media" /></a>
+	  <a href="{{ SITE_URL.BOOKING_URL_RENTALS }}"><img src="{{ URL::asset('assets/images/carrental.jpg') }}" class="booking-card-media" /></a>
 	  <center>
 	  <div class="booking-card-details">
-		<a href="test.html" class="booking-card-head btn btn-primary btn-lg active">Car Rentals</a>
+		<a href="{{ SITE_URL.BOOKING_URL_RENTALS }}" class="booking-card-head btn btn-primary btn-lg active">Car Rentals</a>
 	  </div>
 	  </center>
 	</div>
@@ -32,20 +32,20 @@
     <div class="col col-md-2"></div>
 	<div class="col col-sm-5">
 	<div class="booking-card">
-	  <a href="test.html"><img src="{{ URL::asset('assets/images/rooms.jpg') }}" class="booking-card-media" /></a>
+	  <a href="{{ SITE_URL.BOOKING_URL_HOTEL }}"><img src="{{ URL::asset('assets/images/rooms.jpg') }}" class="booking-card-media" /></a>
 	  <center>
 	  <div class="booking-card-details">
-		<a href="test.html" class="booking-card-head btn btn-primary btn-lg active">Hotel Booking</a>
+		<a href="{{ SITE_URL.BOOKING_URL_HOTEL }}" class="booking-card-head btn btn-primary btn-lg active">Hotel Booking</a>
 	  </div>
 	  </center>
 	</div>
 	</div>
 	<div class="col col-sm-5">
 	<div class="booking-card">
-	  <a href="test.html"><img src="{{ URL::asset('assets/images/weddingcar.jpg') }}" class="booking-card-media" /></a>
+	  <a href="{{ SITE_URL.BOOKING_URL_WEDDING }}"><img src="{{ URL::asset('assets/images/weddingcar.jpg') }}" class="booking-card-media" /></a>
 	  <center>
 	  <div class="booking-card-details">
-		<a href="test.html" class="booking-card-head btn btn-primary btn-lg active">Wedding Car</a>
+		<a href="{{ SITE_URL.BOOKING_URL_WEDDING }}" class="booking-card-head btn btn-primary btn-lg active">Wedding Car</a>
 	  </div>
 	  </center>
 	</div>
