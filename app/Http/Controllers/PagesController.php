@@ -40,10 +40,17 @@ class PagesController extends Controller
 		return view('user.hotel_booking',['title'=> BOOKING_TITLE_TOUR]);
 	}
 	function rental_bookings() {
-		return view('user.rental_booking',['title'=> BOOKING_TITLE_TOUR]);
+		$car_details =DB::select('SELECT * FROM `rental_vehicles` WHERE `type`="car"');
+		$bike_details =DB::select('SELECT * FROM `rental_vehicles` WHERE `type`="bike"');
+		return view('user.rental_booking',['title'=> BOOKING_TITLE_TOUR,'car_details'=>$car_details,'bike_details'=>$bike_details]);
+	}
+	function rental_booking_details($id) {
+		$vehicle_detail =DB::select("SELECT * FROM `rental_vehicles` WHERE `vehicle_id` = '$id'");
+		return view('user.rental_booking_details',['title'=> BOOKING_TITLE_TOUR,'vehicle_details'=>$vehicle_detail]);
 	}
 	function wedding_car_bookings() {
-		return view('user.wedding_car_booking',['title'=> BOOKING_TITLE_TOUR]);
+		$wedding_car_details =DB::select('SELECT * FROM `rental_vehicles` WHERE `type`="wedding_car"');
+		return view('user.wedding_car_booking',['title'=> BOOKING_TITLE_TOUR, 'wedding_cars_details'=>$wedding_car_details]);
 	}
 	function contactus() {
 		return view('user.contactus',['title'=> CONTACTUS_TITLE]);
@@ -177,6 +184,16 @@ class PagesController extends Controller
 		return view('user.tour_booking_success',['title'=> BOOKING_TITLE_TOUR,'booking_pnr'=>$booking_pnr]);
 	}
 
+	function rental_bookings_insert(Request $request){
+		$vehicle_id = $request->input('vehicle_id');
+		$no_of_days = $request->input('no_of_days');
+		$pickup_date = $request->input('pickup_date');
+		$pickup_time = $request->input('pickup_time');
+		$total_amount = $request->input('total_amount');
+		$pickup_location=$request->input('pickup_location');
+		$rental_details=array("vehicle_id"=>$vehicle_id,"no_of_days"=>$no_of_days,"total_amount"=>$total_amount,"pickup_date"=>$pickup_date,"pickup_location"=>$pickup_location,"pickup_time"=>$pickup_time);
+		$rental_id=DB::table('rental_booking')->insertGetId($rental_details);
+	}
 	function bookingstatus() {
 		return view('user.bookingstatus',['title'=> BOOKING_STATUS_TITLE]);
 	}

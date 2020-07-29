@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<section>
+<section style="color: black;font-size: 20px;background-size: cover; background-image: url('../../assets/images/contact-us-4.jpg'); padding: 12px;">
 <link rel="stylesheet" href="{{ URL::asset('assets/css/booking_style.css') }}">
 	<div class="" style="padding: 0px 12px 0px 12px;">
-        <div class="row" style="color: black;font-size: 20px;background-size: cover; background-image: url('../../assets/images/contact-us-4.jpg'); padding: 12px;" >
+        <div class="row"  >
             <div class="col-md-4" >
             </div>
-            <div class="container">
+            <div class="container" style="background-color: #0000008c;border-radius: 15px;margin-top:20px;">
 				<form form id="formoid" class="frm-font" name="hotel_booking" id="eform" action="{{ route('hotel_bookings.insert') }}" method="POST">
 					{{ csrf_field() }}
 					<div class="row">
@@ -60,7 +60,7 @@
 						</div>
 						<span class="label label-danger" id="error_message4"></span><br><br>
 					</div>
-					<input type = 'submit' class="btn btn-success" value = "Submit Hotel Booking Details"/>
+					<input type = 'submit' class="btn btn-success" style="margin-bottom: 20px;height: 50px;" value = "Submit Hotel Booking Details"/>
 				</form>
         	</div>
 		</div>

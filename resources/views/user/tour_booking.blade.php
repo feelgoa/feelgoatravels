@@ -80,7 +80,7 @@
 							</div>
 						</div>
 					</div>
-				<span class="label label-danger" style="font-size: 14px;margin-bottom:14px;white-space: normal;" id="error_message"></span></br>
+					<span class="label label-danger" style="font-size: 14px;margin-bottom:14px;white-space: normal;" id="error_message"></span></br>
 				</div>
 				<div data-panel="two-s1" class="div-s1">
 					<h2 class="lable-from">Package Details</h2>
@@ -129,9 +129,9 @@
 							<div class="spot-container">
 								<h4 class="lable-from">Exclusive South Goa Tour (Day 2)</h4>
 								<div class="form-group">
-										<label for="travel_date2" class="frm-font lable-from">Travelling Date:</label>
-										<span class="required-field">*</span>
-										<input type="date" class="frm-font form-control travels_dates" name="travel_date2" id="travel_date2" onblur="CheckSameDate(this,'Travelling Date should be after one day from today and different from other travelling dates','error_message1')" required>
+									<label for="travel_date2" class="frm-font lable-from">Travelling Date:</label>
+									<span class="required-field">*</span>
+									<input type="date" class="frm-font form-control travels_dates" name="travel_date2" id="travel_date2" onblur="CheckSameDate(this,'Travelling Date should be after one day from today and different from other travelling dates','error_message1')" required>
 								</div>
 							</div>
 							<div class="col-sm-6">

@@ -26,7 +26,8 @@ Route::get(BOOKING_URL_HOME, 'PagesController@bookings_cover');
 Route::get(BOOKING_URL_TOUR, 'PagesController@tour_bookings');
 Route::get(BOOKING_URL_HOTEL, 'PagesController@hotel_bookings');
 Route::get(BOOKING_URL_RENTALS, 'PagesController@rental_bookings');
-Route::get(BOOKING_URL_WEDDING, 'PagesController@twedding_car_bookings');
+Route::get(BOOKING_URL_RENTALS_BOOKING,'PagesController@rental_booking_details')->name('rental_booking_details.show');;
+Route::get(BOOKING_URL_WEDDING, 'PagesController@wedding_car_bookings');
 Route::get(CONTACTUS_URL, 'PagesController@contactus');
 Route::get(GALLERY_URL, 'PagesController@gallery');
 Route::get(BOOKING_STATUS_URL, 'PagesController@bookingstatus');
@@ -49,7 +50,7 @@ Route::group(['prefix'=>ADMIN_BASE,'middleware' => []], function(){
 });*/
 Route::post(BOOKING_URL_TOUR,'PagesController@tour_bookings_insert')->name('tour_bookings.insert');
 Route::post(BOOKING_URL_HOTEL,'PagesController@hotel_bookings_insert')->name('hotel_bookings.insert');
-
+Route::post(BOOKING_URL_RENTALS,'PagesController@rental_bookings_insert')->name('rental_bookings.insert');
 Route::post(BOOKING_STATUS_URL,'API\FguserController@getbookingstatusdetails');
 
 

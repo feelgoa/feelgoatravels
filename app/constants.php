@@ -60,7 +60,9 @@ define('BOOKING_URL_HOME','/bookings');
 define('BOOKING_URL_TOUR','/tour_booking');
 define('BOOKING_URL_HOTEL','/hotel_booking');
 define('BOOKING_URL_RENTALS','/rental_booking');
+define('BOOKING_URL_RENTALS_BOOKING','/rental_booking/{vehicle}');
 define('BOOKING_URL_WEDDING','/wedding_car_booking');
+
 
 define('CONTACTUS_URL','/contact_us');
 define('GALLERY_URL','/gallery');

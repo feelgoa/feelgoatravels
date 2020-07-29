@@ -240,3 +240,7 @@ Please login into the site and update the Booking status so the customer can che
 	</td>
 	</table>';
 }
+
+function productImage($path){
+	return ($path) && file_exists($path)? asset($path) : asset('assets/images/not-found.jpg');
+}
