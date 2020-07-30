@@ -3,7 +3,9 @@
 @section('content')
 
 <section  style="color: black;font-size: 20px;background-size: cover; background-image: url('../../assets/images/contact-us-4.jpg'); padding: 12px;">
-<link rel="stylesheet" href="{{ URL::asset('assets/css/rental_booking_details_style.css') }}">    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel="stylesheet" href="{{ URL::asset('assets/css/rental_booking_details_style.css') }}">  
+
 @foreach($vehicle_details as $vehicle)
 <div class="container" style="background-color: #0000008c;border-radius: 15px;margin-top:20px;">
     <div class="columns">
@@ -55,7 +57,7 @@
 							<div class="col-sm-6">
                                 <label for="pickup_time" class="frm-font lable-from">Select Pickup time:</label>
                                 <span class="required-field">*</span><br>
-                                <input type="time" id="pickup_time" min="09:00" max="20:00" name="pickup_time" required>
+                                <input id="pickup_time" class="frm-font form-control" name="pickup_time" required onblur="checktime(this,'Pickup time should be between 8am to 9pm','error_message')">
                             </div>
                             <div class="col-sm-6">
                                 <label for="total_amount" class="frm-font lable-from">Total Amount:</label>
@@ -96,7 +98,8 @@
 </div>
 @endforeach
 <script type="text/javascript" src="{{ URL::asset('assets/js/jquery.js') }}"></script>
-<script type="text/javascript" src="{{ URL::asset('assets/js/bootstrap.min.js') }}"></script>	
+<script type="text/javascript" src="{{ URL::asset('assets/js/bootstrap.min.js') }}"></script>
+<script src='https://code.jquery.com/ui/1.10.3/jquery-ui.js'></script>	
 <script src='https://awik.io/demo/webshop-zoom/Drift.min.js'></script>
 <script type="text/javascript" src="{{ URL::asset('assets/js/rental_booking_details_script.js') }}"></script>	
    

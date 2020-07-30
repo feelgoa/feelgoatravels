@@ -185,14 +185,22 @@ class PagesController extends Controller
 	}
 
 	function rental_bookings_insert(Request $request){
+		//dd($request);
 		$vehicle_id = $request->input('vehicle_id');
 		$no_of_days = $request->input('no_of_days');
 		$pickup_date = $request->input('pickup_date');
 		$pickup_time = $request->input('pickup_time');
 		$total_amount = $request->input('total_amount');
-		$pickup_location=$request->input('pickup_location');
-		$rental_details=array("vehicle_id"=>$vehicle_id,"no_of_days"=>$no_of_days,"total_amount"=>$total_amount,"pickup_date"=>$pickup_date,"pickup_location"=>$pickup_location,"pickup_time"=>$pickup_time);
+		$pickup_location=$request->input('pickup_loc');
+		$pickup_point = $request->input('pickup_point');
+		if($pickup_point==""){
+			$rental_details=array("vehicle_id"=>$vehicle_id,"no_of_days"=>$no_of_days,"total_amount"=>$total_amount,"pickup_date"=>$pickup_date,"pickup_location"=>$pickup_location,"pickup_time"=>$pickup_time);
+		}else{
+			$rental_details=array("vehicle_id"=>$vehicle_id,"no_of_days"=>$no_of_days,"total_amount"=>$total_amount,"pickup_date"=>$pickup_date,"pickup_location"=>$pickup_point,"pickup_time"=>$pickup_time);
+		}
 		$rental_id=DB::table('rental_booking')->insertGetId($rental_details);
+		$vehicle_detail =DB::select("SELECT * FROM `rental_vehicles` WHERE `vehicle_id` = '$vehicle_id'");
+		return view('user.rental_booking_success',['title'=> BOOKING_TITLE_TOUR,'vehicle_detail'=>$vehicle_detail]);
 	}
 	function bookingstatus() {
 		return view('user.bookingstatus',['title'=> BOOKING_STATUS_TITLE]);
