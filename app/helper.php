@@ -183,7 +183,7 @@ function user_booking_email_template($data) {
 	</tr>
 	<tr colspan="2" >
 	<td>
-		You can use this PNR number to track the status of your request by visiting the <a target="_blank" href="'.FEELGOA_LINK.'">feelgoatravels.com</a> website and clicking on <a target="_blank" href="'.SITE_URL.BOOKING_STATUS__URL.'">"Booking status enquiry"</a> at the bottom of the page.
+		You can use this PNR number to track the status of your request by visiting the <a target="_blank" href="'.FEELGOA_LINK.'">feelgoatravels.com</a> website and clicking on <a target="_blank" href="'.SITE_URL.BOOKING_STATUS_URL.'">"Booking status enquiry"</a> at the bottom of the page.
 	</td>
 	</tr>
 	<tr colspan="2" >
