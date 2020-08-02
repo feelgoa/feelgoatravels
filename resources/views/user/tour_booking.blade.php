@@ -68,7 +68,7 @@
 							<div class="col-sm-4 team_details">
 								<label for="place" class="frm-font lable-from">Place of Origin:</label>
 								<span class="required-field">*</span>
-								<input name="place" type="text" class="frm-font form-control" id="place" placeholder="Enter place of origin" onblur="ValidateEmptyField(this,'Place oF origin cannot be empty',,'error_message')" required>
+								<input name="place" type="text" class="frm-font form-control" id="place" placeholder="Enter place of origin" onblur="ValidateEmptyField(this,'Place oF origin cannot be empty','error_message')" required>
 							</div>
 							<div class="col-sm-4 team_details">
 								<label for="number" class="frm-font lable-from">Total Male Members:</label>
@@ -269,7 +269,7 @@
 								<div class="col-sm-12">
 									<div class="form-group">
 										<label  for="hotel_req" class="form-labels">Any other requirements:</label>
-										<textarea class="form-control" placeholder="Please mention any other speciic requirement regarding your hotel booking" name="hotel_req" rows="5" id="message" style="width:100%;resize: none;" onblur="ValidateEmptyField(this,'Message cannot be empty','error_message4')"></textarea>
+										<textarea class="form-control" placeholder="Please mention any other specific requirement regarding your hotel booking" name="hotel_req" rows="5" id="message" style="width:100%;resize: none;" onblur="ValidateEmptyField(this,'Message cannot be empty','error_message4')"></textarea>
 									</div>			
 								</div>
 							</div>

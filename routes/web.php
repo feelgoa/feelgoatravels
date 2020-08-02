@@ -37,29 +37,22 @@ Route::get(BOOKING_STATUS_URL, 'PagesController@bookingstatus');
 
 /*Admin ROUTES */
 /* 'middleware' => ['authenticate'] */
-/*
+
 Route::get(ADMIN_BASE.ADMIN_LOGIN_URL, 'AdminController@login');
 Route::group(['prefix'=>ADMIN_BASE,'middleware' => []], function(){
 	Route::get(ADMIN_HOME_URL, 'AdminController@home');
 	Route::get(ADMIN_LOGOUT_URL, 'AdminController@logout');
 	Route::get(ADMIN_HOME_CONTENT_URL, 'AdminController@page_content');
+	Route::get(ADMIN_ENQUIRYT_URL, 'AdminController@enquirydetails');
+	Route::get(ADMIN_ENQUIRYT_URL.'/{slug}', 'AdminController@getindividual');
+		
+	Route::get('/', function () {	
+		return abort(404);	
+	});	
+});
 
-	Route::get('/', function () {
-		return abort(404);
-	});
-});*/
 Route::post(BOOKING_URL_TOUR,'PagesController@tour_bookings_insert')->name('tour_bookings.insert');
 Route::post(BOOKING_URL_HOTEL,'PagesController@hotel_bookings_insert')->name('hotel_bookings.insert');
 Route::post(BOOKING_URL_RENTALS,'PagesController@rental_bookings_insert')->name('rental_bookings.insert');
-Route::post(BOOKING_STATUS_URL,'API\FguserController@getbookingstatusdetails');
+Route::post(BOOKING_STATUS_URL,'API\UsersController@getbookingstatusdetails');
 
-
-/*Route::get('/', function () {
-	return view('landing');
-});
-*/
-
-
-// Route::group(['prefix' => 'admin'], function () {
-//     Voyager::routes();
-// });

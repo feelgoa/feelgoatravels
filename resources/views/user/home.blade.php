@@ -71,7 +71,7 @@
 		</div>
 	</div>
 
-	<div class="container" style="display:block;">
+	<div class="container" style="display:none;">
 		<div class="row">
 			<div class="col-md-12 col-sm-12 tldiv">
 				<div class="col-md-12 col-sm-12 colourbanner">

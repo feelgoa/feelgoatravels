@@ -21,7 +21,9 @@
 	=========================================================
 	* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 	-->
-<link href="{{ URL::asset('assets/css/main.css') }}" rel="stylesheet"></head>
+<link href="{{ URL::asset('assets/css/main.css') }}" rel="stylesheet">
+<link href="{{ URL::asset('assets/css/jquery.dataTables.min.css') }}" rel="stylesheet">
+</head>
 <body>
 	<div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
 		<div class="app-header header-shadow">
@@ -135,88 +137,37 @@
 							<ul class="vertical-nav-menu">
 								<li class="app-sidebar__heading">Menu</li>
 								<li>
-									<a href="{{ADMIN_BASE.ADMIN_HOME_URL}}" class="mm-active">
+									<a href="{{ADMIN_BASE.ADMIN_HOME_URL}}" @if(str_contains(url()->current(), ADMIN_HOME_URL )) class="mm-active" @endif>
 										<i class="metismenu-icon pe-7s-diamond"></i>
-										Dashboard
+										{{ ADMIN_DASHBOARD_TITLE }}
 									</a>
 								</li>
 								<li>
-									<a href="elements-buttons-standard.html">
+									<a href="{{ADMIN_BASE.ADMIN_ENQUIRYT_URL}}" @if(str_contains(url()->current(), ADMIN_ENQUIRYT_URL )) class="mm-active" @endif>
 										<i class="metismenu-icon pe-7s-diamond"></i>
-										Banners
+										{{ ADMIN_ENQUIRY_TITLE }}
 									</a>
 								</li>
 								<li>
 									<a href="#">
 										<i class="metismenu-icon pe-7s-diamond"></i>
-											Pages
+											Sample
 										<i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
 									</a>
 									<ul>
 										<li>
 											<a href="elements-buttons-standard.html">
 												<i class="metismenu-icon"></i>
-												Page 1
+												Menu 1
 											</a>
 										</li>
 										<li>
 											<a href="elements-dropdowns.html">
 												<i class="metismenu-icon"></i>
-												Page 2
+												Menu 2
 											</a>
 										</li>
 									</ul>
-								</li>
-								<li>
-									<a href="elements-buttons-standard.html">
-										<i class="metismenu-icon pe-7s-diamond"></i>
-										Content
-										<i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
-									</a>
-									<ul>
-										<li>
-											<a href="{{ ADMIN_URL.ADMIN_HOME_CONTENT_URL }}">
-												<i class="metismenu-icon"></i>
-												Home Page
-											</a>
-										</li>
-										<li>
-											<a href="elements-dropdowns.html">
-												<i class="metismenu-icon"></i>
-												Contact us
-											</a>
-										</li>
-									</ul>
-								</li>
-								<li>
-									<a href="elements-buttons-standard.html">
-										<i class="metismenu-icon pe-7s-diamond"></i>
-										Timeline
-									</a>
-								</li>
-								<li>
-									<a href="elements-buttons-standard.html">
-										<i class="metismenu-icon pe-7s-diamond"></i>
-										Transactions
-									</a>
-								</li>
-								<li>
-									<a href="elements-buttons-standard.html">
-										<i class="metismenu-icon pe-7s-diamond"></i>
-										Enquiry
-									</a>
-								</li>
-								<li>
-									<a href="elements-buttons-standard.html">
-										<i class="metismenu-icon pe-7s-diamond"></i>
-										Emails
-									</a>
-								</li>
-								<li>
-									<a href="elements-buttons-standard.html">
-										<i class="metismenu-icon pe-7s-diamond"></i>
-										Feedback
-									</a>
 								</li>
 							</ul>
 						</div>
@@ -227,7 +178,7 @@
 					<div class="app-main__inner">
 					@yield('content')
 					<!-- Footer -->
-					<div class="app-wrapper-footer">
+					<div class="app-wrapper-footer" style="padding-top:12px;">
 						<div class="app-footer">
 							<div class="app-footer__inner">
 									<div class="col-md-12" style="text-align:center;">
@@ -248,5 +199,11 @@
 				<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
 		</div>
 	</div>
-<script type="text/javascript" src="{{ URL::asset('assets/js/main.js') }}"></script></body>
+<script type="text/javascript" src="{{ URL::asset('assets/js/jquery.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('assets/js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('assets/js/main.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('assets/js/custom_admin.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('assets/js/jquery.dataTables.min.js') }}"></script>
+</body>
+
 </html>

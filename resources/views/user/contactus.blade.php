@@ -14,6 +14,21 @@
                         <form id="contactus_form" name="contactus_form" action="/recapcha-page" method="post">
                             @csrf
                             <div class="form-group ">
+                            <input type="checkbox" id='pnrchkbox'/>
+                                <label for="firstname" class="form-labels">I already have a PNR number</label>
+                                <span class="required-field"></span>
+                                <div id="pnrholder" style="display:none;">
+                                <div class="col-md-8 col-sm-8 col-xs-8" style="padding-left:0px;"> 
+                                <input class="form-control" type="text" name="ref_id" id="ref_id" maxlength="8"
+                                    placeholder="Enter PNR Number">
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-4">
+                                <input type="button" id="verify_ref_id" class="btn btn-success" value="VERIFY">
+                                </div>
+                                <p class="form-labels">Once you verify your PNR number, all fields will be automatically filled with your existing details.</p>
+                                </div>
+                            </div>
+                            <div class="form-group ">
                                 <label for="firstname" class="form-labels">First Name:</label>
                                 <span class="required-field">*</span>
                                 <input class="form-control" type="text" name="firstname" id="firstname"
@@ -54,10 +69,13 @@
                             <span class="label label-danger"
                                 style="font-size: 14px;margin-bottom:14px;white-space: normal;"
                                 id="error_message"></span></br>
-                            <input type="reset" id="contact_us_reset" class="btn btn-info" value="RESET">
+                            <div>
                             <input type="button" id="contact_us_submit" class="btn btn-success" value="SUBMIT">
+                            </form>
+                            <input type="button" id="contact_us_reset" class="btn btn-info" value="RESET">
+                            </div>
                             <br><br>
-                        </form>
+                        
                     </div>
                 </div>
             </div>

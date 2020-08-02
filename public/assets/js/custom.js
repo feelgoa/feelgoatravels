@@ -453,6 +453,11 @@ $('#contact_us_submit').on('click',function(event){
 	document.getElementById("overlay").style.display = "block";
 	event.preventDefault();
 	var msg = document.getElementById("error_message");
+	$('#ref_id').attr('disabled', false);
+	$('#firstname').attr('disabled', false);
+	$('#lastname').attr('disabled', false);
+	$('#email').attr('disabled', false);
+	$('#phone').attr('disabled', false);
 	if(contact_us_check()) {
 		$.ajax({
 			url: "/api/save-contact-us",
@@ -471,13 +476,22 @@ $('#contact_us_submit').on('click',function(event){
 					msg.innerHTML = response['message'];
 				}
 				grecaptcha.reset();
-				$("#contact_us_reset").click()
+				$("#pnrholder").fadeOut("slow");
+				$('#pnrno').val("");
+				$('#firstname').attr('disabled', false);
+				$('#lastname').attr('disabled', false);
+				$('#email').attr('disabled', false);
+				$('#phone').attr('disabled', false);
+				$('#ref_id').attr('disabled', false);
+				$('#verify_ref_id').attr('disabled', false);
+				$('#pnrchkbox').attr('disabled', false);
+				$("#pnrchkbox"). prop("checked", false);
 				document.getElementById("overlay").style.display = "none";
 			}, error:function(response){
 				$("#error_message").addClass("label-danger");
 				$("#error_message").removeClass("label-success");
 				msg.style.display = "inline-block";
-				msg.innerHTML = "Something went wrong. Please Try again in sometime.";
+				msg.innerHTML = "Something went wrong. Please Try again after sometime.";
 				grecaptcha.reset();
 				document.getElementById("overlay").style.display = "none";
 			},
@@ -487,7 +501,7 @@ $('#contact_us_submit').on('click',function(event){
 	}
 });
 $('#contact_us_reset').on('click',function(event){
-	grecaptcha.reset();
+	location.reload();
 });
 
 
@@ -515,7 +529,7 @@ $('#booking_status_submit').on('click',function(event){
 				$("#error_message").addClass("label-danger");
 				$("#error_message").removeClass("label-success");
 				msg.style.display = "inline-block";
-				msg.innerHTML = "Something went wrong. Please Try again in sometime.";
+				msg.innerHTML = "Something went wrong. Please Try again after sometime.";
 				document.getElementById("overlay").style.display = "none";
 			},
 		});
@@ -553,7 +567,7 @@ $('#submit-booking-details').on('click',function(event){
 			$("#error_message").addClass("label-danger");
 			$("#error_message").removeClass("label-success");
 			msg.style.display = "inline-block";
-			msg.innerHTML = "Something went wrong. Please Try again in sometime.";
+			msg.innerHTML = "Something went wrong. Please Try again after sometime.";
 			document.getElementById("overlay").style.display = "none";
 		},
 	});
@@ -670,3 +684,68 @@ function ValidateContact(cont, message) {
 		return true;
 	}
 }
+
+$("#pnrchkbox").click(function(){
+	if($(this).is(":checked")) {
+		$("#pnrholder").fadeIn("slow");
+		$('#firstname').attr('disabled', true);
+		$('#lastname').attr('disabled', true);
+		$('#email').attr('disabled', true);
+		$('#phone').attr('disabled', true);
+	  } else {
+		$('#ref_id').val('');
+		$("#pnrholder").fadeOut("slow");
+		$('#pnrno').val("");
+		$('#firstname').attr('disabled', false);
+		$('#lastname').attr('disabled', false);
+		$('#email').attr('disabled', false);
+		$('#phone').attr('disabled', false);
+	  }
+});
+
+$('#verify_ref_id').on('click',function(event){
+	document.getElementById("overlay").style.display = "block";
+	var msg = document.getElementById("error_message");
+	if ($("#ref_id").val() == "") {
+		$("#error_message").addClass("label-danger");
+		$("#error_message").removeClass("label-success");	
+		msg.style.display = "inline-block";
+		msg.innerHTML = 'PNR number is missing.';
+		document.getElementById("overlay").style.display = "none";
+	} else {
+		$.ajax({
+			url: "/api/verify-existing-pnr",
+			type:"POST",
+			data:{
+				ref_id:$("#ref_id").val()
+			},
+			success:function(response){
+				if (response['isSuccess'] == true) {
+					$("#error_message").addClass("label-success");	
+					$("#error_message").removeClass("label-danger");
+					$('#firstname').val(response['user_details'][0]['firstname']);
+					$('#lastname').val(response['user_details'][0]['lastname']);
+					$('#email').val(response['user_details'][0]['email']);
+					$('#phone').val(response['user_details'][0]['contact']);
+					msg.style.display = "inline-block";
+					msg.innerHTML = response['message'];
+					$('#ref_id').attr('readonly', true);
+					$('#verify_ref_id').attr('disabled', true);
+					$('#pnrchkbox').attr('disabled', true);
+				} else {
+					$("#error_message").addClass("label-danger");
+					$("#error_message").removeClass("label-success");	
+					msg.style.display = "inline-block";
+					msg.innerHTML = response['message'];
+				}
+				document.getElementById("overlay").style.display = "none";
+			}, error:function(response) {
+				$("#error_message").addClass("label-danger");
+				$("#error_message").removeClass("label-success");
+				msg.style.display = "inline-block";
+				msg.innerHTML = "Something went wrong. Please Try again after sometime.";
+				document.getElementById("overlay").style.display = "none";
+			},
+		});
+	}
+});

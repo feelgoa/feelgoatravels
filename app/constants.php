@@ -1,8 +1,8 @@
 <?php
 
-define('SITE_URL', 'http://127.0.0.1:8000');
-define('ADMIN_URL','http://127.0.0.1:8000/admin');
-define('API_URL','http://127.0.0.1:8000/api');
+define('SITE_URL', 'http://127.0.0.1');
+define('ADMIN_URL','http://127.0.0.1/admin');
+define('API_URL','http://127.0.0.1/api');
 define('SITE_NAME','Feel Goa');
 define('SITE_SHORT_DESC','Feel Goa - Tours and Travels');
 
@@ -40,7 +40,7 @@ define('LOCATIONS_TITLE','Locations');
 define('GALLERY_TITLE','Gallery');
 define('CONTACTUS_TITLE','Contact-us');
 define('BOOKING_STATUS_TITLE','Booking status');
-define('BOOKING_TITLE_HOME','bookings');
+define('BOOKING_TITLE_HOME','Bookings');
 define('BOOKING_TITLE_TOUR','Tour Booking');
 define('BOOKING_TITLE_HOTEL','Hotel Booking');
 define('BOOKING_TITLE_RENTALS','Rental Booking');
@@ -49,6 +49,7 @@ define('BOOKING_TITLE_WEDDING','Wedding Car Booking');
 /*Admin Titles*/
 define('ADMIN_DASHBOARD_TITLE','Dashboard');
 define('ADMIN_CONTENT_TITLE','Content');
+define('ADMIN_ENQUIRY_TITLE','Enquiry Details');
 /*********************************/
 /* Routes */
 
@@ -64,9 +65,9 @@ define('BOOKING_URL_RENTALS_BOOKING','/rental_booking/{vehicle}');
 define('BOOKING_URL_WEDDING','/wedding_car_booking');
 
 
-define('CONTACTUS_URL','/contact_us');
+define('CONTACTUS_URL','/contact-us');
 define('GALLERY_URL','/gallery');
-define('BOOKING_STATUS_URL','/booking_status');
+define('BOOKING_STATUS_URL','/booking-status');
 define('BOOKING_STATUS_DETAILS_URL','/booking_status_details');
 
 
@@ -77,6 +78,7 @@ define('ADMIN_HOME_URL','/home');
 define('ADMIN_LOGIN_URL','/login');
 define('ADMIN_LOGOUT_URL','/logout');
 define('ADMIN_HOME_CONTENT_URL','/home-page-content');
+define('ADMIN_ENQUIRYT_URL','/enquiry-details');
 
 /* API Routes*/
 
@@ -86,6 +88,7 @@ define('SAVE_CONTACT_US_FORM_API','/save-contact-us');
 define('SAVE_BOOKING_FORM_API','/save-booking-form');
 define('MAKEPAYMENTS','/make-payments');
 define('REQUEST_BOOKING_DETAILS_API','/get-booking-details');
+define('VERIFY_EXISTING_PNR_API','/verify-existing-pnr');
 
 
 define('ADMIN_PAGES_CONST',
@@ -127,6 +130,8 @@ define('FORM_SUBMIT_WITHOUT_EMAIL_FAILED', 'You have successfully submited your 
 define('EMAIL_SENDING_ERROR', 'There is some issue with sending email.');
 define('RECAPTCH_REQUIRED','Recapcha is not clicked. Please check mark the box to continue');
 define('BOOKING_STATUS_FETCH_FAILED','Sorry we could not fetch the details. Please make sure you have entered the correct details.');
+define('PNR_SUCCESSFUL_VERIFICATION','PNR is successfully verified.');
+define('PNR_FAILED_VERIFICATION','PNR is could not be verified.');
 /*Google reCapcha*/
 
 define("RECAPCHA_SITE_KEY","6Le8fv4UAAAAADhwT9U00tMkk548oepW6gXdkxKr");

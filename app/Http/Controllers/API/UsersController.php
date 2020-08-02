@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Validator;
 use DB;
 
-class FgusersController extends Controller
+class UsersController extends Controller
 {
     public $successStatus = 200;
 	/** 
@@ -158,6 +158,22 @@ class FgusersController extends Controller
 			return response()->json(['isSuccess'=> false, 'message'=> FORM_SUBMIT_FAILED, 'error'=> EMAIL_SENDING_ERROR, 'data'=> '']);
 		}
 		return response()->json(['isSuccess'=> true, 'message'=> '','booking_pnr'=> $booking_pnr]);
+	}
+
+	function verifypnr(Request $request) {
+		$pnr = $request->input('ref_id');
+		$details = DB::select('SELECT ud.name,ud.email,ud.contact FROM `booking_details`as bd left join `user_details` as ud on ud.user_id = bd.user_id WHERE bd.`booking_pnr` = "'.$pnr.'"');
+		if(!empty($details)) {
+			$new_details = json_decode(json_encode($details), true);
+			$name_details = $new_details[0]['name'];
+			$str_arr = explode (" ", $name_details,2);
+			$new_details[0]['firstname'] = $str_arr[0];
+			$new_details[0]['lastname'] = $str_arr[1];
+			return response()->json(['isSuccess'=> true, 'message'=> PNR_SUCCESSFUL_VERIFICATION ,'user_details'=> $new_details]);
+		} else {
+			return response()->json(['isSuccess'=> false, 'message'=> PNR_FAILED_VERIFICATION]);
+		}
+		#$get_booking_id  = json_decode(json_encode($booking_details), true);
 	}
 
 }

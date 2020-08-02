@@ -45,7 +45,6 @@ class AdminController extends Controller {
 	}
 
 	public function page_content() {
-		error_reporting(E_ALL & ~E_NOTICE);
 		$url_parts = explode("/", $_SERVER['REQUEST_URI']);
 		$last_url_param = "/".preg_replace('/[^A-Za-z0-9-\/]/', "", end($url_parts));
 		$value['content'] = "";
@@ -68,5 +67,15 @@ class AdminController extends Controller {
 		#$value = htmlentities($array[0]['content']);
 		#exit;
 		return view('admin.admin_content',['title'=> ADMIN_DASHBOARD_TITLE,'timeline'=> $content_home,'data'=> $value]);
+	}
+
+	public function enquirydetails() {	
+		$contact_us_response = DB::select('select * from contactus where link=0 ORDER BY `created_at` DESC');	
+		return view('admin.admin_enquiry',['title'=>ADMIN_ENQUIRY_TITLE,'data'=>$contact_us_response]);	
+	}	
+	public function getindividual(string $slug) {	
+		$contact_us_response = DB::select('select * from contactus where id="'.$slug.'" or link="'.$slug.'" order by created_at ASC');	
+		return view('admin.admin_enquiry_details',['title'=>ADMIN_ENQUIRY_TITLE,'data'=>$contact_us_response]);	
+		exit();	
 	}
 }

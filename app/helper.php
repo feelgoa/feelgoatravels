@@ -198,12 +198,12 @@ function user_booking_email_template($data) {
 
 //bookings admin email template
 function user_booking_admin_email_template($data) {
-	$formated_date = $data['traveling_date'];
+	#$formated_date = $data['traveling_date'];
+	$formated_date= 'DATE';
 	$malecount = $data['malecount'];
 	$femalecount = $data['femalecount'];
 
     $total_count = $malecount + $femalecount;
-    echo "here";
 	return '<table>
 	<tr>
 	<td align="left" valign="top" colspan="2" style="padding: 20px 0 10px 0;">
@@ -224,7 +224,7 @@ function user_booking_admin_email_template($data) {
 	<tr colspan="2">
 	<td>
 	<br>
-	This customer wants to know if Goa tour booking is possible on '.$formated_date.'. The total number of members is '.$total_count.'. This consists of '.$malecount.' Male person and '.$femalecount.' Female person.
+	This customer wants to know if Goa tour booking is possible for these specified details. The total number of members is '.$total_count.'. This consists of '.$malecount.' Male person and '.$femalecount.' Female person.
 	 </td>
 	 </tr>
 	 <tr colspan="2">
