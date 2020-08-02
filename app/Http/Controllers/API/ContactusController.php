@@ -43,10 +43,10 @@ class ContactusController extends Controller {
 					$input['ref_id'] =  0;
 				}
 
-				//$mailsender = send_mail_custom($input['email'],$name_concat,CONTACTUS_EMAIL_TEMPLATE,$details);
-				//$mailsender_admin = send_mail_custom(EMAIL_GMAIL_RECIEVER,FG_TEAM,CONTACTUS_UPDATE_EMAIL_TEMPLATE_ADMIN,$details);
-				$mailsender = 1;
-				$mailsender_admin = 1;
+				$mailsender = send_mail_custom($input['email'],$name_concat,CONTACTUS_EMAIL_TEMPLATE,$details);
+				$mailsender_admin = send_mail_custom(EMAIL_GMAIL_RECIEVER,FG_TEAM,CONTACTUS_UPDATE_EMAIL_TEMPLATE_ADMIN,$details);
+				//$mailsender = 1;
+				//$mailsender_admin = 1;
 				if (($mailsender == 1) and ($mailsender_admin == 1)) {
 					unset($input["_token"]);
 					unset($input["g-recaptcha-response"]);
