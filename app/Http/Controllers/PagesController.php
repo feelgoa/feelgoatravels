@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Carbon\Carbon;
 
 class PagesController extends Controller
 {
@@ -94,7 +95,7 @@ class PagesController extends Controller
 		$room_count=$request->input('room_count');
 		$member_count=$request->input('member_count1');
 		$extra_requirements=$request->input('hotel_req');
-		$hotelbooking=array("check_in_date"=>$check_in_date,"check_out_date"=>$check_out_date,"room_type"=>$room_type,"room_count"=>$room_count,"member_count"=>$member_count,"extra_requirements"=>$extra_requirements);
+		$hotelbooking=array("check_in_date"=>$check_in_date,"check_out_date"=>$check_out_date,"room_type"=>$room_type,"room_count"=>$room_count,"member_count"=>$member_count,"extra_requirements"=>$extra_requirements,"created_at"=>Carbon::now(),"updated_at"=>Carbon::now());
 		$hotel_id=DB::table('hotel_details')->insertGetId($hotelbooking);
 		return view('user.hotel_booking_success',['title'=> BOOKING_TITLE_HOTEL]);
 	}
@@ -135,30 +136,30 @@ class PagesController extends Controller
 		$extra_requirements=$request->input('hotel_req');
 
 		//Personal Details Insertion
-		$user_data=array("name"=>$name,"email"=>$email,"contact"=>$contact,"gender"=>$gender,"age"=>$age,"place"=>$place,"male_count"=>$male_count,"female_count"=>$female_count);
+		$user_data=array("name"=>$name,"email"=>$email,"contact"=>$contact,"gender"=>$gender,"age"=>$age,"place"=>$place,"male_count"=>$male_count,"female_count"=>$female_count,"created_at"=>Carbon::now(),"updated_at"=>Carbon::now());
 		$user_id=DB::table('user_details')->insertGetId($user_data);
 		//Booking Details Insertion
-		$booking_data=array("booking_pnr"=>$booking_pnr,"pickup_point"=>$pickup_point,"bus_type"=>$bus_type,"user_id"=>$user_id,"status"=>$status);
+		$booking_data=array("booking_pnr"=>$booking_pnr,"pickup_point"=>$pickup_point,"bus_type"=>$bus_type,"user_id"=>$user_id,"status"=>$status,"created_at"=>Carbon::now(),"updated_at"=>Carbon::now());
 		$booking_id=DB::table('booking_details')->insertGetId($booking_data);
 
 		//Booking_spots Insertion
 		$count=count($spots);
 		$items = array();
 		for($i = 0; $i < $count; $i++){
-			$item = array("booking_id" => $booking_id, 'spot_id' => $spots[$i]);
+			$item = array("booking_id" => $booking_id, 'spot_id' => $spots[$i],"created_at"=>Carbon::now(),"updated_at"=>Carbon::now());
 			DB::table('booking_spot')->insert($item);
 		}
 
 		//Booking TravelDate Insertion
 		$count1=2;
-		$travel[0]=array("booking_id" => $booking_id,'travel_date'=>$travelling_date1,'day'=>"1");
-		$travel[1]=array("booking_id" => $booking_id,'travel_date'=>$travelling_date2,'day'=>"2");
+		$travel[0]=array("booking_id" => $booking_id,'travel_date'=>$travelling_date1,'day'=>"1","created_at"=>Carbon::now(),"updated_at"=>Carbon::now());
+		$travel[1]=array("booking_id" => $booking_id,'travel_date'=>$travelling_date2,'day'=>"2","created_at"=>Carbon::now(),"updated_at"=>Carbon::now());
 		if($travelling_date3!=NULL){
-			$travel[2]=array("booking_id" => $booking_id,'travel_date'=>$travelling_date3,'day'=>"3");
+			$travel[2]=array("booking_id" => $booking_id,'travel_date'=>$travelling_date3,'day'=>"3","created_at"=>Carbon::now(),"updated_at"=>Carbon::now());
 			$count1=$count1+1;
 		}
 		if($travelling_date4!=NULL){
-			$travel[3]=array("booking_id" => $booking_id,'travel_date'=>$travelling_date4,'day'=>"4");
+			$travel[3]=array("booking_id" => $booking_id,'travel_date'=>$travelling_date4,'day'=>"4","created_at"=>Carbon::now(),"updated_at"=>Carbon::now());
 			$count1=$count1+1;
 		}
 		for($i = 0; $i < $count1; $i++){
@@ -166,7 +167,7 @@ class PagesController extends Controller
 		}
 
 		//Hotel details
-		$hotelbooking=array("booking_id" => $booking_id,"check_in_date"=>$check_in_date,"check_out_date"=>$check_out_date,"room_type"=>$room_type,"room_count"=>$room_count,"member_count"=>$member_count,"extra_requirements"=>$extra_requirements);
+		$hotelbooking=array("booking_id" => $booking_id,"check_in_date"=>$check_in_date,"check_out_date"=>$check_out_date,"room_type"=>$room_type,"room_count"=>$room_count,"member_count"=>$member_count,"extra_requirements"=>$extra_requirements,"created_at"=>Carbon::now(),"updated_at"=>Carbon::now());
 		if($hotelbooking_checked=="yes"){
 			$hotel_id=DB::table('hotel_details')->insertGetId($hotelbooking);
 		}
@@ -183,7 +184,6 @@ class PagesController extends Controller
 		$mailsender_admin = send_mail_custom(EMAIL_GMAIL_RECIEVER,FG_TEAM,BOOKINGS_EMAIL_TEMPLATE_ADMIN,$details);
 		return view('user.tour_booking_success',['title'=> BOOKING_TITLE_TOUR,'booking_pnr'=>$booking_pnr]);
 	}
-
 	function rental_bookings_insert(Request $request){
 		//dd($request);
 		$vehicle_id = $request->input('vehicle_id');
@@ -205,6 +205,4 @@ class PagesController extends Controller
 	function bookingstatus() {
 		return view('user.bookingstatus',['title'=> BOOKING_STATUS_TITLE]);
 	}
-
-	
 }

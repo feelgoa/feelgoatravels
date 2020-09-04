@@ -18,7 +18,7 @@
 		<span class="progress-s1"><span></span></span>
 
 		<div class="panels-s1">
-			<form id="formoid" class="frm-font" name="registration" id="eform" action="{{ route('tour_bookings.insert') }}" method="POST">
+			<form id="tour_form" class="frm-font" name="registration" id="eform" action="{{ route('tour_bookings.insert') }}" method="POST">
 			{{ csrf_field() }}
 				<div data-panel="one-s1" class="div-s1">
 					<h2 class="lable-from">Personal Details</h2>
@@ -92,6 +92,8 @@
 									<label for="travel_date1" class="frm-font lable-from">Travelling Date:</label>
 									<span class="required-field">*</span>
 									<input type="date" class="frm-font form-control travel_dates" name="travel_date1" id="travel_date1" onblur="CheckSameDate(this,'Travelling Date should be after one day from today and different from other travelling dates','error_message1')" required>
+									<br>
+									<button class="btn btn-danger" type="button" id="clearDate1">Reset Date</button>
 								</div>
 							</div>
 							<div class="col-sm-6">
@@ -132,6 +134,8 @@
 									<label for="travel_date2" class="frm-font lable-from">Travelling Date:</label>
 									<span class="required-field">*</span>
 									<input type="date" class="frm-font form-control travels_dates" name="travel_date2" id="travel_date2" onblur="CheckSameDate(this,'Travelling Date should be after one day from today and different from other travelling dates','error_message1')" required>
+									<br>
+									<button class="btn btn-danger" type="button" id="clearDate2">Reset Date</button>
 								</div>
 							</div>
 							<div class="col-sm-6">
@@ -172,7 +176,9 @@
 								<div class="form-group">
 									<label for="travel_date3" class="frm-font lable-from">Travelling Date:</label>
 									<span class="required-field">*</span>
-									<input type="date" class="frm-font form-control travelling_dates" name="travel_date3" id="travel_date3" onblur="CheckSameDate(this,'Travelling Date should be after one day from today and different from other travelling dates','error_message2');checkday3places();">
+									<input type="date" class="frm-font form-control travelling_dates" name="travel_date3" id="travel_date3" onblur="CheckSameDate(this,'Travelling Date should be after one day from today and different from other travelling dates','error_message2');checkday3places();">	
+									<br>
+									<button class="btn btn-danger" type="button" id="clearDate3">Reset Date</button>
 								</div>
 							</div>
 						    <div class="col-sm-6">
@@ -197,6 +203,8 @@
 									<label for="travel_date4" class="frm-font lable-from">Travelling Date:</label>
 									<span class="required-field">*</span>
 									<input type="date" class="frm-font form-control travelling_dates" name="travel_date4" id="travel_date4" onblur="CheckSameDate(this,'Travelling Date should be after one day from today and different from other travelling dates','error_message2');checkday4places();" >
+									<br>
+									<button type="button" class="btn btn-danger" id="clearDate4">Reset Date</button>
 								</div>
 							</div>
 							<div class="col-sm-6">
@@ -284,7 +292,7 @@
 									<div class="col-sm-6">
 										<label for="pickup_point" class="frm-font lable-from">Pickup Point:</label>
 										<span class="required-field">*</span>
-										<select id="pickup_point" name="pickup_point" class="form-control" onblur="ValidateDropdownfield(this,'Select Pickup Point From Dropdown','error_message3')" required>
+										<select id="pickup_point" name="pickup_point" class="form-control" onblur="ValidateDropdownfield(this,'Select Pickup Point From Dropdown','error_message3')" >
 											<option value="">Select</option>
 											<option value="Colva">Colva</option>
 											<option value="Margao">Margao</option>
@@ -310,12 +318,12 @@
 											{!! $t_c->content !!}
 										@endforeach
 									</div>
-									<input type="checkbox"  name="terms" id="terms" value="True" required style="margin-left: 3%;width: 20px;height: 20px;">
+									<input type="checkbox"  name="terms" id="terms" style="margin-left: 3%;width: 20px;height: 20px;">
 									<label class="lable-from" for="terms" style="margin-left: 2%;font-size:20px;">I agree to these terms and conditions: </label><span class="required-field">*</span>
 								</div>
 							</div>
 							<span class="label label-danger" id="error_message3"></span><br><br>
-							<input type = 'submit' class="btn btn-success" value = "Submit Booking Details"/>
+							<button type ='button' id="submitbutton" class="btn btn-success">Submit Booking Details</button>
 						</div>
 					</div>
 				</div>
