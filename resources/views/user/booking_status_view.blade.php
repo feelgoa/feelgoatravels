@@ -21,19 +21,6 @@
 		</td>
 		</tr>
 		<tr>
-		<td><label class="form-labels">Booking Date<lable>
-		</td>
-		</td>
-		<td class="table-mid-padding"><label class="form-labels">:<lable>
-		</td>
-		<td>
-			<b><label class="form-labels">North Goa 27-06-2020</label></b></br>
-			<b><label class="form-labels">South Goa 28-06-2020</label></b>
-			<b><label class="form-labels">Palolem and Agonda 29-06-2020</label></b>
-			<b><label class="form-labels">Dudhsagar 30-06-2020</label></b>
-		</td>
-		</tr>
-		<tr>
 		<td><label class="form-labels">People Travelling<lable>
 		</td>
 		</td>
@@ -53,12 +40,31 @@
 		</td>
 		<td class="table-mid-padding"><label class="form-labels">:<lable>
 		</td>
-		<td><b><label class="form-labels">{{ $details['booking'][0]['status'] }}</label></b>
+		<td><b><label class="form-labels">{{ BOOKING_STATUS_VALUES[$details['booking'][0]['status']] }}</label></b>
+		</td>
+		</tr>
+		<tr>
+		<td><label class="form-labels">Traveling dates<lable>
+		</td>
+		</td>
+		<td class="table-mid-padding"><label class="form-labels">:<lable>
+		</td>
+		<td>
+			@foreach($travel_details as $travel_dates)
+				@if($loop->first)
+				<b><label class="form-labels"> {{ date('d/m/Y', strtotime($travel_dates->travel_date)) }} </label></b>
+				@elseif ($loop->last)
+				<b><label class="form-labels"> and {{ date('d/m/Y', strtotime($travel_dates->travel_date)) }} </label></b>
+				@else
+				<b><label class="form-labels">, {{ date('d/m/Y', strtotime($travel_dates->travel_date)) }}</label></b>
+				@endif
+					
+			@endforeach
 		</td>
 		</tr>
 		</table>
 		<div>
-			<i><p class="form-labels" style="padding-top:12px;">If you want to get more details, you can contact us by clicking <a href='http://127.0.0.1/contact-us'><u>here</u></a>. Please dont forget to mention your PNR number in the description.</i></p>
+			<i><p class="form-labels" style="padding-top:12px;">If you want to get more details, you can contact us by clicking <a href="{{ SITE_URL.CONTACTUS_URL.'/'.encrypt_code($pnrno) }} "><u>here</u></a>.</i></p>
 		</div>
 	</div>
 </div>

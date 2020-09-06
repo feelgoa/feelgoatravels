@@ -102,15 +102,12 @@ class UsersController extends Controller
 		$booking_details['booking'] = DB::select('SELECT * FROM booking_details as bd left join user_details as ud on bd.user_id = ud.user_id WHERE bd.booking_pnr = "'.$input['pnrvalueget'].'"');
 		$get_booking_id  = json_decode(json_encode($booking_details), true);
 		$get_booking_id['booking'][0]['totalcount'] = $get_booking_id['booking'][0]['male_count'] + $get_booking_id['booking'][0]['female_count'];
-		/*$get_booking_id['booking'][0]['locations'] = array(
-			array('name'=>'North Goa','date'=>'27-06-2020'),
-			array('name'=>'South Goa','date'=>'28-06-2020'),
-			array('name'=>'Palolem and Agonda','date'=>'29-06-2020'),
-			array('name'=>'Dudhsagar','date'=>'30-06-2020')
-			);*/
+
 		$booking_id = $get_booking_id ['booking'][0]['booking_id'];
 		$booking_details['spots'] = DB::select('SELECT * FROM booking_spot where booking_id = "'.$booking_id.'"');
-		return view('user.booking_status_view',['title'=> BOOKING_STATUS_TITLE,'pnrno'=>$get_booking_id ['booking'][0]['booking_pnr'],'details'=>$get_booking_id]);
+		$travel_details = DB::select('SELECT * FROM booking_traveldate where booking_id = "'.$booking_id.'" order by travel_date ASC');
+		$link_value = encrypt_code($booking_id);
+		return view('user.booking_status_view',['title'=> BOOKING_STATUS_TITLE,'pnrno'=>$get_booking_id ['booking'][0]['booking_pnr'],'details'=>$get_booking_id,'travel_details'=>$travel_details]);
 	}
 	function addbookingdetails(Request $request) {
 		$name = $request->input('name1');
@@ -175,5 +172,74 @@ class UsersController extends Controller
 		}
 		#$get_booking_id  = json_decode(json_encode($booking_details), true);
 	}
+	public function replycomment(Request $request) {
+		               try {
+		                       $timevalue = date("Y-m-d h:i:s");
+		                       $user_data=array("firstname"=>FG_TEAM,"lastname"=>"X","email"=>EMAIL_GMAIL_RECIEVER,"message"=>$_POST['message'],"link"=>$_POST['link'],"created_time"=>$timevalue);
+		                       $user_id=DB::table('contactus')->insertGetId($user_data);
+		                       $current_user = DB::select('SELECT firstname,lastname,email FROM `contactus` WHERE id ="'.$_POST['link'].'"');
+		
+		                       $new_details = json_decode(json_encode($current_user), true);
+		                       $details['firstname'] = $new_details[0]['firstname'];
+		                       $details['lastname'] = $new_details[0]['lastname'];
+		                       $details['email'] = $new_details[0]['email'];
+		                       $details['message'] = $_POST['message'];
+		       
+		                       $prev_message = DB::select('SELECT message FROM `contactus` WHERE link="'.$_POST['link'].'" and lastname != "X" order by ID DESC LIMIT 1');
+								if ($prev_message) {
+		                       		$prev_actual_message = json_decode(json_encode($prev_message), true);
+							   		$details['prev_message'] = $prev_actual_message[0]['message'];
+								} else {
+									$prev_message = DB::select('SELECT message FROM `contactus` WHERE id="'.$_POST['link'].'"');
+									$prev_actual_message = json_decode(json_encode($prev_message), true);
+									$details['prev_message'] = $prev_actual_message[0]['message'];
+								}
+							   $details['link_value'] = $_POST['link'];
 
+		
+		                       $mailsender = send_mail_custom($details['email'],$details['firstname'],CONTACT_US_REPLY,$details);
+		                       #$mailsender_admin = send_mail_custom(EMAIL_GMAIL_RECIEVER,FG_TEAM,BOOKINGS_EMAIL_TEMPLATE_ADMIN,$details);
+		               } catch (Exception $e) {
+		                       return response()->json(['isSuccess'=> false, 'message'=> COMMENT_ADD_FAILED]);
+		               }
+		               return response()->json(['isSuccess'=> true, 'message'=> COMMENT_ADD_SUCCESS_VERIFICATION]);
+		       }
+		
+		       public function logiadminnuser() {
+		               print_r("asd");
+		               exit;
+		       }
+		
+		       public function logiadmincheck(Request $request) {
+		
+		               #$credentials = request($request->input('email'), $request->input('pswd'));
+		
+		               /*if(!Auth::attempt($credentials)) {
+		                       return response()->json([
+		                               'message' => 'Unauthorized'
+		                       ], 401); 
+		               } else {
+		                       return "has loged in";
+		               }*/
+		               if(Auth::attempt(['email' => request('email'), 'password' => request('pswd')])){ 
+		                       $user = Auth::user(); 
+		                       $success['token'] =  $user->createToken('MyApp')-> accessToken; 
+		               $user = $request->user();
+		        $tokenResult = $user->createToken('Personal Access Token');
+		               $token = $tokenResult->token;
+		
+		               $token->save();
+		
+		               return response()->json([
+		            'access_token' => $tokenResult->accessToken,
+		            'token_type' => 'Bearer',
+		            'expires_at' => Carbon::parse(
+		                $tokenResult->token->expires_at
+		            )->toDateTimeString()
+	              ]);
+	                       } else {
+	                              return "no";
+	                       }
+	
+		}
 }

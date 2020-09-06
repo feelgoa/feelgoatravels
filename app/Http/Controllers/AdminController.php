@@ -27,7 +27,7 @@ class AdminController extends Controller {
 		}
 	}
 
-	public function login(){
+	public function login(Request $request){
 		$method = $request->method();
 		if ($request->isMethod('post')) {
 			if(Auth::attempt(['email' => 'alisther@gmail.com', 'password' => '123456'])){ 
@@ -40,7 +40,7 @@ class AdminController extends Controller {
 				return response()->json(['status' => 'CANNOT LOGIN']); 
 			}
 		} else {
-			return response()->json(['status' => 'LOGGING']); 
+			return response()->json(['status' => 'Login page']); 
 		}
 	}
 
@@ -59,23 +59,31 @@ class AdminController extends Controller {
 			$value['title'] = $array[0]['title'];
 			$value['visiblity'] = $array[0]['visiblity'];
 		}
-		#echo "value : ".$value;
-		#print_r($value);
-		#exit;
-		#$content_response = DB::select('select * from content where id='.ADMIN_PAGES_CONST[$last_url_param]);
-		#$array = json_decode(json_encode($content_home), true);
-		#$value = htmlentities($array[0]['content']);
-		#exit;
 		return view('admin.admin_content',['title'=> ADMIN_DASHBOARD_TITLE,'timeline'=> $content_home,'data'=> $value]);
 	}
 
-	public function enquirydetails() {	
-		$contact_us_response = DB::select('select * from contactus where link=0 ORDER BY `created_at` DESC');	
+	public function enquirydetails() {
+		$contact_us_response = DB::select('select * from contactus where lastname != "X" ORDER BY `created_time` DESC');
 		return view('admin.admin_enquiry',['title'=>ADMIN_ENQUIRY_TITLE,'data'=>$contact_us_response]);	
 	}	
 	public function getindividual(string $slug) {	
-		$contact_us_response = DB::select('select * from contactus where id="'.$slug.'" or link="'.$slug.'" order by created_at ASC');	
-		return view('admin.admin_enquiry_details',['title'=>ADMIN_ENQUIRY_TITLE,'data'=>$contact_us_response]);	
-		exit();	
+		$contact_us_response = DB::select('select * from contactus where id="'.$slug.'" or link="'.$slug.'" order by created_time ASC');
+		return view('admin.admin_enquiry_details',['title'=>ADMIN_ENQUIRY_TITLE,'data'=>$contact_us_response,'current_id'=>$slug]);	
 	}
+
+	public function loginpage() {
+		return view('layouts.login',['title'=>ADMIN_LOGIN_TITLE]);	
+	}
+
+	public function getbookingdetails() {
+		$tour_details = DB::select('SELECT * FROM `booking_details` left join `user_details` on `user_details`.`user_id` = `booking_details`.`user_id`');
+		return view('admin.admin_bookings',['title'=>ADMIN_BOOKING_TITLE,'data'=>$tour_details]);	
+	}
+	
+	public function getbookingindividual(string $slug) {
+		$contact_us_response = DB::select('select * from contactus where id="'.$slug.'" or link="'.$slug.'" order by created_time ASC');
+		return view('admin.admin_enquiry_details',['title'=>ADMIN_ENQUIRY_TITLE,'data'=>$contact_us_response,'current_id'=>$slug]);	
+
+	}
+
 }

@@ -54,7 +54,12 @@ class PagesController extends Controller
 		return view('user.wedding_car_booking',['title'=> BOOKING_TITLE_TOUR, 'wedding_cars_details'=>$wedding_car_details]);
 	}
 	function contactus() {
-		return view('user.contactus',['title'=> CONTACTUS_TITLE]);
+		$details['firstname'] = '';
+		$details['lastname'] = '';
+		$details['email'] = '';
+		$details['phone'] = '';
+		$details['pid'] = '';
+		return view('user.contactus',['title'=> CONTACTUS_TITLE,'details'=>$details]);
 	}
 
 	function gallery() {
@@ -122,7 +127,7 @@ class PagesController extends Controller
 
 		//Pickup Details
 		$pickup_point=$request->input('pickup_point');
-		$status="Booking Received (Not confirmed)";
+		$status=BOOKING_STATUS_VALUES[RECIEVED_NOT_CONFIRMED];
 		$booking_pnr=generate_pnr();
 		$bus_type=$request->input('bus_type');
 		
@@ -205,4 +210,48 @@ class PagesController extends Controller
 	function bookingstatus() {
 		return view('user.bookingstatus',['title'=> BOOKING_STATUS_TITLE]);
 	}
+
+	function contactus_reply() {
+		$url_parts = explode("/", $_SERVER['REQUEST_URI']);
+		$last_url_param = end($url_parts);
+		$value = decrypt_code($last_url_param);
+		$user = DB::select('SELECT * FROM `contactus` WHERE id="'.$value.'"');
+		if ($user) {
+			$user_details = json_decode(json_encode($user), true);
+			$details['firstname'] = $user_details[0]['firstname'];
+			$details['lastname'] = $user_details[0]['lastname'];
+			$details['email'] = $user_details[0]['email'];
+			$details['phone'] = $user_details[0]['phone'];
+			$details['pid'] = $value;
+		} else {
+			$newuser = DB::select('SELECT * FROM `booking_details` left join user_details on user_details.user_id = booking_details.user_id where booking_details.booking_pnr ="'.$value.'"');
+			if ($newuser) {
+				$new_user_details = json_decode(json_encode($newuser), true);
+
+				$splitvalue = explode(" ", $new_user_details[0]['name']);
+				if (isset($splitvalue[0])) {
+					$details['firstname'] = $splitvalue[0];
+				}
+				if (isset($splitvalue[1])) {
+					$details['lastname'] = $splitvalue[1];
+				} else {
+					$details['lastname'] = "";
+				}
+
+				$details['email'] = $new_user_details[0]['email'];
+				$details['phone'] = $new_user_details[0]['contact'];
+				$details['pid'] = "";
+				$details['ref_id'] = $value;
+			} else {
+				$details['firstname'] = '';
+				$details['lastname'] = '';
+				$details['email'] = '';
+				$details['phone'] = '';
+				$details['pid'] = '';
+			}
+		}
+
+		return view('user.contactus',['title'=> CONTACTUS_TITLE,'details'=>$details]);
+	}
+
 }

@@ -29,6 +29,8 @@ Route::get(BOOKING_URL_RENTALS, 'PagesController@rental_bookings');
 Route::get(BOOKING_URL_RENTALS_BOOKING,'PagesController@rental_booking_details')->name('rental_booking_details.show');;
 Route::get(BOOKING_URL_WEDDING, 'PagesController@wedding_car_bookings');
 Route::get(CONTACTUS_URL, 'PagesController@contactus');
+Route::get(CONTACTUS_URL.'/{slug}', 'PagesController@contactus_reply');
+Route::get(ADMIN_ENQUIRYT_URL.'/{slug}', 'AdminController@getindividual');
 Route::get(GALLERY_URL, 'PagesController@gallery');
 Route::get(BOOKING_STATUS_URL, 'PagesController@bookingstatus');
 
@@ -39,12 +41,15 @@ Route::get(BOOKING_STATUS_URL, 'PagesController@bookingstatus');
 /* 'middleware' => ['authenticate'] */
 
 Route::get(ADMIN_BASE.ADMIN_LOGIN_URL, 'AdminController@login');
+Route::get(ADMIN_BASE.ADMIN_LOGIN_PAGE_URL, 'AdminController@loginpage');
 Route::group(['prefix'=>ADMIN_BASE,'middleware' => []], function(){
 	Route::get(ADMIN_HOME_URL, 'AdminController@home');
 	Route::get(ADMIN_LOGOUT_URL, 'AdminController@logout');
 	Route::get(ADMIN_HOME_CONTENT_URL, 'AdminController@page_content');
 	Route::get(ADMIN_ENQUIRYT_URL, 'AdminController@enquirydetails');
 	Route::get(ADMIN_ENQUIRYT_URL.'/{slug}', 'AdminController@getindividual');
+	Route::get(ADMIN_BOOKINGS_URL, 'AdminController@getbookingdetails');
+	Route::get(ADMIN_BOOKINGS_URL.'/{slug}', 'AdminController@getbookingindividual');
 		
 	Route::get('/', function () {	
 		return abort(404);	

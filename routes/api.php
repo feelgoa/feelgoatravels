@@ -25,6 +25,8 @@ Route::post(SAVE_CONTACT_US_FORM_API, 'API\ContactusController@save_contact_us_f
 Route::post(SAVE_BOOKING_FORM_API, 'API\UsersController@addbookingdetails');
 Route::post(REQUEST_BOOKING_DETAILS_API, 'API\UsersController@get_booking_status_form');
 Route::post(VERIFY_EXISTING_PNR_API, 'API\UsersController@verifypnr');
+Route::post(REPLYCOMMENT, 'API\UsersController@replycomment');
+Route::post(LOGINCHECK, 'API\UsersController@logiadmincheck');
 
 Route::get('get-addr-location', 'API\UsersController@get_addr_location_details');
 Route::get(SENDMAIL,'API\MailController@send_mail');

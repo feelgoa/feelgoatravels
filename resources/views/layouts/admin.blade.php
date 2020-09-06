@@ -68,25 +68,25 @@
 											<i class="fa fa-angle-down ml-2 opacity-8"></i>
 										</a>
 										<div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
-											<button type="button" tabindex="0" class="dropdown-item">User Account</button>
 											<button type="button" tabindex="0" class="dropdown-item">Settings</button>
-											<h6 tabindex="-1" class="dropdown-header">Header</h6>
-											<button type="button" tabindex="0" class="dropdown-item">Actions</button>
+											<a href="https://webmail1.hostinger.in/" target="_black" style="text-decoration:none;"><span class="dropdown-item">Webmail</span></a>
+											<h6  style="display:none;" tabindex="-1" class="dropdown-header">Header</h6>
+											<button  style="display:none;" type="button" tabindex="0" class="dropdown-item">Actions</button>
 											<div tabindex="-1" class="dropdown-divider"></div>
-											<button type="button" tabindex="0" class="dropdown-item">Dividers</button>
+											<button type="button" tabindex="0" class="dropdown-item">Log Out</button>
 										</div>
 									</div>
 								</div>
 								<div class="widget-content-left  ml-3 header-user-info">
 									<div class="widget-heading">
-										Alina Mclourd
+										Admin
 									</div>
 									<div class="widget-subheading">
-										VP People Manager
+										Feel Goa
 									</div>
 								</div>
-								<div class="widget-content-right header-user-info ml-3">
-									<button type="button" class="btn-shadow p-1 btn btn-primary btn-sm show-toastr-example">
+								<div style="display:none;" class="widget-content-right header-user-info ml-3">
+									<button type="button" id="toast-message" class="btn-shadow p-1 btn btn-primary btn-sm show-toastr-example">
 										<i class="fa text-white fa-calendar pr-1 pl-1"></i>
 									</button>
 								</div>
@@ -149,6 +149,31 @@
 									</a>
 								</li>
 								<li>
+									<a href="{{ADMIN_BASE.ADMIN_BOOKINGS_URL}}" @if(str_contains(url()->current(), ADMIN_BOOKINGS_URL )) class="mm-active" @endif>
+										<i class="metismenu-icon pe-7s-diamond"></i>
+										{{ ADMIN_BOOKING_TITLE }}
+									</a>
+								</li>
+								<li>
+									<a href="{{ADMIN_BASE.ADMIN_BOOKINGS_URL}}" @if(str_contains(url()->current(), ADMIN_BOOKINGS_URL )) class="mm-active" @endif>
+										<i class="metismenu-icon pe-7s-diamond"></i>
+										{{ ADMIN_VEHICLE_RENTAL_TITLE }}
+									</a>
+								</li>
+								<li>
+									<a href="{{ADMIN_BASE.ADMIN_BOOKINGS_URL}}" @if(str_contains(url()->current(), ADMIN_BOOKINGS_URL )) class="mm-active" @endif>
+										<i class="metismenu-icon pe-7s-diamond"></i>
+										{{ ADMIN_WEDDING_CAR_TITLE }}
+									</a>
+								</li>
+								<li>
+									<a href="{{ADMIN_BASE.ADMIN_BOOKINGS_URL}}" @if(str_contains(url()->current(), ADMIN_BOOKINGS_URL )) class="mm-active" @endif>
+										<i class="metismenu-icon pe-7s-diamond"></i>
+										{{  ADMIN_PAYMENTS_TITLE }}
+									</a>
+								</li>
+
+								<li style="display:none;">
 									<a href="#">
 										<i class="metismenu-icon pe-7s-diamond"></i>
 											Sample
@@ -202,6 +227,7 @@
 <script type="text/javascript" src="{{ URL::asset('assets/js/jquery.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('assets/js/bootstrap.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('assets/js/main.js') }}"></script>
+
 <script type="text/javascript" src="{{ URL::asset('assets/js/custom_admin.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('assets/js/jquery.dataTables.min.js') }}"></script>
 </body>

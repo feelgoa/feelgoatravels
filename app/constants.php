@@ -22,11 +22,13 @@ define('CONTACT_US_ADMIN_SUBJECT','Contact Us');
 define('EMAIL_GMAIL_RECIEVER','feelgoatravelsofficial@gmail.com');
 define('BOOKINGS_CUSTOMER_SUBJECT','Bookings Request');
 define('BOOKINGS_ADMIN_SUBJECT','Bookings Enquiry');
+define('EMAIL_MANAGER_URL','https://webmail1.hostinger.in/');
 
 define('CONTACTUS_EMAIL_TEMPLATE', 1);
 define('CONTACTUS_UPDATE_EMAIL_TEMPLATE_ADMIN', 2);
 define('BOOKINGS_EMAIL_TEMPLATE', 3);
 define('BOOKINGS_EMAIL_TEMPLATE_ADMIN', 4);
+define('CONTACT_US_REPLY', 5);
 
 
 /*********************************/
@@ -49,7 +51,12 @@ define('BOOKING_TITLE_WEDDING','Wedding Car Booking');
 /*Admin Titles*/
 define('ADMIN_DASHBOARD_TITLE','Dashboard');
 define('ADMIN_CONTENT_TITLE','Content');
-define('ADMIN_ENQUIRY_TITLE','Enquiry Details');
+define('ADMIN_ENQUIRY_TITLE','Enquiry');
+define('ADMIN_LOGIN_TITLE','Login');
+define('ADMIN_BOOKING_TITLE','Tour');
+define('ADMIN_VEHICLE_RENTAL_TITLE','Vehicle Rental');
+define('ADMIN_WEDDING_CAR_TITLE','Weeding Car');
+define('ADMIN_PAYMENTS_TITLE','Payments');
 /*********************************/
 /* Routes */
 
@@ -79,6 +86,8 @@ define('ADMIN_LOGIN_URL','/login');
 define('ADMIN_LOGOUT_URL','/logout');
 define('ADMIN_HOME_CONTENT_URL','/home-page-content');
 define('ADMIN_ENQUIRYT_URL','/enquiry-details');
+define('ADMIN_LOGIN_PAGE_URL','/login-user');
+define('ADMIN_BOOKINGS_URL','/booking-details');
 
 /* API Routes*/
 
@@ -89,6 +98,9 @@ define('SAVE_BOOKING_FORM_API','/save-booking-form');
 define('MAKEPAYMENTS','/make-payments');
 define('REQUEST_BOOKING_DETAILS_API','/get-booking-details');
 define('VERIFY_EXISTING_PNR_API','/verify-existing-pnr');
+define('REPLYCOMMENT','/reply-admin-comment');
+define('LOGINADMIN','/admin-login-user');
+define('LOGINCHECK','/login-check');
 
 
 define('ADMIN_PAGES_CONST',
@@ -109,15 +121,15 @@ define('REFUND_COMPLETED',9);
 
 define('BOOKING_STATUS_VALUES',
 	array (
-		RECIEVED_NOT_CONFIRMED,'Booking Received (Not confirmed)',
-		RECIEVED_AND_PROCESSING, 'Booking Received - Checking availablity (Not confirmed)',
-		REPLIEDTO_CUSTOMER, 'Replied to Customer - Awaiting reply/payment (Not Confirmed)',
-		PAYMENT_RECIEVED_CONFIRM, 'Recieved Payment (Confirmed)',
-		PAYMENT_FAILED, 'Payment Failed - (Not Confirmed)',
-		PAYMENT_NOT_RECIEVED, 'Payment not recieved (Not Confirmed)',
-		TRAVEL_COMPLETED, 'Done',
-		REFUND_INITIATED, 'Refund has been initited',
-		REFUND_COMPLETED, 'Refund completed',
+		RECIEVED_NOT_CONFIRMED =>'Booking Received (Not confirmed)',
+		RECIEVED_AND_PROCESSING => 'Booking Received - Checking availablity (Not confirmed)',
+		REPLIEDTO_CUSTOMER =>'Replied to Customer - Awaiting reply/payment (Not Confirmed)',
+		PAYMENT_RECIEVED_CONFIRM => 'Recieved Payment (Confirmed)',
+		PAYMENT_FAILED => 'Payment Failed - (Not Confirmed)',
+		PAYMENT_NOT_RECIEVED => 'Payment not recieved (Not Confirmed)',
+		TRAVEL_COMPLETED => 'Done',
+		REFUND_INITIATED => 'Refund has been initited',
+		REFUND_COMPLETED => 'Refund completed',
 	)
 );
 
@@ -132,7 +144,11 @@ define('RECAPTCH_REQUIRED','Recapcha is not clicked. Please check mark the box t
 define('BOOKING_STATUS_FETCH_FAILED','Sorry we could not fetch the details. Please make sure you have entered the correct details.');
 define('PNR_SUCCESSFUL_VERIFICATION','PNR is successfully verified.');
 define('PNR_FAILED_VERIFICATION','PNR is could not be verified.');
+define('COMMENT_ADD_SUCCESS_VERIFICATION','Comment successfully added and an email was sent to the customer.');
+define('COMMENT_ADD_FAILED','Something went wrong. Please try again in some time.');
 /*Google reCapcha*/
 
 define("RECAPCHA_SITE_KEY","6Le8fv4UAAAAADhwT9U00tMkk548oepW6gXdkxKr");
 define("RECAPCHA_SECRET_KEY","6Le8fv4UAAAAAFRhTptH-7bKGT63oy7g7ZiYy2i9");
+define("IV_ENCRYPTION_VALUE","1234567891011121");
+define("ENCRYPTION_KEY","FEE!G()TrAv#!$");

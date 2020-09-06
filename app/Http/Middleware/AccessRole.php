@@ -18,14 +18,19 @@ class AccessRole
 	 */
 	public function handle($request, Closure $next)
 	{
+		/*
 		if(Auth::check()) {
 			return $next($request);
 		}
+		return redirect()->action(
+			'AdminController@login'
+		);
+		*/
+        if (!$request->session()->exists('user')) {
+            // user value cannot be found in session
+            return redirect(ADMIN_URL.ADMIN_LOGIN_PAGE_URL);
+        }
 
-		return response()->json(['status' => 'LOGIN REQUIRED']);
-		#return redirect()->action(
-		#	'AdminController@login'
-		#);
-
+        return $next($request);
 	}
 }

@@ -31,7 +31,7 @@ class ContactusController extends Controller {
 				return response()->json(['isSuccess'=> false, 'message'=> RECAPTCH_REQUIRED,'data'=> '']);
 			}
 			$responseKeys = validate_recapcha(urlencode($captcha));
-			$responseKeys["success"]  = 1;
+			#$responseKeys["success"]  = 1;
 			if($responseKeys["success"] == 1) {
 				$input = $request->all();
 				$name_concat = $input['firstname'].' '.$input['lastname'];
@@ -39,14 +39,18 @@ class ContactusController extends Controller {
 				$details['phone'] = $input['phone'];
 				$details['name'] = $name_concat;
 				$details['email'] = $input['email'];
+				
 				if ($input['ref_id'] == "") {
 					$input['ref_id'] =  0;
 				}
 
+				if ($input['link'] == "") {
+					$input['link'] =  0;
+				}
+
+				$input['created_time'] = $timevalue = date("Y-m-d h:i:s");
 				$mailsender = send_mail_custom($input['email'],$name_concat,CONTACTUS_EMAIL_TEMPLATE,$details);
 				$mailsender_admin = send_mail_custom(EMAIL_GMAIL_RECIEVER,FG_TEAM,CONTACTUS_UPDATE_EMAIL_TEMPLATE_ADMIN,$details);
-				//$mailsender = 1;
-				//$mailsender_admin = 1;
 				if (($mailsender == 1) and ($mailsender_admin == 1)) {
 					unset($input["_token"]);
 					unset($input["g-recaptcha-response"]);

@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set("Asia/Kolkata");
 use PHPMailer\PHPMailer;
 
 function validate_recapcha($captcha) {
@@ -51,6 +52,12 @@ function send_mail_custom($reciever_email_value,$reciever_email_name,$template_n
 			$mail->addReplyTo($extra_details['email'], $extra_details['name']);
 			$mail->addAddress($reciever, $reciever_name);
 			break;
+		case CONTACT_US_REPLY:
+			$subject = BOOKINGS_ADMIN_SUBJECT.' '.SITE_SHORT_DESC;
+            $body = admin_reply_to_enquiry_template($extra_details);
+			$mail->addAddress($reciever, $reciever_name);
+			break;
+		break;
 		default:
 			return 0;
 		}
@@ -86,12 +93,11 @@ Hi '.$data['name'].',
 <tr>
 <td colspan="2">
 Thank you for reaching out to us.
- This auto-reply is just to let you know that we have received your email and will get back to you with a response as soon as possible.
+ This auto-reply is just to let you know that we have received your email and will get back to you soon.
 </td>
 </tr>
 <tr colspan="2">
 <td>
-We are looking forward to chatting with you soon!
 </td>
 </tr>
 </table>';
@@ -243,4 +249,93 @@ Please login into the site and update the Booking status so the customer can che
 
 function productImage($path){
 	return ($path) && file_exists($path)? asset($path) : asset('assets/images/not-found.jpg');
+}
+
+function encrypt_code($simple_string) {
+	$ciphering = "AES-128-CTR"; 
+
+	$simple_string = "feelGoaId+".$simple_string;
+
+	// Use OpenSSl Encryption method 
+	$iv_length = openssl_cipher_iv_length($ciphering); 
+	$options = 0; 
+
+	// Non-NULL Initialization Vector for encryption 
+	$encryption_iv = IV_ENCRYPTION_VALUE; 
+
+	// Store the encryption key 
+	$encryption_key = ENCRYPTION_KEY; 
+
+	// Use openssl_encrypt() function to encrypt the data 
+	$encryption = openssl_encrypt($simple_string, $ciphering, 
+				$encryption_key, $options, $encryption_iv); 
+
+	// Display the encrypted string 
+	return $encryption;
+}
+
+function decrypt_code($simple_string) {
+
+	$ciphering = "AES-128-CTR"; 
+	$options = 0; 
+
+	// Non-NULL Initialization Vector for decryption 
+	$decryption_iv = IV_ENCRYPTION_VALUE; 
+	
+	// Store the decryption key 
+	$decryption_key = ENCRYPTION_KEY; 
+	
+	// Use openssl_decrypt() function to decrypt the data 
+	$decryption=openssl_decrypt ($simple_string, $ciphering,  
+			$decryption_key, $options, $decryption_iv); 
+	
+	// Display the decrypted string 
+	$splitvalue = explode("+", $decryption);
+	if (isset($splitvalue[1])) {
+		return $splitvalue[1];
+	} else {
+		return 0;
+	}
+}
+
+function admin_reply_to_enquiry_template($data) {
+
+	return '<table>
+	<tr>
+	<td align="left" valign="top" colspan="2" style="padding: 20px 0 10px 0;">
+	<span style="font-size: 18px; font-weight: normal;">ENQUIRY RESPONSE</span>
+	</td>
+	</tr>
+	<tr>
+	<td align="left" valign="top" colspan="2" style="padding-top: 10px;">
+	Hi '.$data['firstname'].',
+	<td>
+	</tr>
+	<tr>
+	<td colspan="2">
+	<br>
+	Here is what you had asked us</td>
+	</tr>
+	<tr colspan="2">
+	<td colspan="2" style="background-color:beige;">
+	'.$data['prev_message'].'
+	</td>
+	</tr>
+
+	<tr>
+	<td colspan="2">
+	<br>
+	Below is a reply from the feelgoa team to your above enquiry.</td>
+	</tr>
+	<tr colspan="2">
+	<td colspan="2" style="background-color:beige;">
+'.$data['message'].'
+	</td>
+	</tr>
+	<tr>
+	<td colspan="2">
+	<br>
+	Please click <a href="'.SITE_URL.CONTACTUS_URL.'/'.encrypt_code($data['link_value']).'">here</a> to reply to the email and continue the conversation tree.</td>
+	</tr>
+	</table>';
 }
