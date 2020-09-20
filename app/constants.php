@@ -65,17 +65,17 @@ define('HOME_URL','/home');
 define('LOCATION_URL','/locations');
 define('PACKAGES_URL','/packages');
 define('BOOKING_URL_HOME','/bookings');
-define('BOOKING_URL_TOUR','/tour_booking');
-define('BOOKING_URL_HOTEL','/hotel_booking');
-define('BOOKING_URL_RENTALS','/rental_booking');
-define('BOOKING_URL_RENTALS_BOOKING','/rental_booking/{vehicle}');
-define('BOOKING_URL_WEDDING','/wedding_car_booking');
+define('BOOKING_URL_TOUR','/tour-booking');
+define('BOOKING_URL_HOTEL','/hotel-booking');
+define('BOOKING_URL_RENTALS','/rental-booking');
+define('BOOKING_URL_RENTALS_BOOKING','/rental-booking/{vehicle}');
+define('BOOKING_URL_WEDDING','/wedding-car-booking');
 
 
 define('CONTACTUS_URL','/contact-us');
 define('GALLERY_URL','/gallery');
 define('BOOKING_STATUS_URL','/booking-status');
-define('BOOKING_STATUS_DETAILS_URL','/booking_status_details');
+define('BOOKING_STATUS_DETAILS_URL','/booking-status-details');
 
 
 

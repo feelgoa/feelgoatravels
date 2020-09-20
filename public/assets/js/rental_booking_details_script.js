@@ -7,10 +7,15 @@ new Drift(document.querySelector('.drift-demo-trigger'), {
 });
 
 function caltotal(no_of_days, rate) {
-    var days = parseInt(no_of_days.value);
-    var total = days * parseInt(rate);
-    var msg = document.getElementById("total_amount");
-    msg.value = total;
+    if(isNaN(no_of_days)){
+        var msg = document.getElementById("total_amount");
+        msg.value = "";
+    }else{
+        var days = parseInt(no_of_days.value);
+        var total = days * parseInt(rate);
+        var msg = document.getElementById("total_amount");
+        msg.value = total;
+    }
 }
 
 // Function to Validate Empty Number Field
@@ -51,18 +56,6 @@ function CheckDate_after(date_id, message, error_message) {
         return true;
     }
 }
-
-$('#selectlocation').change(function() {
-    if ($(this).is(':checked')) {
-        $('.pickup_point').css('display', 'block');
-        $('#pickup_point').val("Select");
-        $('.pickup_location1').css('display', 'none');
-    } else {
-        $('.pickup_point').css('display', 'none');
-        $('#pickup_point').val("Select");
-        $('.pickup_location1').css('display', 'block');
-    }
-});
 
 // Function to validate Dropdowns
 function ValidateDropdownfield(emt_len, message, error_message) {

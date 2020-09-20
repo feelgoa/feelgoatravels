@@ -33,25 +33,50 @@
 			{{ csrf_field() }}
                     <h3 class="lable-from">{{ucfirst($vehicle->type)}} Booking Details</h3>
                     <div class="row">
+                        <div class="col-sm-12">
+                            <label class="frm-font lable-from" for="name1">Name:</label>
+                            <span class="required-field">*</span>
+                            <input type="text" class="frm-font form-control" id="name1" name="name1" placeholder="Enter Full Name" onblur="ValidateEmptyField(this,'Name cannot be empty','error_message')" required>
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-sm-6">
+							<label for="email" class="frm-font lable-from">Email:</label>
+							<span class="required-field">*</span>
+							<input type="email" class="frm-font form-control" name="email" id="email" placeholder="Enter email id" onblur="ValidateEmail(this,'Please your check email format','error_message')" required>
+						</div>
+						<div class="col-sm-6">
+							<label for="tel" class="frm-font lable-from">Contact Number:</label>
+							<span class="required-field">*</span>
+							<input type="tel" size="10" class="frm-font form-control" id="contact" name="contact" placeholder="Contact number" onblur="ValidateContact1(this,'Enter 10 digit mobile Number','error_message')" required>
+						</div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-sm-6">
+                        @if($vehicle->type=="wedding_car")
+                        <label for="pickup_date" class="frm-font lable-from">Required Date:</label>
+							<span class="required-field">*</span>
+							<input type="date" class="frm-font form-control" name="pickup_date" id="pickup_date" onblur="CheckDate_after(this,'Travelling Date Date should be after one day from today','error_message')" required>
+                        @else
+                            <label for="pickup_date" class="frm-font lable-from">Travelling Date:</label>
+							<span class="required-field">*</span>
+							<input type="date" class="frm-font form-control" name="pickup_date" id="pickup_date" onblur="CheckDate_after(this,'Travelling Date Date should be after one day from today','error_message')" required>
+                        @endif
+                        </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                             @if($vehicle->type=="wedding_car")
                                 <label class="frm-font lable-from" for="no_of_days">No of Hours:</label>
                                 <span class="required-field">*</span>
-                                <input type="text" maxlength="2" value="1" class="frm-font form-control" id="no_of_days" name="no_of_days" placeholder="Enter no of hours for which car is needed" required onblur="caltotal(this,'{{$vehicle->rate}}');ValidateEmptyNumberField(this,'No of Hours must be integer and cannot be empty','error_message');">
+                                <input type="text" maxlength="2" value="1" class="frm-font form-control" id="no_of_days" name="no_of_days" placeholder="Enter no of hours for which car is needed (Minimum 1 Hour)" required onblur="caltotal(this,'{{$vehicle->rate}}');ValidateEmptyNumberField(this,'No of Hours must be integer and cannot be empty','error_message');">
                             @else
                                 <label class="frm-font lable-from" for="no_of_days">No of Days:</label>
                                 <span class="required-field">*</span>
-                                <input type="text" maxlength="2" value="1" class="frm-font form-control" id="no_of_days" name="no_of_days" placeholder="Number of Days" required onblur="caltotal(this,'{{$vehicle->rate}}');ValidateEmptyNumberField(this,'No of Days must be integer and cannot be empty','error_message');">
+                                <input type="text" maxlength="2" value="1" class="frm-font form-control" id="no_of_days" name="no_of_days" placeholder="Number of Days (Minimum 1 Day)" required onblur="caltotal(this,'{{$vehicle->rate}}');ValidateEmptyNumberField(this,'No of Days must be integer and cannot be empty','error_message');">
                             @endif
                             </div>
                         </div>
-                        <div class="col-sm-6">
-                                <label for="pickup_date" class="frm-font lable-from">Travelling Date:</label>
-								<span class="required-field">*</span>
-								<input type="date" class="frm-font form-control" name="pickup_date" id="pickup_date" onblur="CheckDate_after(this,'Travelling Date Date should be after one day from today','error_message')" required>
-						</div>
-                    </div>
+                    </div><br>
 					<div class="form-group">
 						<div class="row">
 							<div class="col-sm-6">
@@ -61,31 +86,10 @@
                             </div>
                             <div class="col-sm-6">
                                 <label for="total_amount" class="frm-font lable-from">Total Amount:</label>
-								<input type="text" readonly class="frm-font form-control" value="{{$vehicle->rate}}" name="total_amount" id="total_amount" required>
+                                <input type="text" readonly class="frm-font form-control" value="{{$vehicle->rate}}" name="total_amount" id="total_amount" required>
 							</div>
 						</div>
                     </div>
-                    @if($vehicle->type=="bike")
-                    <div class="bike_location">
-                        <div class="form-group" >
-                            <div class="checkbox">
-                                <label class="lable-from" for="selectlocation">
-                                <input type="checkbox" id="selectlocation" name="selectlocation" value="yes">Select Pickup Point</label>
-                            </div>
-                        </div>
-                        <div class="pickup_point" style="display:none;">
-                            <div class="form-group">
-                                <label for="pickup_point" class="frm-font lable-from">Pickup Point:</label>
-								<span class="required-field">*</span>
-								<select id="pickup_point" name="pickup_point" class="form-control" onblur="ValidateDropdownfield(this,'Select Pickup Point From Dropdown','error_message')">
-									<option value="">Select</option>
-									<option value="Colva">Colva</option>
-									<option value="Margao">Margao</option>
-								</select>	
-                            </div>
-                        </div>
-                    </div>
-                    @endif
                     <div class="form-group pickup_location1" style="display:block;">
                         <label for="pickup_location" class="frm-font lable-from">Enter Pickup location:</label>
 						<span class="required-field">*</span>

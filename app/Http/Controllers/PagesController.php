@@ -46,7 +46,8 @@ class PagesController extends Controller
 		return view('user.rental_booking',['title'=> BOOKING_TITLE_TOUR,'car_details'=>$car_details,'bike_details'=>$bike_details]);
 	}
 	function rental_booking_details($id) {
-		$vehicle_detail =DB::select("SELECT * FROM `rental_vehicles` WHERE `vehicle_id` = '$id'");
+		$id1=decrypt_code($id);
+		$vehicle_detail =DB::select("SELECT * FROM `rental_vehicles` WHERE `vehicle_id` = '$id1'");
 		return view('user.rental_booking_details',['title'=> BOOKING_TITLE_TOUR,'vehicle_details'=>$vehicle_detail]);
 	}
 	function wedding_car_bookings() {
@@ -93,6 +94,9 @@ class PagesController extends Controller
 		}
 	}
 	function hotel_bookings_insert(Request $request){
+		$name = $request->input('name1');
+		$email = $request->input('email');
+		$contact = $request->input('contact');
 		$hotelbooking_checked=$request->input('hotelbooking');
 		$check_in_date=$request->input('check_in');
 		$check_out_date=$request->input('check_out');
@@ -100,7 +104,7 @@ class PagesController extends Controller
 		$room_count=$request->input('room_count');
 		$member_count=$request->input('member_count1');
 		$extra_requirements=$request->input('hotel_req');
-		$hotelbooking=array("check_in_date"=>$check_in_date,"check_out_date"=>$check_out_date,"room_type"=>$room_type,"room_count"=>$room_count,"member_count"=>$member_count,"extra_requirements"=>$extra_requirements,"created_at"=>Carbon::now(),"updated_at"=>Carbon::now());
+		$hotelbooking=array("check_in_date"=>$check_in_date,"check_out_date"=>$check_out_date,"room_type"=>$room_type,"room_count"=>$room_count,"member_count"=>$member_count,"extra_requirements"=>$extra_requirements,"created_at"=>Carbon::now(),"updated_at"=>Carbon::now(),"name"=>$name,"email"=>$email,"contact"=>$contact);
 		$hotel_id=DB::table('hotel_details')->insertGetId($hotelbooking);
 		return view('user.hotel_booking_success',['title'=> BOOKING_TITLE_HOTEL]);
 	}
@@ -172,7 +176,7 @@ class PagesController extends Controller
 		}
 
 		//Hotel details
-		$hotelbooking=array("booking_id" => $booking_id,"check_in_date"=>$check_in_date,"check_out_date"=>$check_out_date,"room_type"=>$room_type,"room_count"=>$room_count,"member_count"=>$member_count,"extra_requirements"=>$extra_requirements,"created_at"=>Carbon::now(),"updated_at"=>Carbon::now());
+		$hotelbooking=array("booking_id" => $booking_id,"check_in_date"=>$check_in_date,"check_out_date"=>$check_out_date,"room_type"=>$room_type,"room_count"=>$room_count,"member_count"=>$member_count,"extra_requirements"=>$extra_requirements,"created_at"=>Carbon::now(),"updated_at"=>Carbon::now(),"name"=>$name,"email"=>$email,"contact"=>$contact);
 		if($hotelbooking_checked=="yes"){
 			$hotel_id=DB::table('hotel_details')->insertGetId($hotelbooking);
 		}
@@ -191,18 +195,16 @@ class PagesController extends Controller
 	}
 	function rental_bookings_insert(Request $request){
 		//dd($request);
+		$name = $request->input('name1');
+		$email = $request->input('email');
+		$contact = $request->input('contact');
 		$vehicle_id = $request->input('vehicle_id');
 		$no_of_days = $request->input('no_of_days');
 		$pickup_date = $request->input('pickup_date');
 		$pickup_time = $request->input('pickup_time');
 		$total_amount = $request->input('total_amount');
 		$pickup_location=$request->input('pickup_loc');
-		$pickup_point = $request->input('pickup_point');
-		if($pickup_point==""){
-			$rental_details=array("vehicle_id"=>$vehicle_id,"no_of_days"=>$no_of_days,"total_amount"=>$total_amount,"pickup_date"=>$pickup_date,"pickup_location"=>$pickup_location,"pickup_time"=>$pickup_time);
-		}else{
-			$rental_details=array("vehicle_id"=>$vehicle_id,"no_of_days"=>$no_of_days,"total_amount"=>$total_amount,"pickup_date"=>$pickup_date,"pickup_location"=>$pickup_point,"pickup_time"=>$pickup_time);
-		}
+			$rental_details=array("vehicle_id"=>$vehicle_id,"no_of_days"=>$no_of_days,"total_amount"=>$total_amount,"pickup_date"=>$pickup_date,"pickup_location"=>$pickup_location,"pickup_time"=>$pickup_time,"created_at"=>Carbon::now(),"updated_at"=>Carbon::now(),"name"=>$name,"email"=>$email,"contact"=>$contact);
 		$rental_id=DB::table('rental_booking')->insertGetId($rental_details);
 		$vehicle_detail =DB::select("SELECT * FROM `rental_vehicles` WHERE `vehicle_id` = '$vehicle_id'");
 		return view('user.rental_booking_success',['title'=> BOOKING_TITLE_TOUR,'vehicle_detail'=>$vehicle_detail]);

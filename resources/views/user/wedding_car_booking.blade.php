@@ -12,7 +12,7 @@
                 <div class="single-cat-widget">
                     <div class="content relative">
                         <div class="overlay1 overlay1-bg"></div>
-                        <a href="{{route('rental_booking_details.show',$vehicle->vehicle_id) }}">
+                        <a href="{{route('rental_booking_details.show',encrypt_code($vehicle->vehicle_id)) }}">
                             <div class="thumb">
                                 <img class="content-image img-fluid d-block mx-auto" src="{{$vehicle->vehicle_img}}"
                                     alt="">

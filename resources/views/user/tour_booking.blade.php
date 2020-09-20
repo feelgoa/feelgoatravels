@@ -170,6 +170,10 @@
 							</div>	
 						</div>
 						<span class="label label-danger" id="error_message1" style="margin-left:2%;"></span><br>	
+					</div>
+					<hr>
+					<h2 class="lable-from">Additional Booking Details</h2>
+					<div class="row">	
 						<div class="col-sm-6">
 							<div class="spot-container">
 								<h4 class="lable-from">Day 3</h4>

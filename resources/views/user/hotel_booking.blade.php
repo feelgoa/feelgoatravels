@@ -15,9 +15,29 @@
 							<div class="form-group" >
 								<div class="hotel-details-div">
 									<h3 class="lable-from">Hotel Details</h3><br>
+									<div class="col-sm-12">
+										<div class="row">
+											<div class="col-sm-12">
+												<label class="frm-font lable-from" for="name1">Name:</label>
+												<span class="required-field">*</span>
+												<input type="text" class="frm-font form-control" id="name1" name="name1" placeholder="Enter Full Name" onblur="ValidateEmptyField(this,'Name cannot be empty','error_message')" required>
+											</div>
+											<div class="col-sm-6">
+												<label for="email" class="frm-font lable-from">Email:</label>
+												<span class="required-field">*</span>
+												<input type="email" class="frm-font form-control" name="email" id="email" placeholder="Enter email id" onblur="ValidateEmail(this,'Please your check email format','error_message')" required>
+											</div>
+											<div class="col-sm-6">
+												<label for="tel" class="frm-font lable-from">Contact Number:</label>
+												<span class="required-field">*</span>
+												<input type="tel" size="10" class="frm-font form-control" id="contact" name="contact" placeholder="Contact number" onblur="ValidateContact1(this,'Enter 10 digit mobile Number','error_message')" required>
+											</div>
+										</div>
+									</div>
 									<div class="col-sm-6">
 										<div class="form-group">
 											<label for="check_in" class="frm-font lable-from">Check-in Date:</label>
+											<span class="required-field">*</span>
 											<input type="date" class="frm-font form-control travel_dates" name="check_in" id="check_in" onblur="CheckDate_after(this,'Check_In Date should be after one day from today','error_message4')" required>
 										</div>
 										<div class="row">
@@ -38,6 +58,7 @@
 									<div class="col-sm-6">
 										<div class="form-group">
 											<label for="check_out" class="frm-font lable-from">Check-out Date:</label>
+											<span class="required-field">*</span>
 											<input type="date" class="frm-font form-control travel_dates" name="check_out" id="check_out" onblur="Checkout_date_check(this,'Check_Out Date should be atleast one day after Check_In date','error_message4')" required>
 										</div>
 										<div class="row">
@@ -52,7 +73,7 @@
 									<div class="col-sm-12">
 										<div class="form-group">
 											<label  for="hotel_req" class="form-labels">Any other requirements:</label>
-											<textarea class="form-control" placeholder="Please mention any other speciic requirement regarding your hotel booking" name="hotel_req" rows="5" id="message" style="width:100%;resize: none;" onblur="ValidateEmptyField(this,'Message cannot be empty','error_message4')" required></textarea>
+											<textarea class="form-control" placeholder="Please mention any other speciic requirement regarding your hotel booking ( e.g Swimming Pool )" name="hotel_req" rows="5" id="message" style="width:100%;resize: none;" onblur="ValidateEmptyField(this,'Message cannot be empty','error_message4')" required></textarea>
 										</div>			
 									</div>
 								</div>
