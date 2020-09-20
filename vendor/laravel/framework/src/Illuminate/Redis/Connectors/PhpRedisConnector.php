@@ -7,6 +7,7 @@ use Illuminate\Redis\Connections\PhpRedisClusterConnection;
 use Illuminate\Redis\Connections\PhpRedisConnection;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Redis as RedisFacade;
+use Illuminate\Support\Str;
 use LogicException;
 use Redis;
 use RedisCluster;
@@ -28,7 +29,7 @@ class PhpRedisConnector implements Connector
             ));
         };
 
-        return new PhpRedisConnection($connector(), $connector);
+        return new PhpRedisConnection($connector(), $connector, $config);
     }
 
     /**
@@ -56,7 +57,7 @@ class PhpRedisConnector implements Connector
      */
     protected function buildClusterConnectionString(array $server)
     {
-        return $server['host'].':'.$server['port'].'?'.Arr::query(Arr::only($server, [
+        return $this->formatHost($server).':'.$server['port'].'?'.Arr::query(Arr::only($server, [
             'database', 'password', 'prefix', 'read_timeout',
         ]));
     }
@@ -98,10 +99,6 @@ class PhpRedisConnector implements Connector
                 $client->setOption(Redis::OPT_READ_TIMEOUT, $config['read_timeout']);
             }
 
-            if (! empty($options['serializer'])) {
-                $client->setOption(Redis::OPT_SERIALIZER, $options['serializer']);
-            }
-
             if (! empty($config['scan'])) {
                 $client->setOption(Redis::OPT_SCAN, $config['scan']);
             }
@@ -120,7 +117,7 @@ class PhpRedisConnector implements Connector
         $persistent = $config['persistent'] ?? false;
 
         $parameters = [
-            $config['host'],
+            $this->formatHost($config),
             $config['port'],
             Arr::get($config, 'timeout', 0.0),
             $persistent ? Arr::get($config, 'persistent_id', null) : null,
@@ -160,17 +157,28 @@ class PhpRedisConnector implements Connector
                 $client->setOption(RedisCluster::OPT_PREFIX, $options['prefix']);
             }
 
-            if (! empty($options['serializer'])) {
-                $client->setOption(RedisCluster::OPT_SERIALIZER, $options['serializer']);
+            if (! empty($options['scan'])) {
+                $client->setOption(RedisCluster::OPT_SCAN, $options['scan']);
             }
 
-            if (! empty($config['scan'])) {
-                $client->setOption(RedisCluster::OPT_SCAN, $config['scan']);
-            }
-
-            if (! empty($config['failover'])) {
-                $client->setOption(RedisCluster::OPT_SLAVE_FAILOVER, $config['failover']);
+            if (! empty($options['failover'])) {
+                $client->setOption(RedisCluster::OPT_SLAVE_FAILOVER, $options['failover']);
             }
         });
+    }
+
+    /**
+     * Format the host using the scheme if available.
+     *
+     * @param  array  $options
+     * @return string
+     */
+    protected function formatHost(array $options)
+    {
+        if (isset($options['scheme'])) {
+            return Str::start($options['host'], "{$options['scheme']}://");
+        }
+
+        return $options['host'];
     }
 }

@@ -1,8 +1,8 @@
 <?php
 
-define('SITE_URL', 'http://127.0.0.1');
+define('SITE_URL', 'http://127.0.0.1:8000');
 define('ADMIN_URL','http://127.0.0.1/admin');
-define('API_URL','http://127.0.0.1/api');
+define('API_URL','http://127.0.0.1:8000/api');
 define('SITE_NAME','Feel Goa');
 define('SITE_SHORT_DESC','Feel Goa - Tours and Travels');
 
