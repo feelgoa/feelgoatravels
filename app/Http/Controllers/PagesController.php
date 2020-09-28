@@ -151,6 +151,9 @@ class PagesController extends Controller
 		$booking_data=array("booking_pnr"=>$booking_pnr,"pickup_point"=>$pickup_point,"bus_type"=>$bus_type,"user_id"=>$user_id,"status"=>$status,"created_at"=>Carbon::now(),"updated_at"=>Carbon::now());
 		$booking_id=DB::table('booking_details')->insertGetId($booking_data);
 
+		$booking_status=array("booking_type"=>"1","reference_id"=>$booking_id,"status"=>"1","desc"=>"","created_at"=>Carbon::now());
+		$booking_status_insert = DB::table('statuschange')->insertGetId($booking_status);
+
 		//Booking_spots Insertion
 		$count=count($spots);
 		$items = array();
@@ -255,5 +258,91 @@ class PagesController extends Controller
 
 		return view('user.contactus',['title'=> CONTACTUS_TITLE,'details'=>$details]);
 	}
+
+	public function SubscribProcess() {
+		return view('user.payment',['title'=> PAYMENTS_TITLE]);
+	}
+
+	
+	public function SubscribeCancel()
+{
+     dd('Payment Cancel!');
+}
+
+public function Response(Request $request)
+{
+	if (isset($_POST)) {
+		print_r($_POST);
+	}
+
+    dd('Payment Successfully done!');
+}
+
+public function paymentspage() {
+	$url_parts = explode("/", $_SERVER['REQUEST_URI']);
+	$last_url_param = end($url_parts);
+	$value = decrypt_code($last_url_param);
+	$payment = DB::select('SELECT * FROM `payments` where tnxid ="'.$value.'" and created_at >= curdate()');
+	if ($payment) {
+		$p_details = json_decode(json_encode($payment), true);
+		if ($p_details[0]['booking_type'] == BOOKING_TYPE_TOUR) {
+			$user_details = DB::select('SELECT * FROM `user_details` where user_id = '.$p_details[0]['ref_id']);
+			if ($user_details) {
+				$details['phone'] = $user_details[0]->contact;
+				$details['firstname'] =  $user_details[0]->name;
+				$details['email'] =  $user_details[0]->email;
+				$details['productinfo'] = ADMIN_BOOKING_TITLE;
+				$details['surl'] = SITE_URL.PAYMENT_SUCCESS_URL;
+				$details['furl'] = SITE_URL.PAYMENT_FAILURE_URL;
+				$details['service_provider'] = PAYMENT_SERVICE_PROVIDER;
+				$details['amount'] = $p_details[0]['amount'];
+				$details['txnid'] = $p_details[0]['tnxid'];
+				return view('user.payment_view',['title'=> PAYMENTS_TITLE,'data'=>$details]);
+			} else {
+				echo "error, if still persists request for a new link";
+			}
+		} else {
+			echo "other payment";
+		}
+		echo "match";
+	} else {
+		echo "no match, invallid url or the link is expired";
+	}
+	exit;
+}
+
+public function suc() {
+
+	print_r($_POST);
+	$status=$_POST["status"];
+	$firstname=$_POST["firstname"];
+	$amount=$_POST["amount"];
+	$txnid=$_POST["txnid"];
+	$posted_hash=$_POST["hash"];
+	$key=$_POST["key"];
+	$productinfo=$_POST["productinfo"];
+	$email=$_POST["email"];
+	$salt=PAYU_SALT_KEY;
+	
+	if (isset($_POST["additionalCharges"])) {
+		   $additionalCharges=$_POST["additionalCharges"];
+			$retHashSeq = $additionalCharges.'|'.$salt.'|'.$status.'|||||||||||'.$email.'|'.$firstname.'|'.$productinfo.'|'.$amount.'|'.$txnid.'|'.$key;
+		} else {
+			$retHashSeq = $salt.'|'.$status.'|||||||||||'.$email.'|'.$firstname.'|'.$productinfo.'|'.$amount.'|'.$txnid.'|'.$key;
+		}
+			$hash = hash("sha512", $retHashSeq);
+			 
+		if ($hash != $posted_hash) {
+			echo "Invalid Transaction. Please try again";
+		} else {
+			echo "<h3>Your booking status is ". $status .".</h3>";
+			echo "<h4>Your Transaction ID for this transaction is ".$txnid.".</h4>";
+			echo "<h4>We have received a payment of Rs. " . $amount . ". Your order will soon be shipped.</h4>";
+		}
+}
+public function suc1() {
+	echo "here";
+	exit;
+}
 
 }

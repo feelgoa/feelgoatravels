@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth; 
 use Validator;
 use DB;
+use Carbon\Carbon;
 
 class UsersController extends Controller
 {
@@ -107,7 +108,10 @@ class UsersController extends Controller
 		$booking_details['spots'] = DB::select('SELECT * FROM booking_spot where booking_id = "'.$booking_id.'"');
 		$travel_details = DB::select('SELECT * FROM booking_traveldate where booking_id = "'.$booking_id.'" order by travel_date ASC');
 		$link_value = encrypt_code($booking_id);
-		return view('user.booking_status_view',['title'=> BOOKING_STATUS_TITLE,'pnrno'=>$get_booking_id ['booking'][0]['booking_pnr'],'details'=>$get_booking_id,'travel_details'=>$travel_details]);
+
+		$status_updates = DB::select('SELECT * FROM `statuschange` where reference_id = "'.$booking_id.'" ORDER BY `id` ASC');
+		$curr_status = end($status_updates);
+		return view('user.booking_status_view',['title'=> BOOKING_STATUS_TITLE,'pnrno'=>$get_booking_id ['booking'][0]['booking_pnr'],'details'=>$get_booking_id,'travel_details'=>$travel_details,'curr_status'=>$curr_status]);
 	}
 	function addbookingdetails(Request $request) {
 		$name = $request->input('name1');
@@ -177,7 +181,7 @@ class UsersController extends Controller
 		                       $timevalue = date("Y-m-d h:i:s");
 		                       $user_data=array("firstname"=>FG_TEAM,"lastname"=>"X","email"=>EMAIL_GMAIL_RECIEVER,"message"=>$_POST['message'],"link"=>$_POST['link'],"created_time"=>$timevalue);
 		                       $user_id=DB::table('contactus')->insertGetId($user_data);
-		                       $current_user = DB::select('SELECT firstname,lastname,email FROM `contactus` WHERE id ="'.$_POST['link'].'"');
+							   $current_user = DB::select('SELECT firstname,lastname,email FROM `contactus` WHERE id ="'.$_POST['link'].'"');
 		
 		                       $new_details = json_decode(json_encode($current_user), true);
 		                       $details['firstname'] = $new_details[0]['firstname'];
@@ -242,4 +246,66 @@ class UsersController extends Controller
 	                       }
 	
 		}
+
+		public function update_booking_status(Request $request) {
+			$user_data=array(
+				'booking_type'=>$_POST['booking_type'],
+				'reference_id'=>$_POST['booking_id'],
+				"status"=>$_POST['status'],
+				'desc'=>$_POST['desc'],
+				'created_at'=>Carbon::now(),
+			);
+			$user_id = DB::table('statuschange')->insertGetId($user_data);
+			if ($user_data) {
+				return response()->json(['isSuccess'=> true, 'message'=> STATUS_UPDATE_SUCCESS]);
+			} else {
+				return response()->json(['isSuccess'=> false, 'message'=> STATUS_UPDATE_FAILED]);
+			}
+		}
+	
+	public function fetchemailcontent(Request $request) {
+		$t_val = substr(hash('sha256', mt_rand() . microtime()), 0, 20);
+		$transaction_reference = encrypt_code($t_val);
+		$transaction_reference = str_replace("/","",$transaction_reference);
+
+		$traveldetails = DB::select('SELECT * FROM `booking_traveldate` where booking_id = "'.$_POST['ref_id'].'" ORDER BY travel_date ASC');
+
+		$resp = calculate_travel_details($traveldetails,$_POST['totalcount']);
+
+		$user_data=array(
+			'transaction_reference'=>$transaction_reference,
+			'tnxid'=>$t_val,
+			'booking_type'=>$_POST['booking_type'],
+			'ref_id'=>$_POST['ref_id'],
+			'amount'=>$resp['amount'],
+			"status"=>PAYMENT_NOT_RECIEVED,
+			'created_at'=>Carbon::now(),
+		);
+		$user_id = DB::table('payments')->insertGetId($user_data);
+
+		
+
+		$details['amount'] = $resp['amount'];
+		$details['transaction_reference'] = $transaction_reference;
+		$details['name'] = $_POST['name'];
+		$details['count'] = $_POST['totalcount'];
+		$details['pickuppoint'] = $_POST['pickuppoint'];
+		$details['pnr'] = $_POST['pnr'];
+		$details['travel_details'] = $traveldetails;
+		$details['days'] = $resp['days'];
+		$details['calculation'] = $resp['calc'];
+
+		return response()->json(['isSuccess'=> false, 'message'=> '',  'data'=> payment_email_generator($details)]);
+	}
+
+	public function sendpaymentemail(Request $request) {
+		$mailsender = send_mail_custom($_POST['email'],$_POST['name'],$_POST['template'],$_POST['content']);
+
+		if ($mailsender == 1) {
+			echo "success";
+		} else {
+			echo "failed";
+		}
+		exit;
+	}
 }

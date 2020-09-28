@@ -33,7 +33,36 @@ Route::get(CONTACTUS_URL.'/{slug}', 'PagesController@contactus_reply');
 Route::get(ADMIN_ENQUIRYT_URL.'/{slug}', 'AdminController@getindividual');
 Route::get(GALLERY_URL, 'PagesController@gallery');
 Route::get(BOOKING_STATUS_URL, 'PagesController@bookingstatus');
+Route::get(BOOKING_PAYMENTS_URL.'/{slug}', 'PagesController@paymentspage');
+Route::get(PAYMENT_SUCCESS_URL, 'PagesController@suc');
+Route::post(PAYMENT_SUCCESS_URL, 'PagesController@suc');
 
+
+Route::get('subscribe-process', [
+    'as' => 'subscribe-process',
+    'uses' => 'PagesController@SubscribProcess'
+]);
+
+Route::post('subscribe-process', [
+    'as' => 'subscribe-process',
+    'uses' => 'PagesController@SubscribProcess'
+]);
+
+
+
+Route::get('subscribe-cancel', [
+    'as' => 'subscribe-cancel',
+    'uses' => 'PagesController@SubscribeCancel'
+]);
+
+Route::get('subscribe-response', [
+    'as' => 'subscribe-response',
+    'uses' => 'PagesController@Response'
+]);
+Route::post('subscribe-response', [
+    'as' => 'subscribe-response',
+    'uses' => 'PagesController@Response'
+]);
 
 //Route::any('recapcha-page', 'PagesController@recapchay');
 

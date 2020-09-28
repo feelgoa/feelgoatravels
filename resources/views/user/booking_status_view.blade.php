@@ -40,7 +40,7 @@
 		</td>
 		<td class="table-mid-padding"><label class="form-labels">:<lable>
 		</td>
-		<td><b><label class="form-labels">{{ BOOKING_STATUS_VALUES[$details['booking'][0]['status']] }}</label></b>
+		<td><b><label class="form-labels">{{ BOOKING_STATUS_VALUES[(int)$curr_status->status]  }}</label></b>
 		</td>
 		</tr>
 		<tr>

@@ -16,7 +16,7 @@ $(document).ready( function () {
     $('#tours-table').DataTable({
         "columnDefs": [
             { "searchable": true, "targets": [3] },
-            {'targets': [1,3,5,6], /* column index */
+            {'targets': [1,2,4,6], /* column index */
                 'orderable': false, /* true or false */
              }
 
@@ -42,11 +42,10 @@ $(document).ready( function () {
                         msg.style.display = "inline-block";
                         //msg.innerHTML = response['message'];
                         $("#toast-message").click();
-                        $('.toast-message').text(response['message']);
+                        $('.toast-message').text(response['message']+" Page will be reloaded to display the newly added comment.");
                         setTimeout(function () {
-                            alert('Reloading page to display newly added comment.');
                             location.reload(true);
-                        }, 1000);
+                        }, 5000);
                     } else {
                         $("#error_message").addClass("label-danger");
                         $("#error_message").removeClass("label-success");	
@@ -99,6 +98,91 @@ $(document).ready( function () {
             });
     });
 
+    $("#update_status_btn").click(function(){
+        if ($("#status_dropdown").val() == $("#curstatus").val()) {
+            $("#toast-message").click();
+            $('.toast-message').text('New updating status cannot be same as the existing status.');
+        } else {
+            $.ajax({
+                url: "/api/update-booking-status",
+                type:"POST",
+                data:{
+                    booking_id:$("#bkngid").val(),
+                    booking_type : $("#bkngtype").val(),
+                    status : $("#status_dropdown").val(),
+                    desc : $("#status_desc").val()
+                },
+                success:function(response){
+                    $("#toast-message").click();
+                    $('.toast-message').text(response['message']);
+                    setTimeout(function () {
+                        location.reload(true);
+                    }, 5000);
+                }, error:function(response) {
+                    $("#toast-message").click();
+                    $('.toast-message').text(response['message']);
+                }
+            });
+        }
+
+    });
+
+
+    $("#gen_email").click(function(){
+            $.ajax({
+                url: "/api/get-payment-email-content",
+                type:"POST",
+                data:{
+                    booking_type:1,
+                    name: $('#booking_name').val(),
+                    ref_id:$('#booking_refid').val(),
+                    totalcount:$('#booking_count').val(),
+                    pickuppoint:$('#booking_pickuppoint').val(),
+                    pnr:$('#booking_pnr').val()
+                },
+                success:function(response){
+                    $("#toast-message").click();
+                    $('.toast-message').text('Email content was successfully loaded.');
+                    //$( "#email-template" ).html(response['data']);
+                    $('#email_container').val(response['data']);
+                    auto_grow(document.getElementById("email_container"))
+                }, error:function(response) {
+                    $("#toast-message").click();
+                    $('.toast-message').text('There was some error while loading email content. Please try again in some time.');
+                }
+            });
+    });
+
+    $("#payment-link-btn").click(function(){
+        if($("#email_container").val() == "") {
+            $("#toast-message").click();
+            $('.toast-message').text('Cannot send email with empty content. You have to first generate payment email');
+        }else {
+            $.ajax({
+                url: "/api/send-payment-email",
+                type:"POST",
+                data:{
+                    content: $('#email_container').val(),
+                    email:$('#booking_email').val(),
+                    name:$('#booking_name').val(),
+                    template:6
+                },
+                success:function(response){
+                    $("#toast-message").click();
+                    $('.toast-message').text('Email was sent.');
+                    
+                    $('#email_container').val(response['data']);
+                    auto_grow(document.getElementById("email_container"))
+                }, error:function(response) {
+                    $("#toast-message").click();
+                    $('.toast-message').text('There was some error while sending email content. Please try again in some time.');
+                }
+            });
+
+            $("#toast-message").click();
+            $('.toast-message').text('Sending Email.'); 
+        }
+    });
 
 });
 

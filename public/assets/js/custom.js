@@ -414,7 +414,6 @@ jQuery(document).ready(function($){
 	}
 });
 
-jQuery(document).ready(function($){
 	$.ajax({
 		type: 'GET', 
 		url : "http://127.0.0.1/api/get-addr-location", 
@@ -422,7 +421,15 @@ jQuery(document).ready(function($){
 			$("#addr_location" ).replaceWith("<div id='addr_location'>"+data[0]['content']+"</div>");
 		}
 	});
-
+jQuery(document).ready(function($){
+	/*$.ajax({
+		type: 'GET', 
+		url : "http://127.0.0.1/api/get-addr-location", 
+		success : function (data) {
+			$("#addr_location" ).replaceWith("<div id='addr_location'>"+data[0]['content']+"</div>");
+		}
+	});
+*/
 	var url = window.location.href;
 	url = url.split("/");
 	if (url[3] != 'home') {

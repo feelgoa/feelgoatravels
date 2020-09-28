@@ -68,8 +68,9 @@
 											<i class="fa fa-angle-down ml-2 opacity-8"></i>
 										</a>
 										<div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
-											<button type="button" tabindex="0" class="dropdown-item">Settings</button>
-											<a href="https://webmail1.hostinger.in/" target="_black" style="text-decoration:none;"><span class="dropdown-item">Webmail</span></a>
+											<button style="display:none;" type="button" tabindex="0" class="dropdown-item">Settings</button>
+											<a href="<?php echo EMAIL_MANAGER_URL ?>" target="_black" style="text-decoration:none;"><span class="dropdown-item">Webmail</span></a>
+											<a href="<?php echo PAYU_MANAGER_URL ?>" target="_black" style="text-decoration:none;"><span class="dropdown-item">Payments</span></a>
 											<h6  style="display:none;" tabindex="-1" class="dropdown-header">Header</h6>
 											<button  style="display:none;" type="button" tabindex="0" class="dropdown-item">Actions</button>
 											<div tabindex="-1" class="dropdown-divider"></div>
@@ -154,19 +155,19 @@
 										{{ ADMIN_BOOKING_TITLE }}
 									</a>
 								</li>
-								<li>
+								<li style="display:none;" >
 									<a href="{{ADMIN_BASE.ADMIN_BOOKINGS_URL}}" @if(str_contains(url()->current(), ADMIN_BOOKINGS_URL )) class="mm-active" @endif>
 										<i class="metismenu-icon pe-7s-diamond"></i>
 										{{ ADMIN_VEHICLE_RENTAL_TITLE }}
 									</a>
 								</li>
-								<li>
+								<li style="display:none;">
 									<a href="{{ADMIN_BASE.ADMIN_BOOKINGS_URL}}" @if(str_contains(url()->current(), ADMIN_BOOKINGS_URL )) class="mm-active" @endif>
 										<i class="metismenu-icon pe-7s-diamond"></i>
 										{{ ADMIN_WEDDING_CAR_TITLE }}
 									</a>
 								</li>
-								<li>
+								<li style="display:none;">
 									<a href="{{ADMIN_BASE.ADMIN_BOOKINGS_URL}}" @if(str_contains(url()->current(), ADMIN_BOOKINGS_URL )) class="mm-active" @endif>
 										<i class="metismenu-icon pe-7s-diamond"></i>
 										{{  ADMIN_PAYMENTS_TITLE }}
@@ -221,7 +222,7 @@
 					<!-- Footer End -->
 
 				</div>
-				<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+				
 		</div>
 	</div>
 <script type="text/javascript" src="{{ URL::asset('assets/js/jquery.js') }}"></script>

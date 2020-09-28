@@ -53,11 +53,15 @@ function send_mail_custom($reciever_email_value,$reciever_email_name,$template_n
 			$mail->addAddress($reciever, $reciever_name);
 			break;
 		case CONTACT_US_REPLY:
-			$subject = BOOKINGS_ADMIN_SUBJECT.' '.SITE_SHORT_DESC;
+			$subject = PAYMENT_DETAILS_SUBJECT.' '.SITE_SHORT_DESC;
             $body = admin_reply_to_enquiry_template($extra_details);
 			$mail->addAddress($reciever, $reciever_name);
 			break;
-		break;
+		case BOOKING_PAYMENT_TEMPLATE:
+			$subject = BOOKINGS_ADMIN_SUBJECT.' '.SITE_SHORT_DESC;
+            $body =  $extra_details;
+			$mail->addAddress($reciever, $reciever_name);
+			break;
 		default:
 			return 0;
 		}
@@ -338,4 +342,63 @@ function admin_reply_to_enquiry_template($data) {
 	Please click <a href="'.SITE_URL.CONTACTUS_URL.'/'.encrypt_code($data['link_value']).'">here</a> to reply to the email and continue the conversation tree.</td>
 	</tr>
 	</table>';
+}
+
+function payment_email_generator ($details) {
+$value = '<table><tr><td>Hi,</td></tr>
+
+<tr><td><br>With regards to your booking payment and confirmation, here are the details.</td></tr>
+
+<tr><td><br>Bookings summary</td></tr>
+
+<tr><td><br>Name : '.$details['name'].'</td></tr>
+<tr><td>Number on people traveling : '.$details['count'].'</td></tr>
+<tr><td>PNR : '.$details['pnr'].'</td></tr>
+<tr><td>Pickup Point : '.$details['pickuppoint'].'</td></tr>
+
+<tr><td><br>Traveling dates</td></tr>
+'.$details['days'].'
+
+<tr><td><br>Your total calculated traveling cost is '.$details['calculation'].' = '.$details['amount'].'Rs</td></tr>
+
+<tr><td><br>You can click on the below link to proceed to make the payment.</td></tr>
+
+<tr><td><br><a target="_blank" href="'.SITE_URL.BOOKING_PAYMENTS_URL.'/'.$details['transaction_reference'].'"> Click here to proceed to payments page </a>This link is only valid for 24 hours.</td></tr>
+
+<tr><td><br>
+***You can add extra content here. You can remove this line if not required.***
+</td></tr>
+
+<tr><td><br>You you have any queries, you can contact us. We will be happy to assist you. Please don\'t forget to mention your PNR number.</td></tr>
+
+<tr><td><br>*Charges for Day1 and Day2 are '.DAY1_DAY2_CHARGE.'Rs per person for each day.</td></tr>
+<tr><td>*Charges for Day3 and Day4 are '.DAY3_DAY4_CHARGE.'Rs per person for each day.</td></tr>
+<tr><td>**Charges will be applicable as per the selected days.</td></tr></table>';
+
+	return $value;
+
+}
+
+
+function calculate_travel_details($details,$count) {
+	$resp['days'] = "";
+	$resp['calc'] = "";
+	$resp['amount'] = 0;
+	$p_details = json_decode(json_encode($details), true);
+	foreach ($p_details as $det) {
+		$resp['days'] = $resp['days'] ."<tr><td>Day".$det['day'].": ".date('d/m/Y', strtotime($det['travel_date']))."</td></tr>";
+		if (($det['day'] == 1) || ($det['day'] == 2)) {
+			$resp['calc'] = $resp['calc'].DAY1_DAY2_CHARGE."RsX".$count." + ";
+			$resp['amount'] = $resp['amount'] + $count*DAY1_DAY2_CHARGE;
+		} elseif(($det['day'] == 3) || ($det['day'] == 4)) {
+			$resp['calc'] = $resp['calc'].DAY3_DAY4_CHARGE."RsX".$count." + ";
+			$resp['amount'] = $resp['amount'] + $count*DAY3_DAY4_CHARGE;
+		} else {
+			$resp['calc'] = $resp['calc']."0RsX ".$count." + ";
+			$resp['amount'] = $resp['amount'] + $count*0;
+		}
+	}
+	$resp['calc'] = rtrim($resp['calc'], ' + ') . '';
+	return $resp;
+
 }

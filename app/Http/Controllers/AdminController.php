@@ -66,9 +66,10 @@ class AdminController extends Controller {
 		$contact_us_response = DB::select('select * from contactus where lastname != "X" ORDER BY `created_time` DESC');
 		return view('admin.admin_enquiry',['title'=>ADMIN_ENQUIRY_TITLE,'data'=>$contact_us_response]);	
 	}	
-	public function getindividual(string $slug) {	
-		$contact_us_response = DB::select('select * from contactus where id="'.$slug.'" or link="'.$slug.'" order by created_time ASC');
-		return view('admin.admin_enquiry_details',['title'=>ADMIN_ENQUIRY_TITLE,'data'=>$contact_us_response,'current_id'=>$slug]);	
+	public function getindividual(string $slug) {
+		$slugvalue = decrypt_code($slug);
+		$contact_us_response = DB::select('select * from contactus where id="'.$slugvalue.'" or link="'.$slugvalue.'" order by created_time ASC');
+		return view('admin.admin_enquiry_details',['title'=>ADMIN_ENQUIRY_TITLE,'data'=>$contact_us_response,'current_id'=>$slugvalue]);	
 	}
 
 	public function loginpage() {
@@ -76,13 +77,33 @@ class AdminController extends Controller {
 	}
 
 	public function getbookingdetails() {
-		$tour_details = DB::select('SELECT * FROM `booking_details` left join `user_details` on `user_details`.`user_id` = `booking_details`.`user_id`');
+		#$tour_details = DB::select('SELECT * FROM `booking_details` left join `user_details` on `user_details`.`user_id` = `booking_details`.`user_id`');
+		$tour_details = DB::select('SELECT * FROM `booking_details` left join `user_details` on `user_details`.`user_id` = `booking_details`.`user_id` left join (SELECT  statuschange.status as latest_status,statuschange.reference_id FROM statuschange WHERE id in (SELECT MAX(id) from statuschange GROUP BY reference_id)) as my_tab on my_tab.reference_id = booking_details.booking_id');
 		return view('admin.admin_bookings',['title'=>ADMIN_BOOKING_TITLE,'data'=>$tour_details]);	
 	}
 	
 	public function getbookingindividual(string $slug) {
-		$contact_us_response = DB::select('select * from contactus where id="'.$slug.'" or link="'.$slug.'" order by created_time ASC');
-		return view('admin.admin_enquiry_details',['title'=>ADMIN_ENQUIRY_TITLE,'data'=>$contact_us_response,'current_id'=>$slug]);	
+		$slugvalue = decrypt_code($slug);
+		$tour_details_response = DB::select('SELECT booking_details.*,user_details.name,user_details.email,user_details.user_id,user_details.contact,user_details.contact,user_details.gender,user_details.age,user_details.place,user_details.male_count,user_details.female_count FROM `booking_details` left join `user_details` on `user_details`.`user_id` = `booking_details`.`user_id` where booking_details.booking_id = "'.$slugvalue.'"');
+		$traveling_dates = DB::select('SELECT * FROM `booking_traveldate` where booking_id = "'.$slugvalue.'" ORDER BY travel_date ASC');
+		$hotel_stay = DB::select('SELECT * FROM `hotel_details` where booking_id = "'.$slugvalue.'"');
+		$conversation_details = DB::select('SELECT * FROM `contactus` where ref_id = "43875127" ORDER BY `id` ASC');
+
+		#tour details
+		$array = json_decode(json_encode($tour_details_response), true);
+
+		$contact_id = DB::select('SELECT id FROM `contactus` where ref_id = "'.$array[0]['booking_pnr'].'" ORDER BY `id` ASC');
+		$contact_id_value = 0;
+		$contact = json_decode(json_encode($contact_id), true);
+		if (sizeof($contact) > 0) {
+			$contact_us_response = DB::select('select * from contactus where id="'.$contact[0]['id'].'" or link="'.$contact[0]['id'].'" order by created_time ASC');
+			$contact_id_value = $contact[0]['id'];
+		} else {
+			$contact_us_response = array();
+		}
+		$status_updates = DB::select('SELECT * FROM `statuschange` where reference_id = "'.$slugvalue.'" ORDER BY `id` ASC');
+		$curr_status = end($status_updates);
+		return view('admin.admin_booking_details',['title'=>ADMIN_BOOKING_TITLE,'traveling_dates'=>$traveling_dates,'hotel_stay'=>$hotel_stay,'data'=>$tour_details_response,'contact_us_response'=>$contact_us_response,'current_contact_us_id'=>$contact_id_value,'status_list'=>$status_updates,'booking_id'=>$slugvalue,'cur_status'=>$curr_status]);	
 
 	}
 

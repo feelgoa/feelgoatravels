@@ -1,12 +1,12 @@
 <?php
 
-define('SITE_URL', 'http://127.0.0.1:8000');
+define('SITE_URL', 'http://127.0.0.1');
 define('ADMIN_URL','http://127.0.0.1/admin');
-define('API_URL','http://127.0.0.1:8000/api');
+define('API_URL','http://127.0.0.1/api');
 define('SITE_NAME','Feel Goa');
 define('SITE_SHORT_DESC','Feel Goa - Tours and Travels');
 
-/*Emails Config*/
+/*Config*/
 define('SMTP_HOST_VALUE','smtp.hostinger.in');
 define('SMTP_PORT_VALUE','587');
 define('EMAIL_USERNAME','team@feelgoatravels.com');
@@ -23,13 +23,19 @@ define('EMAIL_GMAIL_RECIEVER','feelgoatravelsofficial@gmail.com');
 define('BOOKINGS_CUSTOMER_SUBJECT','Bookings Request');
 define('BOOKINGS_ADMIN_SUBJECT','Bookings Enquiry');
 define('EMAIL_MANAGER_URL','https://webmail1.hostinger.in/');
+define('PAYU_MANAGER_URL','https://www.payu.in/');
+
+
+define('PAYMENT_DETAILS_SUBJECT','Payments Details');
+#define('PAYU_BASE_URL','https://secure.payu.in');
+define('PAYU_BASE_URL','https://sandboxsecure.payu.in');
 
 define('CONTACTUS_EMAIL_TEMPLATE', 1);
 define('CONTACTUS_UPDATE_EMAIL_TEMPLATE_ADMIN', 2);
 define('BOOKINGS_EMAIL_TEMPLATE', 3);
 define('BOOKINGS_EMAIL_TEMPLATE_ADMIN', 4);
 define('CONTACT_US_REPLY', 5);
-
+define('BOOKING_PAYMENT_TEMPLATE', 6);
 
 /*********************************/
 
@@ -47,6 +53,7 @@ define('BOOKING_TITLE_TOUR','Tour Booking');
 define('BOOKING_TITLE_HOTEL','Hotel Booking');
 define('BOOKING_TITLE_RENTALS','Rental Booking');
 define('BOOKING_TITLE_WEDDING','Wedding Car Booking');
+define('PAYMENTS_TITLE','Payments');
 
 /*Admin Titles*/
 define('ADMIN_DASHBOARD_TITLE','Dashboard');
@@ -76,7 +83,7 @@ define('CONTACTUS_URL','/contact-us');
 define('GALLERY_URL','/gallery');
 define('BOOKING_STATUS_URL','/booking-status');
 define('BOOKING_STATUS_DETAILS_URL','/booking-status-details');
-
+define('BOOKING_PAYMENTS_URL','/payments-details');
 
 
 /* Admin Routes */
@@ -100,8 +107,14 @@ define('REQUEST_BOOKING_DETAILS_API','/get-booking-details');
 define('VERIFY_EXISTING_PNR_API','/verify-existing-pnr');
 define('REPLYCOMMENT','/reply-admin-comment');
 define('LOGINADMIN','/admin-login-user');
-define('LOGINCHECK','/login-check');
+define('LOGINCHECK','/login-check');  
+define('UPDATE_BOOKING_STATUS','/update-booking-status');
+define('FETCH_EMAIL_FOR_PAYMENT','/get-payment-email-content');
+define('SEND_EMAIL_FOR_PAYMENT','/send-payment-email');
 
+
+define('PAYMENT_SUCCESS_URL','/suc');
+define('PAYMENT_FAILURE_URL','/fail');
 
 define('ADMIN_PAGES_CONST',
 	array(
@@ -109,27 +122,39 @@ define('ADMIN_PAGES_CONST',
 		)
 );
 
+define('DAY1_DAY2_CHARGE',250);
+define('DAY3_DAY4_CHARGE',500);
+
+define('BOOKING_TYPE_TOUR',1);
+define('BOOKING_TYPE_HOTEL',2);
+define('BOOKING_TYPE_VEHICLE',3);
+define('BOOKING_TYPE_WEDDING',4);
+
 define('RECIEVED_NOT_CONFIRMED',1);
 define('RECIEVED_AND_PROCESSING',2);
 define('REPLIEDTO_CUSTOMER',3);
-define('PAYMENT_RECIEVED_CONFIRM',4);
-define('PAYMENT_FAILED',5);
-define('PAYMENT_NOT_RECIEVED',6);
-define('TRAVEL_COMPLETED',7);
-define('REFUND_INITIATED',8);
-define('REFUND_COMPLETED',9);
+define('REPLIEDTO_CUSTOMER_WAITING_PAYMENT',4);
+define('PAYMENT_RECIEVED_CONFIRM',5);
+define('PAYMENT_FAILED',6);
+define('PAYMENT_NOT_RECIEVED',7);
+define('TRAVEL_COMPLETED',8);
+define('REFUND_INITIATED',9);
+define('REFUND_COMPLETED',10);
+define('CANCEL',11);
 
 define('BOOKING_STATUS_VALUES',
 	array (
 		RECIEVED_NOT_CONFIRMED =>'Booking Received (Not confirmed)',
 		RECIEVED_AND_PROCESSING => 'Booking Received - Checking availablity (Not confirmed)',
-		REPLIEDTO_CUSTOMER =>'Replied to Customer - Awaiting reply/payment (Not Confirmed)',
+		REPLIEDTO_CUSTOMER =>'Replied to Customer - Awaiting reply (Not Confirmed)',
+		REPLIEDTO_CUSTOMER_WAITING_PAYMENT =>'Sent payment link to Customer - Awaiting payment (Not Confirmed)',
 		PAYMENT_RECIEVED_CONFIRM => 'Recieved Payment (Confirmed)',
 		PAYMENT_FAILED => 'Payment Failed - (Not Confirmed)',
 		PAYMENT_NOT_RECIEVED => 'Payment not recieved (Not Confirmed)',
 		TRAVEL_COMPLETED => 'Done',
 		REFUND_INITIATED => 'Refund has been initited',
 		REFUND_COMPLETED => 'Refund completed',
+		CANCEL => 'Canceled',
 	)
 );
 
@@ -146,9 +171,17 @@ define('PNR_SUCCESSFUL_VERIFICATION','PNR is successfully verified.');
 define('PNR_FAILED_VERIFICATION','PNR is could not be verified.');
 define('COMMENT_ADD_SUCCESS_VERIFICATION','Comment successfully added and an email was sent to the customer.');
 define('COMMENT_ADD_FAILED','Something went wrong. Please try again in some time.');
+define('STATUS_UPDATE_SUCCESS','Status updated successfully.');
+define('STATUS_UPDATE_FAILED','Status updated failed.');
 /*Google reCapcha*/
 
 define("RECAPCHA_SITE_KEY","6Le8fv4UAAAAADhwT9U00tMkk548oepW6gXdkxKr");
 define("RECAPCHA_SECRET_KEY","6Le8fv4UAAAAAFRhTptH-7bKGT63oy7g7ZiYy2i9");
 define("IV_ENCRYPTION_VALUE","1234567891011121");
 define("ENCRYPTION_KEY","FEE!G()TrAv#!$");
+
+/*dev*/
+define("PAYU_MERCHANT_KEY","nIRFHUsB");
+define("PAYU_SALT_KEY","AcLhcxPoOT");
+
+define("PAYMENT_SERVICE_PROVIDER",'payu_paisa');

@@ -41,9 +41,9 @@
 			<td>{{ date('d/m/Y', strtotime($datalist->created_time)) }}</td>
 			<th scope="col">{{ $datalist->ref_id }}</th>
 			@if ($datalist->link ==  0)
-				<td><a href="{{ ADMIN_URL.ADMIN_ENQUIRYT_URL.'/'.$datalist->id}}"><i class="pe-7s-paper-plane" title="View"></i></a></td>
+				<td><a href="{{ ADMIN_URL.ADMIN_ENQUIRYT_URL.'/'.encrypt_code($datalist->id)}}"><i class="pe-7s-paper-plane" title="View"></i></a></td>
 			@else
-				<td><a href="{{ ADMIN_URL.ADMIN_ENQUIRYT_URL.'/'.$datalist->link}}"><i class="pe-7s-paper-plane" title="View"></i></a></td>
+				<td><a href="{{ ADMIN_URL.ADMIN_ENQUIRYT_URL.'/'.encrypt_code($datalist->link)}}"><i class="pe-7s-paper-plane" title="View"></i></a></td>
 			@endif
 
 		</tr>

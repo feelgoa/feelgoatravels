@@ -9,7 +9,7 @@
 					<i class="pe-7s-note2"></i>
 				</div>
 				<div>{{ ADMIN_BOOKING_TITLE }}
-					<div class="page-title-subheading">List of all Bookings that you have recieved.</div>
+					<div class="page-title-subheading">List of all tour Bookings that you have recieved.</div>
 				</div>
 			</div>
 			<div class="page-title-actions" style="display:none;"></div>
@@ -27,10 +27,10 @@
     <tr>
       <th scope="col">PNR number</th>
       <th scope="col">Pickup point</th>
-	  <th scope="col">Date</th>
 	  <th scope="col">Status</th>
 	  <th scope="col">Name</th>
 	  <th scope="col">Contact</th>
+	  <th scope="col">Booking Date</th>
 	  <th scope="col">Action</th>
     </tr>
   </thead>
@@ -39,11 +39,17 @@
 		<tr>
 			<td>{{ $datalist->booking_pnr }}</td>
 			<td>{{ $datalist->pickup_point }}</td>
-			<td>{{ $datalist->created_at }}</td>
-			<td>{{ BOOKING_STATUS_VALUES[$datalist->status] }}</td>
+			<td>
+				@if($datalist->latest_status)
+					{{ BOOKING_STATUS_VALUES[$datalist->latest_status] }}
+				@else
+				-
+				@endif
+			</td>
 			<td>{{ $datalist->name }}</td>
 			<td>{{ $datalist->contact }}</td>
-			<td><a href="{{ ADMIN_URL.ADMIN_BOOKINGS_URL.'/'.$datalist->booking_id}}"><i class="pe-7s-paper-plane" title="View"></i></a></td>
+			<td> {{ date('d/m/Y', strtotime($datalist->created_at)) }} </td>
+			<td><a href="{{ ADMIN_URL.ADMIN_BOOKINGS_URL.'/'.encrypt_code($datalist->booking_id)}}"><i class="pe-7s-paper-plane" title="View"></i></a></td>
 		</tr>
 	@endforeach
   </tbody>

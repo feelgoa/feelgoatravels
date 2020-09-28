@@ -27,7 +27,11 @@ Route::post(REQUEST_BOOKING_DETAILS_API, 'API\UsersController@get_booking_status
 Route::post(VERIFY_EXISTING_PNR_API, 'API\UsersController@verifypnr');
 Route::post(REPLYCOMMENT, 'API\UsersController@replycomment');
 Route::post(LOGINCHECK, 'API\UsersController@logiadmincheck');
+Route::post(UPDATE_BOOKING_STATUS, 'API\UsersController@update_booking_status');
+Route::post(FETCH_EMAIL_FOR_PAYMENT, 'API\UsersController@fetchemailcontent');
+Route::post(SEND_EMAIL_FOR_PAYMENT, 'API\UsersController@sendpaymentemail');
 
 Route::get('get-addr-location', 'API\UsersController@get_addr_location_details');
 Route::get(SENDMAIL,'API\MailController@send_mail');
 Route::get('pay','API\PaymentsController@make_payments');
+
