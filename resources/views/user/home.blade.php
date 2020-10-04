@@ -64,7 +64,7 @@
 			<div class="col-md-12 com-sm-12">
 				<address class="wow fadeInUp animated" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
 					<p>
-						Recently we have also started providing wedding (with driver for rent).
+						We provide you a tour service to the most famous places in Goa. Along with that you can also book for hotels and rental bikes for easy commute on your visit to Goa. Recently we have also started providing rental service for wedding cars with driver.
 					</p>
 				</address>
 			</div>

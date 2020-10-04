@@ -62,12 +62,22 @@ function send_mail_custom($reciever_email_value,$reciever_email_name,$template_n
             $body =  $extra_details;
 			$mail->addAddress($reciever, $reciever_name);
 			break;
+		case CONTACTUS_EMAIL_THREAD:
+			$subject = CONTACT_US_ADMIN_SUBJECT.' ('.REFERENCE_ID.' #'.$extra_details['contactusid'].'.) '.SITE_SHORT_DESC;
+			$body = contact_us_admin_thread_email_template($extra_details);
+			$mail->addAddress(EMAIL_SENDER, FG_TEAM);
+			$mail->addReplyTo($extra_details['email'], $extra_details['name']);
+			break;
 		default:
 			return 0;
 		}
 		$mail->Subject = $subject;
 		$mail->IsHTML(true);
-		$mail->Body = EMAIL_HEADER.$body.EMAIL_FOOTER;
+		if ($template_name != CONTACTUS_EMAIL_THREAD) {
+			$mail->Body = EMAIL_HEADER.$body.EMAIL_FOOTER;
+		} else {
+			$mail->Body = $body;
+		}
 		try {
 			if (!$mail->send()) {
 				return 0;
@@ -401,4 +411,8 @@ function calculate_travel_details($details,$count) {
 	$resp['calc'] = rtrim($resp['calc'], ' + ') . '';
 	return $resp;
 
+}
+
+function contact_us_admin_thread_email_template($details) {
+	return '<p>'.$details['message'].'</p>';
 }

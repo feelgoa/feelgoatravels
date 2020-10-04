@@ -24,6 +24,7 @@ define('BOOKINGS_CUSTOMER_SUBJECT','Bookings Request');
 define('BOOKINGS_ADMIN_SUBJECT','Bookings Enquiry');
 define('EMAIL_MANAGER_URL','https://webmail1.hostinger.in/');
 define('PAYU_MANAGER_URL','https://www.payu.in/');
+define('REFERENCE_ID','ReferenceId');
 
 
 define('PAYMENT_DETAILS_SUBJECT','Payments Details');
@@ -36,7 +37,7 @@ define('BOOKINGS_EMAIL_TEMPLATE', 3);
 define('BOOKINGS_EMAIL_TEMPLATE_ADMIN', 4);
 define('CONTACT_US_REPLY', 5);
 define('BOOKING_PAYMENT_TEMPLATE', 6);
-
+define('CONTACTUS_EMAIL_THREAD', 7);
 /*********************************/
 
 /* Page Titles*/

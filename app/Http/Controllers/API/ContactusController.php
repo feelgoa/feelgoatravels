@@ -47,11 +47,12 @@ class ContactusController extends Controller {
 				if ($input['link'] == "") {
 					$input['link'] =  0;
 				}
-
 				$input['created_time'] = $timevalue = date("Y-m-d h:i:s");
+				$details['contactusid'] = strtotime($input['created_time']);
 				$mailsender = send_mail_custom($input['email'],$name_concat,CONTACTUS_EMAIL_TEMPLATE,$details);
 				$mailsender_admin = send_mail_custom(EMAIL_GMAIL_RECIEVER,FG_TEAM,CONTACTUS_UPDATE_EMAIL_TEMPLATE_ADMIN,$details);
-				if (($mailsender == 1) and ($mailsender_admin == 1)) {
+				$mailsender_thread = send_mail_custom($input['email'],$name_concat,CONTACTUS_EMAIL_THREAD,$details);
+				if (($mailsender == 1) and ($mailsender_admin == 1) and ($mailsender_thread == 1)) {
 					unset($input["_token"]);
 					unset($input["g-recaptcha-response"]);
 					DB::table('contactus')->insert($input);
