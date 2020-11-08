@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="gallery_body" >
+<section class="gallery_body" style="padding-top:30px;">
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css'>	
 <link rel="stylesheet" href="{{ URL::asset('assets/css/gallery_style.css') }}">
 <div id="gallery-div" class="container-fluid">

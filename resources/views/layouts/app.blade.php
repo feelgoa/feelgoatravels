@@ -75,8 +75,7 @@
         </div>
         <div class="col-md-12" id='marquee-holder'>
             <marquee class="infoalert" onmouseover="this.stop();" onmouseout="this.start();">
-                We will be fully functional by October 2020 according the info recieved by Goa Government. If there is
-                any delay we will keep you updated. Thank you.
+            Due to the current Covid19 situaton, we have to follow certain SOP's provided by the Government of Goa. If you have any queries  regarding your travel or stay in Goa, then please feel free to contact us and we assure we will get back to you soon. Thank you. Take Care and Stay Safe.
             </marquee>
         </div>
     </section>

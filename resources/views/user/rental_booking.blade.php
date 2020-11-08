@@ -28,7 +28,7 @@
                                         <h4 class="content-title mx-auto text-uppercase">{{$vehicle->vehicle_name}}</h4>
                                         <span></span>
                                         <p class="rental_p">{{$vehicle->capacity}}</p>
-                                        <p class="rental_p">{{$vehicle->rate}}</p>
+                                        <p class="rental_p" style="display:none;">{{$vehicle->rate}}</p>
                                     </div>
                                     </a>
                                 </div>

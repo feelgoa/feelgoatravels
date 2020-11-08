@@ -72,8 +72,8 @@
 									</div>
 									<div class="col-sm-12">
 										<div class="form-group">
-											<label  for="hotel_req" class="form-labels">Any other requirements:</label>
-											<textarea class="form-control" placeholder="Please mention any other speciic requirement regarding your hotel booking ( e.g Swimming Pool )" name="hotel_req" rows="5" id="message" style="width:100%;resize: none;" onblur="ValidateEmptyField(this,'Hotel cannot be empty','error_message4')" required></textarea>
+											<label  for="hotel_req" class="form-labels">Mention requirements below:</label>
+											<textarea class="form-control" placeholder="Please mention your requirement regarding your hotel booking ( e.g Swimming Pool, number of rooms, type of room etc )" name="hotel_req" rows="5" id="message" style="width:100%;resize: none;" onblur="ValidateEmptyField(this,'Hotel cannot be empty','error_message4')" required></textarea>
 										</div>			
 									</div>
 								</div>

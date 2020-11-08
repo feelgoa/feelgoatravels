@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<section>
+<section style="padding-top:30px;">
 <link rel="stylesheet" href="{{ URL::asset('assets/css/booking_style.css') }}">
     <div class="" style="padding: 0px 12px 0px 12px;">
         <div class="row"

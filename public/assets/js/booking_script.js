@@ -509,7 +509,6 @@ $("#submitbutton").click(function(){
     var termsandconditions=document.getElementById("terms").checked;
     var msg = document.getElementById("error_message3");
     if(pickup_point===0 || termsandconditions==false){
-        alert(termsandconditions);
         msg.style.display = "inline-block";
         msg.innerHTML = "Select Pickup Point and terms and conditions";
     }

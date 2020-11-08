@@ -11,6 +11,12 @@ var SITE_URL_JS = 'https://feelgoatravels.com/';
 	// PRE LOADER
 	$(window).load(function(){
 	  $('.preloader').fadeOut(1000); // set duration in brackets	
+	  if (localStorage.hasOwnProperty('hasaccessed')) { 
+		console.log('No popup');
+	} else {
+		localStorage.setItem('hasaccessed', true);
+		console.log('show popup');
+	}
 	});
 
 
@@ -421,6 +427,7 @@ jQuery(document).ready(function($){
 			$("#addr_location" ).replaceWith("<div id='addr_location'>"+data[0]['content']+"</div>");
 		}
 	});
+
 jQuery(document).ready(function($){
 	/*$.ajax({
 		type: 'GET', 
@@ -437,15 +444,15 @@ jQuery(document).ready(function($){
 		activetab.css("color", "#ce3232");
 		activetab.css("border-bottom", "1px solid rgb(206, 50, 50");
 		$('.phone-no-div').hide();
-		$('#marquee-holder').hide();
+		//$('#marquee-holder').hide();
 	} else if (url[3] == 'home') {
-		$('#marquee-holder').hide();
+		//$('#marquee-holder').hide();
 	}
+
 });
 
 $('#contact_submit').on('click',function(event){
 	event.preventDefault();
-	alert('posting');
 	$.ajax({
 		url: "/recapcha-page",
 		type:"POST",

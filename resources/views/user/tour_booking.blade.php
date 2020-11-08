@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="booking_body">
+<section class="booking_body" style="padding-top:30px;">
 <link rel="stylesheet" href="{{ URL::asset('assets/css/booking_style.css') }}">
 <div class="container">
 	<div class="form-s1 col-md-12" style="background-color: #0000008c;border-radius: 15px;padding: 12px;margin-top:12px;">
@@ -235,7 +235,7 @@
 				<div data-panel="three-s1" class="div-s1">
 					<div class="row">
 						<div class="col-sm-12">
-							<div class="form-group" >
+							<div class="form-group" style="display:none;">
 								<div class="checkbox">
 									<label class="lable-from" for="hotelbooking">
 									<input type="checkbox" id="hotelbooking" name="hotelbooking" value="yes">

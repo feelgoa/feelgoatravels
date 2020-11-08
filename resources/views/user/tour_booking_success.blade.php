@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<section>
+<section style="padding-top:30px;"> 
     <link rel="stylesheet" href="{{ URL::asset('assets/css/booking_style.css') }}">
     <div class="" style="padding: 0px 12px 0px 12px;">
         <div class="row"
@@ -18,10 +18,10 @@
                             Feel Goa team with details on availablity and the payments.</p>
                         <p>
                         </p>
-                        <p class="pfont">Here is your booking PNR number : <b>{{$booking_pnr}} .</b> You will also
+                        <p class="pfont" style="display:none;">>Here is your booking PNR number : <b>{{$booking_pnr}} .</b> You will also
                             recieve an email
                             with these details.</p>
-                        <p class="pfont">You can use this PNR number to track the status of your request by clicking on
+                        <p class="pfont" style="display:none;">You can use this PNR number to track the status of your request by clicking on
                             <b>"Booking
                                 status enquiry"</b> at the bottom of the page.</p>
                     </div>

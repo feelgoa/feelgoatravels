@@ -106,6 +106,15 @@ class PagesController extends Controller
 		$extra_requirements=$request->input('hotel_req');
 		$hotelbooking=array("check_in_date"=>$check_in_date,"check_out_date"=>$check_out_date,"room_type"=>$room_type,"room_count"=>$room_count,"member_count"=>$member_count,"extra_requirements"=>$extra_requirements,"created_at"=>Carbon::now(),"updated_at"=>Carbon::now(),"name"=>$name,"email"=>$email,"contact"=>$contact);
 		$hotel_id=DB::table('hotel_details')->insertGetId($hotelbooking);
+		
+		$details['name'] = $name;
+		$details['email'] = $email;
+		#$details['vehicle_details'] = ;
+		#$details['message'] = $pickup_location;
+		$details['pnr'] = '#######';
+		$mailsender = send_mail_custom($email,$name,BOOKINGS_EMAIL_TEMPLATE,$details);
+		$mailsender_admin = send_mail_custom(EMAIL_GMAIL_RECIEVER,FG_TEAM,HOTEL_BOOKING,$hotelbooking);
+
 		return view('user.hotel_booking_success',['title'=> BOOKING_TITLE_HOTEL]);
 	}
 	function tour_bookings_insert(Request $request){
@@ -187,13 +196,27 @@ class PagesController extends Controller
 		$details['name'] = $name;
 		$details['pnr'] = $booking_pnr;
 		$details['email'] = $email;
-		//$details['traveling_date'] = $travelling_date;
-		$details['malecount'] = $male_count;
-		$details['femalecount'] = $female_count;
-		$details['pickup_loc']  = $pickup_point;
 
 		$mailsender = send_mail_custom($email,$name,BOOKINGS_EMAIL_TEMPLATE,$details);
-		$mailsender_admin = send_mail_custom(EMAIL_GMAIL_RECIEVER,FG_TEAM,BOOKINGS_EMAIL_TEMPLATE_ADMIN,$details);
+		#$mailsender_admin = send_mail_custom(EMAIL_GMAIL_RECIEVER,FG_TEAM,BOOKINGS_EMAIL_TEMPLATE_ADMIN,$details);
+
+		$details_collection['name'] = $name;
+		$details_collection['email'] = $email;
+		$details_collection['place'] = $place;
+		$details_collection['contact'] = $contact;
+		$details_collection['male'] = $male_count;
+		$details_collection['female'] = $female_count;
+
+		$details_collection['travel1'] = $travelling_date1;
+		$details_collection['travel2'] = $travelling_date2;
+		$details_collection['travel3'] = $travelling_date3;
+		$details_collection['travel4'] = $travelling_date4;
+
+		#$details_collection['type'] = $travel_type;
+		$details_collection['pickup'] = $pickup_point;
+		$details_collection['bustype'] = $bus_type;
+
+		$mailsender_admin = send_mail_custom(EMAIL_GMAIL_RECIEVER,FG_TEAM,TOUR_BOOKING,$details_collection);
 		return view('user.tour_booking_success',['title'=> BOOKING_TITLE_TOUR,'booking_pnr'=>$booking_pnr]);
 	}
 	function rental_bookings_insert(Request $request){
@@ -202,14 +225,23 @@ class PagesController extends Controller
 		$email = $request->input('email');
 		$contact = $request->input('contact');
 		$vehicle_id = $request->input('vehicle_id');
-		$no_of_days = $request->input('no_of_days');
-		$pickup_date = $request->input('pickup_date');
-		$pickup_time = $request->input('pickup_time');
-		$total_amount = $request->input('total_amount');
+		$no_of_days = 0;
+		$pickup_date = date("Y-m-d");
+		$pickup_time = '00:00am';
+		$total_amount = '0';
 		$pickup_location=$request->input('pickup_loc');
-			$rental_details=array("vehicle_id"=>$vehicle_id,"no_of_days"=>$no_of_days,"total_amount"=>$total_amount,"pickup_date"=>$pickup_date,"pickup_location"=>$pickup_location,"pickup_time"=>$pickup_time,"created_at"=>Carbon::now(),"updated_at"=>Carbon::now(),"name"=>$name,"email"=>$email,"contact"=>$contact);
+		$rental_details=array("vehicle_id"=>$vehicle_id,"no_of_days"=>$no_of_days,"total_amount"=>$total_amount,"pickup_date"=>$pickup_date,"pickup_location"=>$pickup_location,"pickup_time"=>$pickup_time,"created_at"=>Carbon::now(),"updated_at"=>Carbon::now(),"name"=>$name,"email"=>$email,"contact"=>$contact);
 		$rental_id=DB::table('rental_booking')->insertGetId($rental_details);
+
 		$vehicle_detail =DB::select("SELECT * FROM `rental_vehicles` WHERE `vehicle_id` = '$vehicle_id'");
+		$details['name'] = $name;
+		$details['email'] = $email;
+		$details['vehicle_details'] = $vehicle_detail;
+		$details['message'] = $pickup_location;
+		$details['contact'] = $contact;
+		$details['pnr'] = '#######';
+		$mailsender = send_mail_custom($email,$name,BOOKINGS_EMAIL_TEMPLATE,$details);
+		$mailsender_admin = send_mail_custom(EMAIL_GMAIL_RECIEVER,FG_TEAM,BOOKING_VEHICLE,$details);
 		return view('user.rental_booking_success',['title'=> BOOKING_TITLE_TOUR,'vehicle_detail'=>$vehicle_detail]);
 	}
 	function bookingstatus() {

@@ -38,6 +38,9 @@ define('BOOKINGS_EMAIL_TEMPLATE_ADMIN', 4);
 define('CONTACT_US_REPLY', 5);
 define('BOOKING_PAYMENT_TEMPLATE', 6);
 define('CONTACTUS_EMAIL_THREAD', 7);
+define('BOOKING_VEHICLE', 8);
+define('HOTEL_BOOKING', 9);
+define('TOUR_BOOKING', 10);
 /*********************************/
 
 /* Page Titles*/

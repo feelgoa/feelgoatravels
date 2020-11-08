@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<section>
+<section style="padding-top: 30px;">
 <link rel="stylesheet" href="{{ URL::asset('assets/css/booking_style.css') }}">
     <div class="" style="padding: 0px 12px 0px 12px;">
         <div class="row"
@@ -13,7 +13,7 @@
                     <div class="text-center col-md-6" style="background-color: #0000008c; border-radius: 15px; padding:12px;">
                         <h1><span style='color: #1ab91f;font-size:100px;margin-top: 50px;'>&#10004;</span></h1>
                         @foreach ($vehicle_detail as $vehicle)
-                        <p class="pfont">Your booking request for {{$vehicle->vehicle_name}} {{$vehicle->type}} has been
+                        <p class="pfont">Your booking request for {{$vehicle->vehicle_name}} has been
                             successfully registered. You will receive a response from the Feel Goa team with details on
                             availablity
                             and the payments.</p>

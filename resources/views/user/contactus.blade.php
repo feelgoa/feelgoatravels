@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<section>
+<section style="padding-top:30px;">
     <div class="" style="padding: 0px 12px 0px 12px;">
         <div class="row"
             style="color: black;font-size: 20px;background-size: cover; background-image: url('../../assets/images/contact-us-4.jpg'); padding: 12px;">

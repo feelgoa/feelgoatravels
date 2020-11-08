@@ -68,12 +68,30 @@ function send_mail_custom($reciever_email_value,$reciever_email_name,$template_n
 			$mail->addAddress(EMAIL_SENDER, FG_TEAM);
 			$mail->addReplyTo($extra_details['email'], $extra_details['name']);
 			break;
+		case BOOKING_VEHICLE:
+			$subject = BOOKINGS_CUSTOMER_SUBJECT.'- '.$extra_details['name'].' ('.$extra_details['vehicle_details'][0]->vehicle_name.')';
+			$body = booking_recieved($extra_details);
+			$mail->addAddress(EMAIL_SENDER, FG_TEAM);
+			$mail->addReplyTo($extra_details['email'], $extra_details['name']);
+			break;
+		case HOTEL_BOOKING:
+			$subject = BOOKINGS_CUSTOMER_SUBJECT.'- '.$extra_details['name'].' (Hotel Booking)';
+			$body = booking_recieved_hotel_booking($extra_details);
+			$mail->addAddress(EMAIL_SENDER, FG_TEAM);
+			$mail->addReplyTo($extra_details['email'], $extra_details['name']);
+			break;
+		case TOUR_BOOKING:
+			$subject = BOOKINGS_CUSTOMER_SUBJECT.'- '.$extra_details['name'].' (Tour Booking)';
+			$body = booking_recieved_tour_booking($extra_details);
+			$mail->addAddress(EMAIL_SENDER, FG_TEAM);
+			$mail->addReplyTo($extra_details['email'], $extra_details['name']);
+			break;
 		default:
 			return 0;
 		}
 		$mail->Subject = $subject;
 		$mail->IsHTML(true);
-		if ($template_name != CONTACTUS_EMAIL_THREAD) {
+		if (($template_name != CONTACTUS_EMAIL_THREAD) && ($template_name != BOOKING_VEHICLE) && ($template_name != HOTEL_BOOKING) && ($template_name != TOUR_BOOKING)) {
 			$mail->Body = EMAIL_HEADER.$body.EMAIL_FOOTER;
 		} else {
 			$mail->Body = $body;
@@ -198,16 +216,16 @@ function user_booking_email_template($data) {
 	<tr colspan="2">
 	<td colspan="2">
 	<br>
-	We have recieved your booking request and will get back to you soon. You PNR number for the booking request you just made is <b>'.$data['pnr'].'</b>. 
+	We have recieved your booking request and will get back to you soon. <p style="display:none;">You PNR number for the booking request you just made is <b>'.$data['pnr'].'</b></p>. 
 	</td>
 	</tr>
 	<tr colspan="2" >
-	<td>
+	<td style="display:none;">
 		You can use this PNR number to track the status of your request by visiting the <a target="_blank" href="'.FEELGOA_LINK.'">feelgoatravels.com</a> website and clicking on <a target="_blank" href="'.SITE_URL.BOOKING_STATUS_URL.'">"Booking status enquiry"</a> at the bottom of the page.
 	</td>
 	</tr>
 	<tr colspan="2" >
-	<td>
+	<td style="display:none;">
 	<br>
 		You can also click <a target="_blank" href="'.SITE_URL.BOOKING_STATUS_URL.'">here</a> to track your status now.
 	</td>
@@ -415,4 +433,174 @@ function calculate_travel_details($details,$count) {
 
 function contact_us_admin_thread_email_template($details) {
 	return '<p>'.$details['message'].'</p>';
+}
+
+function booking_recieved($details) {
+	/*
+		vehicle rental booking (weeding cars, bikes and cars)
+	*/
+	return '<p>Vehicle Booking Details</p><table style="border: 1px solid black;">
+	<tr>
+	<td style="text-align:right;">Name : 
+	</td>
+	<td>'.$details['name'].'
+	</td>
+	</tr>
+	<tr>
+	<td style="text-align:right;">Message : 
+	</td>
+	<td>
+	'.$details['message'].'</td></tr></table>	<br>
+	<table>
+	<tr>
+	<td>
+	Contac No : 
+	</td>
+	<td>'.$details['contact'].'
+	</td>
+	</tr>
+	</table>';
+}
+
+function booking_recieved_hotel_booking($details) {
+	/*
+		hotel booking
+	*/
+	$details_resp = '<p>Hotel Booking Details</p>
+	<table style="border: 1px solid black;">
+	<tr>
+	<td style="text-align:right;">Name : 
+	</td>
+	<td>'.$details['name'].'
+	</td>
+	</tr>
+	<tr>
+	<td style="text-align:right;">CheckIn : 
+	</td>
+	<td>'.$details['check_in_date'].'
+	</td>
+	</tr>
+	<tr>
+	<td style="text-align:right;">CheckOut : 
+	</td>
+	<td>'.$details['check_out_date'].'
+	</td>
+	</tr>
+	<tr>
+	<td style="text-align:right;">Room type : 
+	</td>
+	<td>'.$details['room_type'].'
+	</td>
+	</tr>
+	<tr>
+	<tr>
+	<td style="text-align:right;">Member count : 
+	</td>
+	<td>'.$details['member_count'].'
+	</td>
+	</tr>
+	<tr>
+	<td style="text-align:right;">Room count :
+	</td>
+	<td>'.$details['room_count'].'
+	</td>
+	</tr>
+	<tr>
+	<td style="text-align:right;">Extra requirements :
+	</td>
+	<td>'.$details['extra_requirements'].'
+	</td>
+	</tr>
+	</table>
+	<br>
+	<table>
+	<tr>
+	<td>
+	Contac No : 
+	</td>
+	<td>'.$details['contact'].'
+	</td>
+	</tr>
+	</table>
+	';
+	return $details_resp;
+}
+
+function booking_recieved_tour_booking($details) {
+	$details_resp = '<p>Tour Booking Details</p>
+	<table style="border: 1px solid black;">
+	<tr>
+	<td style="text-align:right;">Name : 
+	</td>
+	<td>'.$details['name'].'
+	</td>
+	</tr>
+	<tr>
+	<td style="text-align:right;">Countr/State/Location : 
+	</td>
+	<td>'.$details['place'].'
+	</td>
+	</tr>
+	<tr>
+	<td style="text-align:right;">Male count : 
+	</td>
+	<td>'.$details['male'].'
+	</td>
+	</tr>
+	<tr>
+	<td style="text-align:right;">Female count : 
+	</td>
+	<td>'.$details['female'].'
+	</td>
+	</tr>
+	<tr>
+	<tr>
+	<td style="text-align:right;">Traveling Day1 - North : 
+	</td>
+	<td>'.$details['travel1'].'
+	</td>
+	</tr>
+	<tr>
+	<td style="text-align:right;">Traveling Day2 - North :
+	</td>
+	<td>'.$details['travel2'].'
+	</td>
+	</tr>
+	<tr>
+	<td style="text-align:right;">Traveling Day3 :
+	</td>
+	<td>'.$details['travel3'].'
+	</td>
+	</tr>
+	<tr>
+	<td style="text-align:right;">Traveling Day2 :
+	</td>
+	<td>'.$details['travel4'].'
+	</td>
+	</tr>
+	<tr>
+	<td style="text-align:right;">Pickup point :
+	</td>
+	<td>'.$details['pickup'].'
+	</td>
+	</tr>
+	<tr>
+	<td style="text-align:right;">Bus type :
+	</td>
+	<td>'.$details['bustype'].'
+	</td>
+	</tr>
+	</table>
+	<br>
+	<table>
+	<tr>
+	<td>
+	Contac No : 
+	</td>
+	<td>'.$details['contact'].'
+	</td>
+	</tr>
+	</table>
+	';
+	return $details_resp;
 }
