@@ -31,7 +31,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
      *
      * @var string
      */
-    const VERSION = '6.18.40';
+    const VERSION = '6.20.2';
 
     /**
      * The base path for the Laravel installation.
@@ -1039,7 +1039,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
         if ($code == 404) {
             throw new NotFoundHttpException($message);
         }
-        
+
         throw new HttpException($code, $message, null, $headers);
     }
 

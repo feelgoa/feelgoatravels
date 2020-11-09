@@ -1,8 +1,8 @@
 <?php
 
-define('SITE_URL', 'http://test.feelgoatravels.com/');
-define('ADMIN_URL','http://test.feelgoatravels.com/admin');
-define('API_URL','http://test.feelgoatravels.com/api');
+define('SITE_URL', 'http://127.0.0.1/');
+define('ADMIN_URL','http://127.0.0.1/admin');
+define('API_URL','http://127.0.0.1/api');
 define('SITE_NAME','Feel Goa');
 define('SITE_SHORT_DESC','Feel Goa - Tours and Travels');
 
