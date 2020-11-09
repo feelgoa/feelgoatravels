@@ -73,18 +73,21 @@ function send_mail_custom($reciever_email_value,$reciever_email_name,$template_n
 			$body = booking_recieved($extra_details);
 			$mail->addAddress(EMAIL_SENDER, FG_TEAM);
 			$mail->addReplyTo($extra_details['email'], $extra_details['name']);
+			$mail->AddCC(EMAIL_GMAIL_RECIEVER);
 			break;
 		case HOTEL_BOOKING:
 			$subject = BOOKINGS_CUSTOMER_SUBJECT.'- '.$extra_details['name'].' (Hotel Booking)';
 			$body = booking_recieved_hotel_booking($extra_details);
 			$mail->addAddress(EMAIL_SENDER, FG_TEAM);
 			$mail->addReplyTo($extra_details['email'], $extra_details['name']);
+			$mail->AddCC(EMAIL_GMAIL_RECIEVER);
 			break;
 		case TOUR_BOOKING:
 			$subject = BOOKINGS_CUSTOMER_SUBJECT.'- '.$extra_details['name'].' (Tour Booking)';
 			$body = booking_recieved_tour_booking($extra_details);
 			$mail->addAddress(EMAIL_SENDER, FG_TEAM);
 			$mail->addReplyTo($extra_details['email'], $extra_details['name']);
+			$mail->AddCC(EMAIL_GMAIL_RECIEVER);
 			break;
 		default:
 			return 0;
@@ -432,14 +435,27 @@ function calculate_travel_details($details,$count) {
 }
 
 function contact_us_admin_thread_email_template($details) {
-	return '<p>'.$details['message'].'</p>';
+	return '<p>Contact Us</p><table><tr><td style="text-align:right;">Name : </td><td>'.$details['name'].'</td></tr>
+	<tr><td style="text-align:right;">Message : </td><td>'.$details['message'].'</td></tr>
+	</table>
+	<br>
+	<table>
+	<tr>
+	<td>
+	Contac No : 
+	</td>
+	<td>'.$details['phone'].'
+	</td>
+	</tr>
+	</table>
+	';
 }
 
 function booking_recieved($details) {
 	/*
 		vehicle rental booking (weeding cars, bikes and cars)
 	*/
-	return '<p>Vehicle Booking Details</p><table style="border: 1px solid black;">
+	return '<p>Vehicle Booking Details</p><table style="">
 	<tr>
 	<td style="text-align:right;">Name : 
 	</td>
@@ -467,7 +483,7 @@ function booking_recieved_hotel_booking($details) {
 		hotel booking
 	*/
 	$details_resp = '<p>Hotel Booking Details</p>
-	<table style="border: 1px solid black;">
+	<table style="">
 	<tr>
 	<td style="text-align:right;">Name : 
 	</td>
@@ -528,7 +544,7 @@ function booking_recieved_hotel_booking($details) {
 
 function booking_recieved_tour_booking($details) {
 	$details_resp = '<p>Tour Booking Details</p>
-	<table style="border: 1px solid black;">
+	<table style="">
 	<tr>
 	<td style="text-align:right;">Name : 
 	</td>
