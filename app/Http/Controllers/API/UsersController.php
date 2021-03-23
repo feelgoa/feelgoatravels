@@ -272,18 +272,18 @@ class UsersController extends Controller
 
 		$resp = calculate_travel_details($traveldetails,$_POST['totalcount']);
 
+		$amt_value = $_POST['amt'];
 		$user_data=array(
 			'transaction_reference'=>$transaction_reference,
 			'tnxid'=>$t_val,
 			'booking_type'=>$_POST['booking_type'],
 			'ref_id'=>$_POST['ref_id'],
-			'amount'=>$resp['amount'],
+			'amount'=>$amt_value,
 			"status"=>PAYMENT_NOT_RECIEVED,
 			'created_at'=>Carbon::now(),
 		);
-		$user_id = DB::table('payments')->insertGetId($user_data);
 
-		
+		$user_id = DB::table('payments')->insertGetId($user_data);
 
 		$details['amount'] = $resp['amount'];
 		$details['transaction_reference'] = $transaction_reference;
@@ -294,8 +294,9 @@ class UsersController extends Controller
 		$details['travel_details'] = $traveldetails;
 		$details['days'] = $resp['days'];
 		$details['calculation'] = $resp['calc'];
-
-		return response()->json(['isSuccess'=> false, 'message'=> '',  'data'=> payment_email_generator($details)]);
+		$data_holder['data'] = payment_email_generator($details);
+		$data_holder['link'] = SITE_URL.BOOKING_PAYMENTS_URL."/".$transaction_reference;
+		return response()->json(['isSuccess'=> true, 'message'=> '',  'data'=> $data_holder]);
 	}
 
 	public function sendpaymentemail(Request $request) {

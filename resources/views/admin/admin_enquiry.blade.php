@@ -28,7 +28,7 @@
       <th scope="col">Name</th>
       <th scope="col">Message in Brief</th>
 	  <th scope="col">Recieved Date</th>
-	  <th scope="col">PNR Number</th>
+	  <th style="display:none;" scope="col">PNR Number</th>
 	  <th scope="col">Action</th>
     </tr>
   </thead>
@@ -39,7 +39,7 @@
 			<td>{!! \Illuminate\Support\Str::limit($datalist->message, 100, $end='... <a href="'.ADMIN_URL.ADMIN_ENQUIRYT_URL.'/'.$datalist->id.'">Read more</a>' ) !!}
 			</td>
 			<td>{{ date('d/m/Y', strtotime($datalist->created_time)) }}</td>
-			<th scope="col">{{ $datalist->ref_id }}</th>
+			<th style="display:none;" scope="col">{{ $datalist->ref_id }}</th>
 			@if ($datalist->link ==  0)
 				<td><a href="{{ ADMIN_URL.ADMIN_ENQUIRYT_URL.'/'.encrypt_code($datalist->id)}}"><i class="pe-7s-paper-plane" title="View"></i></a></td>
 			@else

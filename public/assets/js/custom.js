@@ -25,26 +25,40 @@ var SITE_URL_JS = 'https://feelgoatravels.com/';
 	  $(".navbar-collapse").collapse('hide');
 	});
 
-	$(window).scroll(function() {
-		if (window.location.pathname == "/" || window.location.pathname == "/home") {
-			if ($(".navbar").offset().top > 50) {
-				$(".navbar-fixed-top").addClass("top-nav-collapse");
-				$(".cu").addClass("call-us-btn-down");
-				$(".cu").removeClass("call-us-btn ");
-			} else {
-				$(".cu").removeClass("call-us-btn-down");
-				$(".cu").addClass("call-us-btn ");
-				$(".navbar-fixed-top").removeClass("top-nav-collapse");
-				
+	if (screen.width <= 767) {
+		$("#blogo").show();
+		$("#wlogo").hide();
+	} 
+		$(window).scroll(function() {
+			if (screen.width <= 767) {
+				$("#blogo").show();
+				$("#wlogo").hide();
+			} else {	
+				if (window.location.pathname == "/" || window.location.pathname == "/home") {
+					if ($(".navbar").offset().top > 50) {
+						$(".navbar-fixed-top").addClass("top-nav-collapse");
+						$(".cu").addClass("call-us-btn-down");
+						$(".cu").removeClass("call-us-btn ");
+							$("#wlogo").hide();
+							$("#blogo").show();
+					} else {
+						$(".cu").removeClass("call-us-btn-down");
+						$(".cu").addClass("call-us-btn ");
+						$(".navbar-fixed-top").removeClass("top-nav-collapse");
+							$("#blogo").hide();
+							$("#wlogo").show();
+					}
+					$('body').addClass('homepagetop');
+					$('body').removeClass('otherpagetop');
+				} else {
+					$(".navbar-fixed-top").addClass("top-nav-collapse");
+					$('body').addClass('otherpagetop');
+					$('body').removeClass('homepagetop');
+						$("#blogo").show();
+						$("#wlogo").hide();
+				}
 			}
-			$('body').addClass('homepagetop');
-			$('body').removeClass('otherpagetop');
-		} else {
-			$(".navbar-fixed-top").addClass("top-nav-collapse");
-			$('body').addClass('otherpagetop');
-			$('body').removeClass('homepagetop');
-		}
-	});
+		});
 
 	// SLIDER
 	$('.owl-carousel').owlCarousel({
@@ -462,6 +476,7 @@ $('#contact_submit').on('click',function(event){
 		},
 	});
 });
+
 
 $('#contact_us_submit').on('click',function(event){
 	document.getElementById("overlay").style.display = "block";

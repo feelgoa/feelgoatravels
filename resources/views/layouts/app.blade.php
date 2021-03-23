@@ -43,7 +43,11 @@
                     <span class="icon icon-bar"></span>
                 </button>
                 <!-- lOGO TEXT HERE -->
-                <a href="{{ SITE_URL.HOME_URL }}" class="navbar-brand" style="font-size: 40px;"> {{ SITE_NAME }}</a>
+                <a href="{{ SITE_URL.HOME_URL }}" class="navbar-brand" style="font-size: 40px;display:none;"> {{ SITE_NAME }}</a>
+                <a href="{{ SITE_URL.HOME_URL }}">
+                <img src="http://127.0.0.1/assets/images/logo-white.png" id="wlogo" height="10%" width="30%" style="height: 60px;width: 180px;">
+                <img src="http://127.0.0.1/assets/images/logo-black.png" id="blogo" height="10%" width="30%" style="height: 60px;width: 180px;">
+                </a>
             </div>
             <!-- MENU LINKS -->
             <div class="collapse navbar-collapse">
@@ -87,7 +91,7 @@
                 <div class="col-md-4 col-sm-6">
                     <div class="footer-info">
                         <div class="section-title">
-                            <h2 class="wow fadeInUp" data-wow-delay="0.2s">Find us <a
+                            <h2 class="wow fadeInUp" data-wow-delay="0.2s">Find us <a href="{{FACEBOOK_LINK }}" target="_blank"
                                     onMouseOver="this.style.color='#23527c'" onMouseOut="this.style.color='#909090'"
                                     id="fbicon" class="fa fa-facebook-square" attr="facebook icon"
                                     style="font-size: 20px;cursor:pointer;"></a>

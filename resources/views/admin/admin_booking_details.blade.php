@@ -278,18 +278,24 @@
 						<div>
 							<table>
 								<tr>
-								<input type="hidden" id="booking_name" value="{{ $data[0]->name }}">
-								<input type="hidden" id="booking_count" value="{{ (int)$data[0]->female_count + (int)$data[0]->male_count }}">
-								<input type="hidden" id="booking_pickuppoint" value="{{ $data[0]->pickup_point }}">
-								<input type="hidden" id="booking_pnr" value="{{ $data[0]->booking_pnr }}">
-								<input type="hidden" id="booking_refid" value="{{ $booking_id }}">
-								<input type="hidden" id="booking_email" value="{{ $data[0]->email }}">
-
-									<td colspan="2"><button type="button" class="btn btn-info" id="gen_email">Generate Payment Email.</button></td>
+									<input type="hidden" id="booking_name" value="{{ $data[0]->name }}">
+									<input type="hidden" id="booking_count" value="{{ (int)$data[0]->female_count + (int)$data[0]->male_count }}">
+									<input type="hidden" id="booking_pickuppoint" value="{{ $data[0]->pickup_point }}">
+									<input type="hidden" id="booking_pnr" value="{{ $data[0]->booking_pnr }}">
+									<input type="hidden" id="booking_refid" value="{{ $booking_id }}">
+									<input type="hidden" id="booking_email" value="{{ $data[0]->email }}">
+									<td style="display:none;"colspan="2"><button type="button" class="btn btn-info" id="gen_email">Generate Payment Email.</button></td>
+								</tr>
+								<tr>									
+									<td><input type="text" id="payment_amount" value="" placeholder="Enter Amount here"></td>
+									<td><input type="text" value="http://127.0.0.1/admin/booking-details/g1iLJIKGqL4YrLbF" id="myInput"><button onclick="myFunction()">Copy text</button></td>
+								</tr>
+								<tr>
+									<td colspan="2"><button type="button" class="btn btn-info" id="gen_email">Generate Payment Link.</button></td>
 								</tr>
 							</table>
 						</div>
-						<div id="email_block">
+						<div id="email_block" style="display:none;">
 						<br>
 							<p><textarea id="email_container"class="textarea-style" style="background-color: #f1f1f1;" oninput="auto_grow(this)" placeholder="Enter extra email content if required."></textarea></p>
 							<button type="button" class="btn btn-info" id="payment-link-btn">Send Email</button>

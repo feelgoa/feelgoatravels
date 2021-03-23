@@ -91,9 +91,9 @@
 						</div>
                     </div>
                     <div class="form-group pickup_location1" style="display:block;">
-                        <label for="pickup_location" class="frm-font lable-from">Booking Specification:</label>
+                        <label for="pickup_location" class="frm-font lable-from">Booking Requirements:</label>
 						<span class="required-field">*</span>
-						<textarea rows="5" style="width:100%;resize: none;" id="pickup_loc" name="pickup_loc" placeholder="Enter all your booking specifications here." required onblur="ValidateEmptyField(this,'Enter your booking specification.','error_message')"></textarea>	
+						<textarea rows="5" style="width:100%;resize: none;" id="pickup_loc" name="pickup_loc" placeholder="Enter all your booking requirements here. If selecting bus/traveller please also mention the capacity." required onblur="ValidateEmptyField(this,'Enter your booking specification.','error_message')"></textarea>	
                     </div>
 					<span class="label label-danger" style="font-size: 14px;margin-bottom:14px;white-space: normal;" id="error_message"></span></br>
             <input type = 'submit' class="btn btn-success" id="submit_btn" value = "Submit Booking Details" style="margin-bottom: 20px;height: 50px;"/>

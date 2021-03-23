@@ -78,7 +78,9 @@ Route::group(['prefix'=>ADMIN_BASE,'middleware' => []], function(){
 	Route::get(ADMIN_ENQUIRYT_URL, 'AdminController@enquirydetails');
 	Route::get(ADMIN_ENQUIRYT_URL.'/{slug}', 'AdminController@getindividual');
 	Route::get(ADMIN_BOOKINGS_URL, 'AdminController@getbookingdetails');
-	Route::get(ADMIN_BOOKINGS_URL.'/{slug}', 'AdminController@getbookingindividual');
+    Route::get(ADMIN_BOOKINGS_URL.'/{slug}', 'AdminController@getbookingindividual');
+    Route::get(ADMIN_VEHICLE_URL, 'AdminController@getvehiclebookingindividual');
+    Route::get(ADMIN_VEHICLE_URL.'/{slug}', 'AdminController@getbookingindividual');
 		
 	Route::get('/', function () {	
 		return abort(404);	

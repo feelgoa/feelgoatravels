@@ -107,4 +107,17 @@ class AdminController extends Controller {
 
 	}
 
+	public function getvehiclebookingindividual() {
+		//echo "A";
+		#$tour_details = DB::select('SELECT * FROM `booking_details` left join `user_details` on `user_details`.`user_id` = `booking_details`.`user_id`');
+		//$tour_details = DB::select('SELECT * FROM `booking_details` left join `user_details` on `user_details`.`user_id` = `booking_details`.`user_id` left join (SELECT  statuschange.status as latest_status,statuschange.reference_id FROM statuschange WHERE id in (SELECT MAX(id) from statuschange GROUP BY reference_id)) as my_tab on my_tab.reference_id = booking_details.booking_id');
+		$tour_details = DB::select('SELECT * FROM `rental_booking` as rb left join rental_vehicles as rv on rb.vehicle_id = rv.vehicle_id order by created_at DESC');
+		
+		//echo "a";
+		//print_r($tour_details);
+		//exit;
+		return view('admin.admin_bookings',['title'=>ADMIN_BOOKING_TITLE,'data'=>$tour_details]);	
+		
+	}
+
 }

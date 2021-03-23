@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta http-equiv="Content-Language" content="en">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	<link rel="shortcut icon" href="{{ URL::asset('assets/images/favicon.png') }}" />
+	<link rel="shortcut icon" href="{{ URL::asset('public/assets/images/favicon.png') }}" />
 	<title>FeelGoa - Tours and Travels | Admin | {{ $title }}</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
 	<meta name="description" content="This is an example dashboard created using build-in elements and components.">
@@ -155,20 +155,26 @@
 										{{ ADMIN_BOOKING_TITLE }}
 									</a>
 								</li>
-								<li style="display:none;" >
-									<a href="{{ADMIN_BASE.ADMIN_BOOKINGS_URL}}" @if(str_contains(url()->current(), ADMIN_BOOKINGS_URL )) class="mm-active" @endif>
+								<li>
+									<a href="{{ADMIN_BASE.ADMIN_VEHICLE_URL}}" @if(str_contains(url()->current(), ADMIN_VEHICLE_URL )) class="mm-active" @endif>
 										<i class="metismenu-icon pe-7s-diamond"></i>
 										{{ ADMIN_VEHICLE_RENTAL_TITLE }}
 									</a>
 								</li>
+								<li>
+									<a href="{{ADMIN_BASE.ADMIN_BOOKINGS_URL}}" @if(str_contains(url()->current(), 'A' )) class="mm-active" @endif>
+										<i class="metismenu-icon pe-7s-diamond"></i>
+										Hotel Booking
+									</a>
+								</li>
 								<li style="display:none;">
-									<a href="{{ADMIN_BASE.ADMIN_BOOKINGS_URL}}" @if(str_contains(url()->current(), ADMIN_BOOKINGS_URL )) class="mm-active" @endif>
+									<a href="{{ADMIN_BASE.ADMIN_BOOKINGS_URL}}" @if(str_contains(url()->current(), 'A' )) class="mm-active" @endif>
 										<i class="metismenu-icon pe-7s-diamond"></i>
 										{{ ADMIN_WEDDING_CAR_TITLE }}
 									</a>
 								</li>
-								<li style="display:none;">
-									<a href="{{ADMIN_BASE.ADMIN_BOOKINGS_URL}}" @if(str_contains(url()->current(), ADMIN_BOOKINGS_URL )) class="mm-active" @endif>
+								<li>
+									<a href="{{ADMIN_BASE.ADMIN_BOOKINGS_URL}}" @if(str_contains(url()->current(), 'B' )) class="mm-active" @endif>
 										<i class="metismenu-icon pe-7s-diamond"></i>
 										{{  ADMIN_PAYMENTS_TITLE }}
 									</a>
@@ -204,7 +210,7 @@
 					<div class="app-main__inner">
 					@yield('content')
 					<!-- Footer -->
-					<div class="app-wrapper-footer" style="padding-top:12px;">
+					<div class="app-wrapper-footer" style="padding-top:12px">
 						<div class="app-footer">
 							<div class="app-footer__inner">
 									<div class="col-md-12" style="text-align:center;">

@@ -1,6 +1,6 @@
 <?php
 
-define('SITE_URL', 'http://127.0.0.1/');
+define('SITE_URL', 'http://127.0.0.1');
 define('ADMIN_URL','http://127.0.0.1/admin');
 define('API_URL','http://127.0.0.1/api');
 define('SITE_NAME','Feel Goa');
@@ -28,8 +28,8 @@ define('REFERENCE_ID','ReferenceId');
 
 
 define('PAYMENT_DETAILS_SUBJECT','Payments Details');
-#define('PAYU_BASE_URL','https://secure.payu.in');
-define('PAYU_BASE_URL','https://sandboxsecure.payu.in');
+define('PAYU_BASE_URL','https://secure.payu.in');
+#define('PAYU_BASE_URL','https://sandboxsecure.payu.in');
 
 define('CONTACTUS_EMAIL_TEMPLATE', 1);
 define('CONTACTUS_UPDATE_EMAIL_TEMPLATE_ADMIN', 2);
@@ -99,6 +99,7 @@ define('ADMIN_HOME_CONTENT_URL','/home-page-content');
 define('ADMIN_ENQUIRYT_URL','/enquiry-details');
 define('ADMIN_LOGIN_PAGE_URL','/login-user');
 define('ADMIN_BOOKINGS_URL','/booking-details');
+define('ADMIN_VEHICLE_URL','/vehicle-details');
 
 /* API Routes*/
 

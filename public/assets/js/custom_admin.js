@@ -1,17 +1,44 @@
+function myFunction() {
+	var copyText = document.getElementById("myInput");
+	copyText.select();
+	copyText.setSelectionRange(0, 99999)
+	document.execCommand("copy");
+    $("#toast-message").click();
+    $('.toast-message').text("Payment link copied : " + copyText.value);
+  }
+
 $(document).ready( function () {
 
-
+    if ($("body").height() > $(window).height()) {
+        //alert("Vertical Scrollbar");
+        //remove position absolute
+        //remove bottom 0px
+        $(".app-wrapper-footer").css({"position": "","bottom": ""});
+    } else {
+        //alert("fix footer");
+        //position absolute
+        //bottom 0px
+        $(".app-wrapper-footer").css({"position": "absolute","bottom": "0px"});
+        //$(".app-wrapper-footer").css({"background-color": "yellow"});
+    }
+    /*
     $('#enquiry-table').DataTable({
         "columnDefs": [
             { "searchable": false, "targets": [3] },
-            {'targets': [3], /* column index */
-                'orderable': false, /* true or false */
+            {'targets': [3],
+                'orderable': false,
              }
 
           ],
         "order": [],
         "lengthChange": false
     });
+    */
+   $('#enquiry-table').DataTable({
+    "columnDefs": [],
+    "order": [],
+    "lengthChange": false
+});
 
     $('#tours-table').DataTable({
         "columnDefs": [
@@ -127,8 +154,11 @@ $(document).ready( function () {
 
     });
 
-
     $("#gen_email").click(function(){
+        if ($("#payment_amount").val == "") {
+            $("#toast-message").click();
+            $('.toast-message').text('Amount cannot be empty;');
+        } else {
             $.ajax({
                 url: "/api/get-payment-email-content",
                 type:"POST",
@@ -138,20 +168,26 @@ $(document).ready( function () {
                     ref_id:$('#booking_refid').val(),
                     totalcount:$('#booking_count').val(),
                     pickuppoint:$('#booking_pickuppoint').val(),
-                    pnr:$('#booking_pnr').val()
+                    pnr:$('#booking_pnr').val(),
+                    amt:$('#payment_amount').val()
                 },
                 success:function(response){
                     $("#toast-message").click();
-                    $('.toast-message').text('Email content was successfully loaded.');
+                    $('.toast-message').text('Amount link successfully loaded.');
                     //$( "#email-template" ).html(response['data']);
-                    $('#email_container').val(response['data']);
-                    auto_grow(document.getElementById("email_container"))
+                    //$('#email_container').val(response['data']);
+                    //console.log(response['data']['link']);
+                    //auto_grow(document.getElementById("email_container"))
+                    $('#myInput').val(response['data']['link']);
+                    console.log(response['data']['link']);
                 }, error:function(response) {
                     $("#toast-message").click();
                     $('.toast-message').text('There was some error while loading email content. Please try again in some time.');
                 }
             });
+        }
     });
+
 
     $("#payment-link-btn").click(function(){
         if($("#email_container").val() == "") {

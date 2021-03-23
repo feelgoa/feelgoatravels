@@ -53,7 +53,7 @@ function send_mail_custom($reciever_email_value,$reciever_email_name,$template_n
 			$mail->addAddress($reciever, $reciever_name);
 			break;
 		case CONTACT_US_REPLY:
-			$subject = PAYMENT_DETAILS_SUBJECT.' '.SITE_SHORT_DESC;
+			$subject = CONTACT_US_ADMIN_SUBJECT.' '.SITE_SHORT_DESC;
             $body = admin_reply_to_enquiry_template($extra_details);
 			$mail->addAddress($reciever, $reciever_name);
 			break;
@@ -63,7 +63,7 @@ function send_mail_custom($reciever_email_value,$reciever_email_name,$template_n
 			$mail->addAddress($reciever, $reciever_name);
 			break;
 		case CONTACTUS_EMAIL_THREAD:
-			$subject = CONTACT_US_ADMIN_SUBJECT.' ('.REFERENCE_ID.' #'.$extra_details['contactusid'].'.) '.SITE_SHORT_DESC;
+			$subject = CONTACT_US_ADMIN_SUBJECT.' '.SITE_SHORT_DESC;
 			$body = contact_us_admin_thread_email_template($extra_details);
 			$mail->addAddress(EMAIL_SENDER, FG_TEAM);
 			$mail->addReplyTo($extra_details['email'], $extra_details['name']);
@@ -370,7 +370,15 @@ function admin_reply_to_enquiry_template($data) {
 	<tr>
 	<td colspan="2">
 	<br>
-	Please click <a href="'.SITE_URL.CONTACTUS_URL.'/'.encrypt_code($data['link_value']).'">here</a> to reply to the email and continue the conversation tree.</td>
+	You can click <a href="'.SITE_URL.CONTACTUS_URL.'/'.encrypt_code($data['link_value']).'">here</a> to reply to the email and continue the conversation.</td>
+	</tr>
+	<tr>
+	<tr>
+	<td colspan="2">
+	<br>
+	Please do not reply to this email directly. You can also send your enquiry directly from the contact us page.
+	</td>
+	</td>
 	</tr>
 	</table>';
 }
